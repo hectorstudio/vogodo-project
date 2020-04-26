@@ -1,0 +1,16 @@
+@import "../../assets/mixins/fontDef";
+@import "../../assets/mixins/variables";
+
+li.menu-item {
+  a {
+    @include fontDef(black, "Open Sans", 14px, bolder, 11px);
+  }
+
+  &.logo {
+    padding: 0 15px 0px 15px;
+
+    @media (max-width: $tabletBreakpoint) {
+      display: none;
+    }
+  }
+}

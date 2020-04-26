@@ -1,0 +1,32 @@
+@import "../assets/mixins/fontDef";
+@import "../assets/mixins/variables";
+
+header {
+  background-color: white;
+  padding: 0px 30px;
+  font-size: 20px;
+  color: black;
+  
+  .menu {
+
+    @media (max-width: $tabletBreakpoint) {
+      flex-direction: column;
+      align-items: center;
+      width: unset;
+      padding-top: 50px;
+      display: none;
+    }
+
+    ul {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      list-style: none;
+      padding: 0px;
+      margin: 0px;
+      @media (max-width: $tabletBreakpoint) {
+        display: block;
+      }
+    }
+  }
+}
