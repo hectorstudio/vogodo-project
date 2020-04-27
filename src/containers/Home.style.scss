@@ -164,4 +164,25 @@ section {
       }
     }
   }
+
+}
+.section-featured .content {
+  padding: 35px 0 35px 0;
+}
+
+.section-intro {
+  background-color: #647883;
+  color: white;
+  .section-title {
+    padding: 25px;
+    margin: 0px;
+  }
+  .introduction {
+    max-width: 800px;
+    margin: auto;
+    line-height: 1.5;
+  }
+  .intro-video {
+    padding: 20px 0px;
+  }
 }

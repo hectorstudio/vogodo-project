@@ -1,18 +1,36 @@
 .featured-item {
-  .each-slide {
-    div {
-      height: 250px;
-      background-size: cover;
-      span {
-        position: relative;
-        background-color: #c02a26;
-        border-radius: 2px;
-        color: white;
-        padding: 3px 5px;
-        top: 10px;
-        right: -100px;
-        font-family: Raleway, sans-serif;
+  //padding: 10px;
+  border: 1px solid #dad2d2;
+  .slide-container {
+    margin: 10px;
+    .each-slide {
+      div {
+        height: 250px;
+        background-size: cover;
+        span {
+          position: relative;
+          background-color: #c02a26;
+          border-radius: 2px;
+          color: white;
+          padding: 3px 5px;
+          top: 10px;
+          right: -75px;
+          font-family: Raleway, sans-serif;
+        }
       }
+    }
+  
+  }
+  .item-description {
+    margin: 0 10px 10px 10px;
+    filter: blur(0.2rem);
+    h3 {
+      margin: 5px 5px !important;
+      text-align: left !important;
+    }
+    p{
+      margin: 0px 5px 5px 5px !important;
+      text-align: left !important;
     }
   }
 }
