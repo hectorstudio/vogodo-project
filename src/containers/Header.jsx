@@ -2,8 +2,6 @@ import React from "react";
 import LogoItem from "../components/MenuItem/LogoItem";
 import MenuItem from "../components/MenuItem";
 
-import Logo from "../assets/img/logo.png";
-
 import "./Header.style.scss";
 
 const Header = () => {
@@ -20,12 +18,6 @@ const Header = () => {
             <MenuItem url="#" title="Find a Property Manager" />
             <MenuItem url="#" title="Find a Contractor" />
           </ul>
-        </div>
-        <button id="navbar-trigger">
-          <i class="fa fa-list"></i>
-        </button>
-        <div class="mobile-logo">
-          <img src={Logo} alt="Logo" />
         </div>
       </div>
     </header>
