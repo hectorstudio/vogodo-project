@@ -1,0 +1,5 @@
+# Ignore built files below
+src/App.js
+src/App.test.js
+src/serviceWorker.js
+src/index.js

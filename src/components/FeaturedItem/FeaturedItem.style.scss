@@ -1,7 +1,18 @@
 .featured-item {
-  .img {
-    img {
-      width: 100%;
+  .each-slide {
+    div {
+      height: 250px;
+      background-size: cover;
+      span {
+        position: relative;
+        background-color: #c02a26;
+        border-radius: 2px;
+        color: white;
+        padding: 3px 5px;
+        top: 10px;
+        right: -100px;
+        font-family: Raleway, sans-serif;
+      }
     }
   }
 }

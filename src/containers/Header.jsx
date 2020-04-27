@@ -7,8 +7,8 @@ import "./Header.style.scss";
 const Header = () => {
   return (
     <header>
-      <div class="container">
-        <div class="menu" id="menu">
+      <div className="container">
+        <div className="menu" id="menu">
           <ul>
             <MenuItem url="#" title="HOME" />
             <MenuItem url="#" title="ABOUT US" />
