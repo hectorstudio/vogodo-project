@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './containers/Header';
 import Home from './containers/Home';
+import Footer from './containers/Footer';
 import './App.scss';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       />
       <Header />
       <Home />
+      <Footer />
     </div>
   );
 }

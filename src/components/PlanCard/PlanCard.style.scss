@@ -1,0 +1,71 @@
+@import "../../assets/mixins/fontDef";
+@import "../../assets/mixins/variables";
+@import "../../assets/mixins/colors";
+@import "../../assets/mixins/buttons";
+
+.price-ticket {
+  flex: 3;
+
+  &:hover {
+    cursor: pointer;
+
+    .ticket-header {
+      padding: 62px 40px 60px;
+    }
+  }
+
+  &.selected {
+    flex: 4;
+
+    .ticket-header {
+      padding: 62px 40px 60px;
+    }
+  }
+
+  margin: 10px 10px;
+
+  .ticket-header {
+    padding: 30px;
+
+    h4 {
+      margin: 10px;
+      @include fontDef(white, "Raleway", 18px, $regular, 24px);
+    }
+
+    .starting-from {
+      margin: 40px;
+      @include fontDef(white, "Raleway", 13px, $regular, 24px);
+    }
+
+    .price {
+      margin: 30px 0;
+      @include fontDef(white, "Arvo", 45px, $regular, 50px);
+
+      .price-cost {
+        @include fontDef(white, "Raleway", 88px, $bold, 22px);
+      }
+    }
+
+    .price-detail {
+      @include fontDef(white, "Raleway", 13px, $regular, 22px);
+    }
+  }
+
+  .ticket-body {
+    h5 {
+      @include fontDef(
+        #333333,
+        "Raleway",
+        14px,
+        $semiBold,
+        22px,
+        none,
+        uppercase
+      );
+    }
+
+    .details {
+      @include fontDef(#777777, "Raleway", 13px, $regular, 30px);
+    }
+  }
+}
