@@ -1,8 +1,17 @@
-import React from "react";
-
+import React, { useState } from "react";
+import Select from "react-dropdown-select";
 import "../../containers/Home.style.scss";
 
+const options = [
+  { 'label':1, 'value': 1 },
+  { 'label':2, 'value': 2 },
+  { 'label':3, 'value': 3 },
+]
+
 const BannerSection = () => {
+  
+  const [values, setValues] = useState([]);
+
   return (
     <section className="section section-top">
       <div className="container">
@@ -11,16 +20,19 @@ const BannerSection = () => {
             <h1>Find The Available Properties</h1>
           </div>
           <div className="property-actions">
-            <button className="btn-property btn-available">Available Properties</button>
+            <button className="btn-property btn-available">
+              Available Properties
+            </button>
             <button className="btn-property btn-list">List a Property</button>
           </div>
           <div className="search-form">
             <form>
               <div className="form-control select">
-                <input
-                  type="text"
-                  name="property_type"
-                  placeholder="Enter a property type"
+                <Select
+                  options={options}
+                  className="property_select"
+                  placeholder="Select the property type..."
+                  onChange={(values) => setValues(values)}
                 />
               </div>
               <div className="form-control input">

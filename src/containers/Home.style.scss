@@ -54,8 +54,8 @@ section {
     justify-content: center;
     .btn-property {
       font-family: Raleway, sans-serif;
-      background-color: rgba(255, 255, 255, 0.5);
-      color: #c02a26;
+      background-color: #c02a26;
+      color: white;
       font-size: 20px;
       font-weight: 500;
       line-height: 1;
@@ -66,8 +66,7 @@ section {
       border: 1px solid #c02a26;
       outline: none;
       &:hover {
-        background-color: #c02a26;
-        color: white;
+        text-decoration: underline;
       }
     }
   }
@@ -85,23 +84,32 @@ section {
       }
       .select {
         flex: 3;
+        .property_select {
+          padding: 0px;
+          background-color: white;
+          font-family: Raleway, sans-serif;
+          font-size: 16px;
+          padding: 10px 2px 9px 2px;
+          border: none;
+        }
       }
       .input {
         flex: 7;
+        input {
+          padding-left: 20px;
+          box-sizing: border-box;
+          font-family: Raleway, sans-serif;
+          width: 100%;
+          outline: none;
+          border: none;
+          font-size: 16px;
+          height: 55px;
+          background-color: #ffffff;
+          color: #666;
+        }
       }
       .button {
         flex: 2;
-      }
-      input {
-        padding-left: 2px;
-        font-family: Raleway, sans-serif;
-        width: 100%;
-        outline: none;
-        border: none;
-        font-size: 16px;
-        height: 55px;
-        background-color: #ffffff;
-        color: #666;
       }
       button {
         font-family: Raleway, sans-serif;
@@ -255,6 +263,10 @@ section {
   .content-section {
     padding: 20px;
     color: white;
+    .btn-register {
+      font-size: 18px;
+      padding: 10px 42px;
+    }
   }
 }
 
