@@ -5,7 +5,7 @@ import Logo from "../../assets/img/logo.png";
 
 const LogoItem = ({ title, url }) => {
   return (
-    <li className={`menu-item logo`}>
+    <li className={`logo-item`}>
       <Link to={url}>
         <img src={Logo} alt={title} />
       </Link>

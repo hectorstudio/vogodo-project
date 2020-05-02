@@ -18,6 +18,10 @@ const Header = () => {
             <MenuItem url="#" title="Find a Property Manager" />
             <MenuItem url="#" title="Find a Contractor" />
           </ul>
+          <div className="social-icons">
+            <div><i class="fa fa-facebook"></i></div>
+            <div><i class="fa fa-google"></i></div>
+          </div>
         </div>
       </div>
     </header>

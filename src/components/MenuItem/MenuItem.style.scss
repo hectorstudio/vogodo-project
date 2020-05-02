@@ -2,15 +2,24 @@
 @import "../../assets/mixins/variables";
 
 li.menu-item {
+  padding: 10px 10px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
   a {
-    @include fontDef(black, "Open Sans", 14px, bolder, 11px);
+    @include fontDef(#647883, "Lato", 16px, $bold, 11px);
   }
-
-  &.logo {
-    padding: 0 15px 0px 15px;
-
-    @media (max-width: $tabletBreakpoint) {
-      display: none;
+  &:hover {
+    background-color: #647883;
+    a {
+      color: white;
     }
+  }
+}
+li.logo-item {
+  padding: 0 15px 0px 15px;
+
+  @media (max-width: $tabletBreakpoint) {
+    display: none;
   }
 }

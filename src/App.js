@@ -1,14 +1,14 @@
-import React from 'react';
-import Header from './containers/Header';
-import Home from './containers/Home';
-import Footer from './containers/Footer';
-import './App.scss';
+import React from "react";
+import Header from "./containers/Header";
+import Home from "./containers/Home";
+import Footer from "./containers/Footer";
+import "./App.scss";
 
 function App() {
   return (
     <div className="App">
       <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800|Raleway:100,300,400,600,700,800|Arvo:400&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,900&display=swap"
         rel="stylesheet"
       />
       <link
