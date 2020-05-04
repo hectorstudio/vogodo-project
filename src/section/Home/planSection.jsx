@@ -22,10 +22,10 @@ const platiumPlan = {
 
 const PlanSection = () => {
   return (
-    <section class="section section-promotion-price">
-      <div class="container">
-        <h2 class="title color-dark">Membership Plans</h2>
-        <div class="promotion-prices">
+    <section className="section section-promotion-price">
+      <div className="container">
+        <h2 className="section-title color-dark">Membership Plans</h2>
+        <div className="promotion-prices">
           <PlanCard selected="" planObject={bronzePlan} />
           <PlanCard selected="selected" planObject={goldPlan} />
           <PlanCard selected="" planObject={platiumPlan} />

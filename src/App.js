@@ -1,23 +1,22 @@
 import React from "react";
-import Header from "./containers/Header";
 import Home from "./containers/Home";
-import Footer from "./containers/Footer";
+import Property from "./containers/Property";
+import Header from "./section/Layout/Header";
+import Footer from "./section/Layout/Footer";
 import "./App.scss";
-
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import ROUTES from "./constants/Routes";
 function App() {
   return (
     <div className="App">
-      <link
-        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,900&display=swap"
-        rel="stylesheet"
-      />
-      <link
-        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-        rel="stylesheet"
-      />
-      <Header />
-      <Home />
-      <Footer />
+      <BrowserRouter>
+        <Header />
+        <Switch>
+          <Route exact path={ROUTES.find_property}  component={Property} title="Property Container"></Route>
+          <Route exact path={ROUTES.home} component={Home} title="Home Container"></Route>
+        </Switch>
+        <Footer />
+      </BrowserRouter>
     </div>
   );
 }

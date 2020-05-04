@@ -1,5 +1,5 @@
-@import "../assets/mixins/fontDef";
-@import "../assets/mixins/variables";
+@import "../../assets/mixins/fontDef";
+@import "../../assets/mixins/variables";
 
 header {
   background-color: white;
@@ -37,6 +37,7 @@ header {
       align-items: center;
       justify-content: flex-end;
       div{
+        cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;

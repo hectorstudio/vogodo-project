@@ -4,45 +4,28 @@
 @import "../../assets/mixins/buttons";
 
 .price-ticket {
-  flex: 3;
-
-  &:hover {
-    cursor: pointer;
-
-    .ticket-header {
-      padding: 62px 40px 60px;
-    }
-  }
-
-  &.selected {
-    flex: 4;
-
-    .ticket-header {
-      padding: 62px 40px 60px;
-    }
-  }
-
+  max-width: 300px;
   margin: 10px 10px;
+  background-color: #647883;
+  border-radius: 15px;
 
   .ticket-header {
-    padding: 30px;
+    padding: 30px 30px 10px 30px;
 
     h4 {
       margin: 10px;
-      @include fontDef(white, "Raleway", 18px, $regular, 24px);
+      @include fontDef(white, "Raleway", 40px, $regular, 24px);
     }
-
-    .starting-from {
-      margin: 40px;
-      @include fontDef(white, "Raleway", 13px, $regular, 24px);
-    }
-
     .price {
-      margin: 30px 0;
-      @include fontDef(white, "Arvo", 45px, $regular, 50px);
+      margin: 10px 0;
+      @include fontDef(white, "Arvo", 23px, $regular, 50px);
 
       .price-cost {
-        @include fontDef(white, "Raleway", 88px, $bold, 22px);
+        @include fontDef(white, "Raleway", 35px, $bold, 22px);
+      }
+      .starting-from {
+        margin: 0 10px;
+        @include fontDef(white, "Raleway", 16px, $regular, 24px);
       }
     }
 
@@ -52,9 +35,16 @@
   }
 
   .ticket-body {
+    padding-bottom: 40px;
+    border-top: 2px solid white;
+    margin: 0px 10px;
     h5 {
+      width: 100px;
+      margin: 20px auto;
+      margin-top: -12px;
+      background-color: #647883;
       @include fontDef(
-        #333333,
+        #ffffff,
         "Raleway",
         14px,
         $semiBold,
@@ -65,7 +55,12 @@
     }
 
     .details {
-      @include fontDef(#777777, "Raleway", 13px, $regular, 30px);
+      @include fontDef(#c2c7ca, "Raleway", 13px, $regular, 30px);
+    }
+    button {
+      border: 1px solid #ffffff;
+      cursor: pointer;
+      margin-bottom: 0px;
     }
   }
 }

@@ -1,0 +1,48 @@
+.property-container {
+  .filter-container {
+    display: flex;
+    .filter-items {
+      width: 60%;
+      display: flex;
+      flex-wrap: wrap;
+      .search-input {
+        min-width: 600px;
+        background-color: white;
+        font-family: Raleway, sans-serif;
+        font-size: 16px;
+        text-align: left;
+        padding: 5px 10px;
+        border: 1px solid #cccccc;
+        border-radius: 5px;
+        min-height: 36px;
+        margin: 5px 5px;
+      }
+      .item {
+        max-width: 100px;
+        margin: 0 5px;
+        .property_select {
+          padding: 0px;
+          background-color: white;
+          font-family: Raleway, sans-serif;
+          font-size: 12px;
+          text-align: left;
+          padding: 5px 2px 5px 2px;
+          border: 1px solid #cccccc;
+          border-radius: 5px;
+        }
+        .react-dropdown-select-input {
+          font-family: 'Raleway', sans-serif !important;
+          font-size: 12px;
+        }
+      }
+    }
+    .filter-values {
+      font-size: 18px;
+    }
+  }
+  .items-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+  }
+}

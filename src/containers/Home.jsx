@@ -7,6 +7,7 @@ import "./Home.style.scss";
 import SubscribeSection from "../section/Home/subscribeSection";
 
 const Home = () => {
+  console.log('HOME PAGE')
   return (
     <Fragment>
       <BannerSection />

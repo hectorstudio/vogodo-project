@@ -9,15 +9,20 @@ section {
   @media (max-width: $smalldeskBreakpoint) {
     text-align: center;
   }
-
-  &.section-top {
-    background-image: url("../assets/img/111.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
 }
-.content {
-  width: 100%;
+.slider-container {
+  height: 486px;
+}
+.section-title {
+  font-family: 'Lato', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+}
+.banner-content {
+  max-width: 1180px;
+  margin: 0 auto;
+  margin-top: -486px;
+  position: relative;
   padding: 64px 0 135px 0;
 
   @media (max-width: $smalldeskBreakpoint) {
@@ -33,7 +38,7 @@ section {
       display: block;
     }
     h1 {
-      @include fontDef(white, "Raleway", 45px, 800, 80px, none, uppercase);
+      @include fontDef(white, "Lato", 45px, 900, 80px, none, uppercase);
       margin: 0px;
       padding: 25px 0px;
       width: 100%;
@@ -92,6 +97,10 @@ section {
           padding: 10px 2px 9px 2px;
           border: none;
         }
+        .react-dropdown-select-input {
+          font-family: 'Raleway', sans-serif !important;
+          font-size: 16px;
+        }
       }
       .input {
         flex: 7;
@@ -115,10 +124,10 @@ section {
         font-family: Raleway, sans-serif;
         background-color: #c02a26;
         color: white;
-        font-size: 14px;
+        font-size: 18px;
         width: 100%;
         height: 100%;
-        font-weight: 800;
+        font-weight: 600;
         padding: 1em 2em;
         cursor: pointer;
         line-height: 1;
@@ -127,8 +136,11 @@ section {
       }
     }
   }
+}
 
-  /* Style about content */
+.content {
+  width: 100%;
+  padding: 64px 0 135px 0;
   .featured {
     display: flex;
     align-items: center;
@@ -190,6 +202,8 @@ section {
     max-width: 800px;
     margin: auto;
     line-height: 1.5;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
   }
   .intro-video {
     padding: 20px 0px;
@@ -199,14 +213,13 @@ section {
 /* Style promotion-price content */
 .promotion-prices {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: flex-end;
   margin-bottom: 50px;
 
   @media (max-width: $smalldeskBreakpoint) {
     display: block;
   }
-
   * {
     text-align: center;
   }
