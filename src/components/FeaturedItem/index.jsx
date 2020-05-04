@@ -1,5 +1,6 @@
 import React from "react";
 import { Slide } from "react-slideshow-image";
+import { Link } from "react-router-dom";
 import imgSrc from "../../assets/img/realestate.jpg";
 import imgSrc1 from "../../assets/img/realestate1.jpg";
 import imgSrc2 from "../../assets/img/realestate2.jpg";
@@ -39,7 +40,7 @@ const properties = {
 
 const FeaturedItem = () => {
   return (
-    <div className="featured-item">
+    <Link to="/properties" className="featured-item">
       <div className="slide-container">
         <Slide {...properties}>
           <div className="each-slide">
@@ -63,7 +64,7 @@ const FeaturedItem = () => {
         <h3>{slideImages.propertyTitle}</h3>
         <p>{slideImages.address}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 

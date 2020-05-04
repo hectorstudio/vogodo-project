@@ -15,7 +15,7 @@ const Header = () => {
             <MenuItem url="#" title="HELP" />
             <MenuItem url="#" title="CONTACT US" />
             <LogoItem url="#" title="Logo" />
-            <MenuItem url="/properties" title="Find a Property Manager" />
+            <MenuItem url="#" title="Find a Property Manager" />
             <MenuItem url="#" title="Find a Contractor" />
           </ul>
           <div className="social-icons">

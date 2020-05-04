@@ -77,7 +77,7 @@ const Property = () => {
       <div className="filter-container">
         <div className="filter-items">
           <div className="search-item">
-            <input type="text" className="search-input" placeholder="Search Properties" value="" />
+            <input type="text" className="search-input" placeholder="Search Properties" />
           </div>
           <div className="item">
             <Select
