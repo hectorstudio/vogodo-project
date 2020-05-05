@@ -1,0 +1,140 @@
+.submit-container {
+  display: flex;
+  .desc-body {
+    width: 73%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    .address-input {
+      width: 100%;
+      background-color: white;
+      font-family: Raleway, sans-serif;
+      font-size: 16px;
+      text-align: left;
+      padding: 5px 10px;
+      border: 1px solid #cccccc;
+      border-radius: 5px;
+      min-height: 36px;
+      margin: 5px 5px;
+    }
+    .content-items {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      .item {
+        display: flex;
+        align-items: center;
+        max-width: 250px;
+        margin: 0 5px 5px 5px;
+        label {
+          margin-right: 10px;
+        }
+        .property_select {
+          padding: 0px;
+          background-color: white;
+          font-family: Raleway, sans-serif;
+          font-size: 12px;
+          text-align: left;
+          padding: 5px 2px 5px 2px;
+          border: 1px solid #cccccc;
+          border-radius: 5px;
+        }
+        .property_input {
+          padding: 0px;
+          background-color: white;
+          font-family: Raleway, sans-serif;
+          font-size: 12px;
+          text-align: left;
+          min-height: 36px;
+          width: 100%;
+          padding: 5px 2px 5px 2px;
+          border: 1px solid #cccccc;
+          border-radius: 5px;
+        }
+        .react-dropdown-select-input {
+          font-family: 'Raleway', sans-serif !important;
+          font-size: 12px;
+        }
+      }
+    }
+    
+    .rent-items {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      .item {
+        display: flex;
+        align-items: center;
+        max-width: 250px;
+        margin: 0 5px 5px 5px;
+        label {
+          margin-right: 10px;
+        }
+        .property_input {
+          padding: 0px;
+          background-color: white;
+          font-family: Raleway, sans-serif;
+          font-size: 12px;
+          text-align: left;
+          min-height: 36px;
+          width: 100%;
+          padding: 5px 2px 5px 2px;
+          border: 1px solid #cccccc;
+          border-radius: 5px;
+        }
+      }
+    }
+
+    .description {
+      width: 100%;
+      margin-bottom: 30px;
+    }
+  }
+  .sidebar-container {
+    width: 25%;
+    margin: 0px 50px;
+    .media-section {
+      .section-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        h3 {
+          font-size: 14px;
+        }
+        span {
+          font-size: 22px;
+          cursor: pointer;
+        }
+      }
+    }
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      h3 {
+        font-size: 14px;
+        text-align: left;
+        width: 100%;
+      }
+      .contact-input {
+        padding: 0px;
+        background-color: white;
+        font-family: Raleway, sans-serif;
+        font-size: 12px;
+        text-align: left;
+        min-height: 25px;
+        width: 100%;
+        padding: 5px 0px 5px 2px;
+        border: 1px solid #cccccc;
+        border-radius: 5px;
+        margin: 0px 5px 5px 0;
+        &.info {
+          width: 45%;
+        }
+        &.btn {
+          background-color: #2c3e50;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
