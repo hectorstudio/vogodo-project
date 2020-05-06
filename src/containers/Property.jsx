@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import PropertyItem from "../components/PropertyItem";
 import { makeStyles } from '@material-ui/core/styles';
 import Select from "react-dropdown-select";
+import PropertyModal from "../components/PropertyModal";
 import "./Property.style.scss";
 import Breadcrumbs from "../components/Breadcrumbs";
 import Chip from '@material-ui/core/Chip';
@@ -72,118 +73,121 @@ const Property = () => {
   };
   const [values, setValues] = useState([]);
   return (
-    <div className="container property-container">
-      <Breadcrumbs />
-      <div className="filter-container">
-        <div className="filter-items">
-          <div className="search-item">
-            <input type="text" className="search-input" placeholder="Search Properties" />
+    <Fragment>
+      <div className="container property-container">
+        <Breadcrumbs />
+        <div className="filter-container">
+          <div className="filter-items">
+            <div className="search-item">
+              <input type="text" className="search-input" placeholder="Search Properties" />
+            </div>
+            <div className="item">
+              <Select
+                options={min_price}
+                className="property_select"
+                value={values}
+                placeholder="Min Price"
+                onChange={(values) => setValues(values)}
+              />
+            </div>
+            <div className="item">
+              <Select
+                options={max_price}
+                className="property_select"
+                value={values}
+                placeholder="Max Price"
+                onChange={(values) => setValues(values)}
+              />
+            </div>
+            <div className="item">
+              <Select
+                options={cities}
+                className="property_select"
+                value={values}
+                placeholder="City"
+                onChange={(values) => setValues(values)}
+              />
+            </div>
+            <div className="item">
+              <Select
+                options={states}
+                className="property_select"
+                value={values}
+                placeholder="State"
+                onChange={(values) => setValues(values)}
+              />
+            </div>
+            <div className="item">
+              <Select
+                options={options}
+                className="property_select"
+                value={values}
+                placeholder="Type"
+                onChange={(values) => setValues(values)}
+              />
+            </div>
+            <div className="item">
+              <Select
+                options={ages}
+                className="property_select"
+                value={values}
+                placeholder="Age"
+                onChange={(values) => setValues(values)}
+              />
+            </div>
           </div>
-          <div className="item">
-            <Select
-              options={min_price}
-              className="property_select"
-              value={values}
-              placeholder="Min Price"
-              onChange={(values) => setValues(values)}
+          <div className={`filter-values ${classes.root}`}>
+            Filter:
+            <Chip
+              label="Temparary Search String"
+              onClick={handleClick}
+              onDelete={handleDelete}
             />
-          </div>
-          <div className="item">
-            <Select
-              options={max_price}
-              className="property_select"
-              value={values}
-              placeholder="Max Price"
-              onChange={(values) => setValues(values)}
+            <Chip
+              label="min: 1K"
+              onClick={handleClick}
+              onDelete={handleDelete}
             />
-          </div>
-          <div className="item">
-            <Select
-              options={cities}
-              className="property_select"
-              value={values}
-              placeholder="City"
-              onChange={(values) => setValues(values)}
+            <Chip
+              label="max: 2K"
+              onClick={handleClick}
+              onDelete={handleDelete}
             />
-          </div>
-          <div className="item">
-            <Select
-              options={states}
-              className="property_select"
-              value={values}
-              placeholder="State"
-              onChange={(values) => setValues(values)}
+            <Chip
+              label="City: New York"
+              onClick={handleClick}
+              onDelete={handleDelete}
             />
-          </div>
-          <div className="item">
-            <Select
-              options={options}
-              className="property_select"
-              value={values}
-              placeholder="Type"
-              onChange={(values) => setValues(values)}
+            <Chip
+              label="State: New York"
+              onClick={handleClick}
+              onDelete={handleDelete}
             />
-          </div>
-          <div className="item">
-            <Select
-              options={ages}
-              className="property_select"
-              value={values}
-              placeholder="Age"
-              onChange={(values) => setValues(values)}
+            <Chip
+              label="Townhouse"
+              onClick={handleClick}
+              onDelete={handleDelete}
+            />
+            <Chip
+              label="5 years"
+              onClick={handleClick}
+              onDelete={handleDelete}
             />
           </div>
         </div>
-        <div className={`filter-values ${classes.root}`}>
-          Filter:
-          <Chip
-            label="Temparary Search String"
-            onClick={handleClick}
-            onDelete={handleDelete}
-          />
-          <Chip
-            label="min: 1K"
-            onClick={handleClick}
-            onDelete={handleDelete}
-          />
-          <Chip
-            label="max: 2K"
-            onClick={handleClick}
-            onDelete={handleDelete}
-          />
-          <Chip
-            label="City: New York"
-            onClick={handleClick}
-            onDelete={handleDelete}
-          />
-          <Chip
-            label="State: New York"
-            onClick={handleClick}
-            onDelete={handleDelete}
-          />
-          <Chip
-            label="Townhouse"
-            onClick={handleClick}
-            onDelete={handleDelete}
-          />
-          <Chip
-            label="5 years"
-            onClick={handleClick}
-            onDelete={handleDelete}
-          />
+        <div className="items-container">
+          <PropertyItem />
+          <PropertyItem />
+          <PropertyItem />
+          <PropertyItem />
+          <PropertyItem />
+          <PropertyItem />
+          <PropertyItem />
+          <PropertyItem />
         </div>
       </div>
-      <div className="items-container">
-        <PropertyItem />
-        <PropertyItem />
-        <PropertyItem />
-        <PropertyItem />
-        <PropertyItem />
-        <PropertyItem />
-        <PropertyItem />
-        <PropertyItem />
-      </div>
-    </div>
+      <PropertyModal openModal={true}/>
+    </Fragment>
   );
 };
 
