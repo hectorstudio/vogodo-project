@@ -1,17 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import LogoItem from "../../components/MenuItem/LogoItem";
 import MenuItem from "../../components/MenuItem";
 import BaseDrawer from "../../components/BaseDrawer";
 import PlanSection from "../Home/planSection";
+import Login from "../../assets/svg/login.svg";
 
 import "./Header.style.scss";
 
 const Header = () => {
   const baseDrawer = React.createRef();
+  const [anchor, setAnchor] = useState("bottom");
 
   const openDrawer = () => {
     baseDrawer.current.openDrawer(<PlanSection></PlanSection>);
-  }
+  };
+
+  const openLoginDrawer = () => {
+    setAnchor("right");
+    console.log(anchor);
+    baseDrawer.current.openDrawer(<PlanSection></PlanSection>);
+  };
 
   return (
     <header>
@@ -27,12 +35,17 @@ const Header = () => {
             <MenuItem url="#" title="Find a Contractor" />
           </ul>
           <div className="social-icons">
-            <div onClick={openDrawer}><i className="fa fa-facebook"></i></div>
-            <div onClick={openDrawer}><i className="fa fa-google"></i></div>
+            {
+              //<div onClick={openDrawer}><i className="fa fa-facebook"></i></div>
+              //<div onClick={openDrawer}><i className="fa fa-google"></i></div>
+            }
+            <div onClick={openLoginDrawer}>
+              <img src={Login} alt="login icon" />
+            </div>
           </div>
         </div>
       </div>
-      <BaseDrawer ref={baseDrawer}/>
+      <BaseDrawer ref={baseDrawer} anchor={anchor} />
     </header>
   );
 };

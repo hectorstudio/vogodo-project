@@ -1,4 +1,12 @@
-.drawer-footer {
-  display: flex;
-  justify-content: space-between;
+.drawer-container{
+  .container {
+    padding: 20px;
+    .drawer-header {
+      display: flex;
+      justify-content: flex-end;
+      span {
+        cursor: pointer;
+      }
+    }
+  }
 }

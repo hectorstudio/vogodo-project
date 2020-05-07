@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Drawer from "@material-ui/core/Drawer";
 import Button from "@material-ui/core/Button";
-import ArrowForward from "@material-ui/icons/ArrowForward";
 import Close from "@material-ui/icons/Close";
 import "./Basedrawer.style.scss";
 
@@ -11,7 +10,6 @@ class BaseDrawer extends Component {
     this.state = {
       isShowDrawer: false,
       drawerContent: null,
-      anchor: props.anchor || "bottom",
     };
   }
 
@@ -32,23 +30,21 @@ class BaseDrawer extends Component {
   };
 
   render() {
-    const { isShowDrawer, drawerContent, anchor } = this.state;
+    const { isShowDrawer, drawerContent } = this.state;
     return (
-      <Drawer anchor={anchor} open={isShowDrawer} onClose={this.closeDrawer}>
+      <Drawer
+        className="drawer-container"
+        anchor={this.props.anchor}
+        open={isShowDrawer}
+        onClose={this.closeDrawer}
+      >
         <div className="container">
-          {drawerContent && drawerContent}
-          <div className="drawer-footer">
-            <Button variant="contained" onClick={this.closeDrawer} color="secondary" endIcon={<Close />}>
-              Close
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              endIcon={<ArrowForward />}
-            >
-              Send
-            </Button>
+          <div className="drawer-header">
+            <span onClick={this.closeDrawer}>
+              <Close />
+            </span>
           </div>
+          {drawerContent && drawerContent}
         </div>
       </Drawer>
     );
