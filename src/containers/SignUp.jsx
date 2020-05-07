@@ -36,7 +36,7 @@ const SignUpForm = () => {
           </button>
         </div>
       </div>
-      <PlanSection></PlanSection>
+      <PlanSection type={type}></PlanSection>
     </div>
   );
 };

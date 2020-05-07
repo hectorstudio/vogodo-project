@@ -3,6 +3,7 @@ import Home from "./containers/Home";
 import SignUp from "./containers/SignUp";
 import Property from "./containers/Property";
 import SubmitProperty from "./containers/SubmitProperty";
+import AccountContainer from "./containers/AccountContainer";
 import Header from "./section/Layout/Header";
 import Footer from "./section/Layout/Footer";
 import History from "./constants/History";
@@ -19,6 +20,7 @@ function App() {
           <Route exact path={ROUTES.home} component={Home} title="Home Container"></Route>
           <Route exact path={ROUTES.submit_property} component={SubmitProperty} title="Submit Container"></Route>
           <Route exact path={ROUTES.signup} component={SignUp} title="SignUp Container"></Route>
+          <Route exact path={ROUTES.account} component={AccountContainer} title="Account Container"></Route>
         </Switch>
         <Footer />
       </Router>
