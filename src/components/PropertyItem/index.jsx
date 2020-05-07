@@ -4,6 +4,7 @@ import imgSrc from "../../assets/img/realestate.jpg";
 import imgSrc1 from "../../assets/img/realestate1.jpg";
 import imgSrc2 from "../../assets/img/realestate2.jpg";
 import { Link } from "react-router-dom";
+import EachSlide from "./EachSlide";
 import "./PropertyItem.style.scss";
 
 const slideImages = {
@@ -38,38 +39,14 @@ const properties = {
   },
 };
 
-const PropertyItem = () => {
+const PropertyItem = ({ setOpenModal }) => {
   return (
     <div className="property-item">
       <div className="slide-container">
         <Slide {...properties}>
-          <div className="each-slide">
-            <div
-              style={{
-                backgroundImage: `url(${slideImages.propertyImages[0].imageUrl})`,
-              }}
-            >
-              <span>${slideImages.propertyPrice}</span>
-            </div>
-          </div>
-          <div className="each-slide">
-            <div
-              style={{
-                backgroundImage: `url(${slideImages.propertyImages[1].imageUrl})`,
-              }}
-            >
-              <span>${slideImages.propertyPrice}</span>
-            </div>
-          </div>
-          <div className="each-slide">
-            <div
-              style={{
-                backgroundImage: `url(${slideImages.propertyImages[2].imageUrl})`,
-              }}
-            >
-              <span>${slideImages.propertyPrice}</span>
-            </div>
-          </div>
+          <EachSlide setOpenModal={setOpenModal} url={slideImages.propertyImages[0].imageUrl} propertyPrice={slideImages.propertyPrice} />
+          <EachSlide setOpenModal={setOpenModal} url={slideImages.propertyImages[1].imageUrl} propertyPrice={slideImages.propertyPrice} />
+          <EachSlide setOpenModal={setOpenModal} url={slideImages.propertyImages[2].imageUrl} propertyPrice={slideImages.propertyPrice} />
         </Slide>
       </div>
       <div className="item-description">
