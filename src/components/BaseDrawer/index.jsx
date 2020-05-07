@@ -1,16 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Drawer from "@material-ui/core/Drawer";
 import Close from "@material-ui/icons/Close";
 import LoginForm from "../../components/LoginForm";
+import SignUpForm from "../../components/SignUpForm";
 import "./Basedrawer.style.scss";
 
-const BaseDrawer = ({
-  isShowDrawer,
-  setShowDrawer,
-}) => {
+const BaseDrawer = ({ isShowDrawer, setShowDrawer }) => {
+  const [drawerContent, setDrawerContent] = useState("");
+
+  useEffect(() => {
+    console.log(drawerContent);
+    if (isShowDrawer === true && !drawerContent) {
+      setDrawerContent("login");
+    }
+  }, [isShowDrawer]);
 
   const closeDrawer = () => {
     setShowDrawer(false);
+  };
+
+  const openSignUpForm = () => {
+    setShowDrawer(true);
+    setDrawerContent("signup");
+  };
+
+  const openLogInForm = () => {
+    setShowDrawer(true);
+    setDrawerContent("login");
   };
 
   return (
@@ -26,7 +42,17 @@ const BaseDrawer = ({
             <Close />
           </span>
         </div>
-        <LoginForm setShowDrawer={setShowDrawer}></LoginForm>
+        {drawerContent === "login" ? (
+          <LoginForm
+            setShowDrawer={setShowDrawer}
+            openSignUpForm={openSignUpForm}
+          ></LoginForm>
+        ) : (
+          <SignUpForm
+            setShowDrawer={setShowDrawer}
+            openLogInForm={openLogInForm}
+          ></SignUpForm>
+        )}
       </div>
     </Drawer>
   );

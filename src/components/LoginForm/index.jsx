@@ -2,11 +2,13 @@ import React from "react";
 import History from "../../constants/History";
 import "./LoginForm.style.scss";
 
-const LoginForm = ({setShowDrawer}) => {
-  const openSignUpForm = () => {
+const LoginForm = ({ setShowDrawer, openSignUpForm }) => {
+  const goToHomePage = () => {
     setShowDrawer(false);
-    History.push("/signup");
-  }
+    localStorage.setItem("login", true);
+    localStorage.setItem("account-type", "manager");
+    History.push("/");
+  };
   return (
     <div className="login-form">
       <form>
@@ -20,21 +22,22 @@ const LoginForm = ({setShowDrawer}) => {
         </div>
         <div className="form-group">
           <div className="form-control">
-            <button type="submit">
-              Log In
-            </button>
+            <button type="submit" onClick={goToHomePage}>Log In</button>
           </div>
         </div>
       </form>
       <div className="signup-link">
-        <p>If the account is doesn't exist, <br/> please <span onClick={openSignUpForm}>Create an account</span></p>
+        <p>
+          If the account is doesn't exist, <br /> please{" "}
+          <span onClick={openSignUpForm}>Create an account</span>
+        </p>
       </div>
       <div className="divider"></div>
       <div className="social-login">
-        <button className="facebook">
+        <button className="facebook" onClick={goToHomePage}>
           <i className="fa fa-facebook"></i> Log In With Facebook
         </button>
-        <button className="google">
+        <button className="google" onClick={goToHomePage}>
           <i className="fa fa-google"></i> Log In With Google
         </button>
       </div>
