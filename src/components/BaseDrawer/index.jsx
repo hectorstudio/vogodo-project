@@ -1,54 +1,35 @@
-import React, { Component } from "react";
+import React from "react";
 import Drawer from "@material-ui/core/Drawer";
-import Button from "@material-ui/core/Button";
 import Close from "@material-ui/icons/Close";
+import LoginForm from "../../components/LoginForm";
 import "./Basedrawer.style.scss";
 
-class BaseDrawer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isShowDrawer: false,
-      drawerContent: null,
-    };
-  }
+const BaseDrawer = ({
+  isShowDrawer,
+  setShowDrawer,
+}) => {
 
-  openDrawer = (drawerContent) => {
-    this.setState({
-      isShowDrawer: true,
-      drawerContent,
-    });
+  const closeDrawer = () => {
+    setShowDrawer(false);
   };
 
-  closeDrawer = () => {
-    this.setState({
-      isShowDrawer: false,
-      drawerContent: null,
-    });
-    const { customClose } = this.props;
-    customClose && customClose();
-  };
-
-  render() {
-    const { isShowDrawer, drawerContent } = this.state;
-    return (
-      <Drawer
-        className="drawer-container"
-        anchor={this.props.anchor}
-        open={isShowDrawer}
-        onClose={this.closeDrawer}
-      >
-        <div className="container">
-          <div className="drawer-header">
-            <span onClick={this.closeDrawer}>
-              <Close />
-            </span>
-          </div>
-          {drawerContent && drawerContent}
+  return (
+    <Drawer
+      className="drawer-container"
+      anchor="right"
+      open={isShowDrawer}
+      onClose={closeDrawer}
+    >
+      <div className={`container login`}>
+        <div className="drawer-header">
+          <span onClick={closeDrawer}>
+            <Close />
+          </span>
         </div>
-      </Drawer>
-    );
-  }
-}
+        <LoginForm setShowDrawer={setShowDrawer}></LoginForm>
+      </div>
+    </Drawer>
+  );
+};
 
 export default BaseDrawer;

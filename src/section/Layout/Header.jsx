@@ -2,23 +2,15 @@ import React, { useState } from "react";
 import LogoItem from "../../components/MenuItem/LogoItem";
 import MenuItem from "../../components/MenuItem";
 import BaseDrawer from "../../components/BaseDrawer";
-import PlanSection from "../Home/planSection";
 import Login from "../../assets/svg/login.svg";
 
 import "./Header.style.scss";
 
 const Header = () => {
-  const baseDrawer = React.createRef();
-  const [anchor, setAnchor] = useState("bottom");
-
-  const openDrawer = () => {
-    baseDrawer.current.openDrawer(<PlanSection></PlanSection>);
-  };
+  const [isShowDrawer, setShowDrawer] = useState(false);
 
   const openLoginDrawer = () => {
-    setAnchor("right");
-    console.log(anchor);
-    baseDrawer.current.openDrawer(<PlanSection></PlanSection>);
+    setShowDrawer(true);
   };
 
   return (
@@ -45,7 +37,10 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <BaseDrawer ref={baseDrawer} anchor={anchor} />
+      <BaseDrawer
+        isShowDrawer={isShowDrawer}
+        setShowDrawer={setShowDrawer}
+      />
     </header>
   );
 };

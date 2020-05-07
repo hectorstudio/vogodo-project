@@ -1,6 +1,9 @@
 .drawer-container{
   .container {
     padding: 20px;
+    &.login {
+      width: 300px;
+    }
     .drawer-header {
       display: flex;
       justify-content: flex-end;
