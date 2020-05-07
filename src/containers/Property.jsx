@@ -77,7 +77,7 @@ const Property = () => {
   return (
     <Fragment>
       <div className="container property-container">
-        <Breadcrumbs />
+        <Breadcrumbs parent="Home" child="Find properties"/>
         <div className="filter-container">
           <div className="filter-items">
             <div className="search-item">

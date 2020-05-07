@@ -1,12 +1,12 @@
 import React from 'react';
 import './Breadcrumbs.style.scss';
 
-const Breadcrumbs = () => {
+const Breadcrumbs = ({parent, child}) => {
   return (
     <div className="breadcrumbs-container">
-      <span>Properties</span>
+      <span>{parent}</span>
       <span>/</span>
-      <span>Find properties</span>
+      <span>{child}</span>
     </div>
   );
 }
