@@ -23,7 +23,7 @@ const slideImages = {
       imageTitle: "Temp Property 3",
     },
   ],
-  propertyPrice: '2100.89'
+  propertyPrice: "2100.89",
 };
 
 const properties = {
@@ -39,28 +39,41 @@ const properties = {
 };
 
 const FeaturedItem = () => {
+  const Login = localStorage.getItem("login");
   return (
     <Link to="/properties" className="featured-item">
       <div className="slide-container">
         <Slide {...properties}>
           <div className="each-slide">
-            <div style={{ backgroundImage: `url(${slideImages.propertyImages[0].imageUrl})` }}>
+            <div
+              style={{
+                backgroundImage: `url(${slideImages.propertyImages[0].imageUrl})`,
+              }}
+            >
               <span>${slideImages.propertyPrice}</span>
             </div>
           </div>
           <div className="each-slide">
-            <div style={{ backgroundImage: `url(${slideImages.propertyImages[1].imageUrl})` }}>
+            <div
+              style={{
+                backgroundImage: `url(${slideImages.propertyImages[1].imageUrl})`,
+              }}
+            >
               <span>${slideImages.propertyPrice}</span>
             </div>
           </div>
           <div className="each-slide">
-            <div style={{ backgroundImage: `url(${slideImages.propertyImages[2].imageUrl})` }}>
+            <div
+              style={{
+                backgroundImage: `url(${slideImages.propertyImages[2].imageUrl})`,
+              }}
+            >
               <span>${slideImages.propertyPrice}</span>
             </div>
           </div>
         </Slide>
       </div>
-      <div className="item-description">
+      <div className={`item-description ${Login ? "" : "blur"}`}>
         <h3>{slideImages.propertyTitle}</h3>
         <p>{slideImages.address}</p>
       </div>

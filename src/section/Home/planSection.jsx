@@ -20,7 +20,11 @@ const platiumPlan = {
   style: "bg-price-platium",
 };
 
-const PlanSection = () => {
+const PlanSection = ({type=""}) => {
+  if(type !== "") {
+    localStorage.setItem('login', true);
+    localStorage.setItem('account-type', type);
+  }
   return (
     <section className="section section-promotion-price">
       <div className="container">

@@ -23,7 +23,9 @@
   }
   .item-description {
     margin: 0 10px 10px 10px;
-    filter: blur(0.2rem);
+    &.blur {
+      filter: blur(0.2rem);
+    }
     h3 {
       margin: 5px 5px !important;
       text-align: left !important;

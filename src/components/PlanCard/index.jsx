@@ -1,14 +1,19 @@
 import React from "react";
+import History from "../../constants/History";
 
 import "./PlanCard.style.scss";
 
 const PlanCard = ({ selected, planObject }) => {
+  const goToHomepage = () => {
+    History.push("/");
+  };
   return (
     <div className={`price-ticket`}>
       <div className={`ticket-header`}>
         <h4> {planObject.title} </h4>
         <p className="price">
-          $<span className="price-cost">{planObject.price}</span><span className="starting-from">per month</span>
+          $<span className="price-cost">{planObject.price}</span>
+          <span className="starting-from">per month</span>
         </p>
         <p className="price-detail">
           Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod
@@ -26,7 +31,7 @@ const PlanCard = ({ selected, planObject }) => {
           <p>&#10004; Unlimited Revision </p>
           <p>&#10004; 3 Months Support </p>
         </div>
-        <button className={`btn btn-rounded uppercase`}>
+        <button onClick={goToHomepage} className={`btn btn-rounded uppercase`}>
           Purchase
         </button>
       </div>
