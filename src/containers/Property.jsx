@@ -64,6 +64,9 @@ const ages = [
 
 const Property = () => {
   const classes = useStyles();
+  const [openModal, setOpenModal] = useState(false);
+  console.log(openModal);
+  const [values, setValues] = useState([]);
   const handleDelete = () => {
     console.info('You clicked the delete icon.');
   };
@@ -71,7 +74,6 @@ const Property = () => {
   const handleClick = () => {
     console.info('You clicked the Chip.');
   };
-  const [values, setValues] = useState([]);
   return (
     <Fragment>
       <div className="container property-container">
@@ -176,17 +178,17 @@ const Property = () => {
           </div>
         </div>
         <div className="items-container">
-          <PropertyItem />
-          <PropertyItem />
-          <PropertyItem />
-          <PropertyItem />
-          <PropertyItem />
-          <PropertyItem />
-          <PropertyItem />
-          <PropertyItem />
+          <PropertyItem setOpenModal={setOpenModal}/>
+          <PropertyItem setOpenModal={setOpenModal}/>
+          <PropertyItem setOpenModal={setOpenModal}/>
+          <PropertyItem setOpenModal={setOpenModal}/>
+          <PropertyItem setOpenModal={setOpenModal}/>
+          <PropertyItem setOpenModal={setOpenModal}/>
+          <PropertyItem setOpenModal={setOpenModal}/>
+          <PropertyItem setOpenModal={setOpenModal}/>
         </div>
       </div>
-      <PropertyModal openModal={true}/>
+      <PropertyModal setOpenModal={setOpenModal} openFlag={openModal}/>
     </Fragment>
   );
 };

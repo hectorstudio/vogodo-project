@@ -1,10 +1,18 @@
 import React from "react";
 import LogoItem from "../../components/MenuItem/LogoItem";
 import MenuItem from "../../components/MenuItem";
+import BaseDrawer from "../../components/BaseDrawer";
+import PlanSection from "../Home/planSection";
 
 import "./Header.style.scss";
 
 const Header = () => {
+  const baseDrawer = React.createRef();
+
+  const openDrawer = () => {
+    baseDrawer.current.openDrawer(<PlanSection></PlanSection>);
+  }
+
   return (
     <header>
       <div className="container">
@@ -19,11 +27,12 @@ const Header = () => {
             <MenuItem url="#" title="Find a Contractor" />
           </ul>
           <div className="social-icons">
-            <div><i className="fa fa-facebook"></i></div>
-            <div><i className="fa fa-google"></i></div>
+            <div onClick={openDrawer}><i className="fa fa-facebook"></i></div>
+            <div onClick={openDrawer}><i className="fa fa-google"></i></div>
           </div>
         </div>
       </div>
+      <BaseDrawer ref={baseDrawer}/>
     </header>
   );
 };

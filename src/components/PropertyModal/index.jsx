@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import "./PropertyModal.style.scss";
 import ImageGallery from "react-image-gallery";
 import YouTube from "react-youtube";
@@ -30,13 +30,14 @@ const images = [
   },
 ];
 
-const PropertyModal = ({ openFlag, favorite = true, share = false }) => {
-  const [openModal, setOpenModal] = useState(false);
+const PropertyModal = ({ setOpenModal, openFlag, favorite = true, share = false }) => {
+  const [save, setSave] = useState(false);
+  const [subscribe, setSubscribe] = useState(false);
 
-  useMemo(() => {
-    console.log(openFlag);
-    setOpenModal(openFlag);
-  }, [openFlag]);
+  useEffect(() => {
+    setSave(favorite);
+    setSubscribe(share);
+  }, [favorite, share]);
 
   const defaultProps = {
     center: {
@@ -58,23 +59,32 @@ const PropertyModal = ({ openFlag, favorite = true, share = false }) => {
     event.target.pauseVideo();
   };
 
-  const handleClose = () => {};
+  const handleClose = () => {
+    setOpenModal(false);
+  };
 
+  const handleSave = () => {
+    setSave(save ? false : true);
+  };
+
+  const handleSubscribe = () => {
+    setSubscribe(subscribe ? false : true);
+  };
   return (
     <div
       className="property-modal-background"
-      style={!openModal ? { display: "none" } : { display: "block" }}
+      style={!openFlag ? { display: "none" } : { display: "block" }}
     >
       <div className="property-modal">
         <div className="property-modal-header">
           <div className="title">
             <div className="button">Home Details</div>
-            <div className="button">
-              {favorite ? <FavoriteIcon /> : <FavoriteIconBorder />}
+            <div className="button" onClick={handleSave}>
+              {save ? <FavoriteIcon /> : <FavoriteIconBorder />}
               Save
             </div>
-            <div className="button">
-              {share ? <Unsubscribe /> : <MailOut />} Share
+            <div className="button" onClick={handleSubscribe}>
+              {subscribe ? <Unsubscribe /> : <MailOut />} Share
             </div>
           </div>
           <div className="close">
