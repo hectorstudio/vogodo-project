@@ -13,7 +13,7 @@ const BaseDrawer = ({ isShowDrawer, setShowDrawer }) => {
     if (isShowDrawer === true && !drawerContent) {
       setDrawerContent("login");
     }
-  }, [isShowDrawer]);
+  }, [isShowDrawer, drawerContent]);
 
   const closeDrawer = () => {
     setShowDrawer(false);

@@ -1,0 +1,18 @@
+.item {
+  max-width: 100px;
+  margin: 0 5px;
+  .property_select {
+    padding: 0px;
+    background-color: white;
+    font-family: Raleway, sans-serif;
+    font-size: 12px;
+    text-align: left;
+    padding: 5px 2px 5px 2px;
+    border: none;
+    border-bottom: 1px solid #cccccc;
+  }
+  .react-dropdown-select-input {
+    font-family: "Raleway", sans-serif !important;
+    font-size: 12px;
+  }
+}

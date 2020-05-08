@@ -1,8 +1,8 @@
 import React, { useState, Fragment } from "react";
 import PropertyItem from "../components/PropertyItem";
 import { makeStyles } from '@material-ui/core/styles';
-import Select from "react-dropdown-select";
 import PropertyModal from "../components/PropertyModal";
+import FilterItem from "../components/FilterItem";
 import "./Property.style.scss";
 import Breadcrumbs from "../components/Breadcrumbs";
 import Chip from '@material-ui/core/Chip';
@@ -10,7 +10,6 @@ import Chip from '@material-ui/core/Chip';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    justifyContent: 'center',
     flexWrap: 'wrap',
     '& > *': {
       marginLeft: theme.spacing(0.5),
@@ -64,7 +63,7 @@ const ages = [
 
 const Property = () => {
   const classes = useStyles();
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false)
   console.log(openModal);
   const [values, setValues] = useState([]);
   const handleDelete = () => {
@@ -74,6 +73,11 @@ const Property = () => {
   const handleClick = () => {
     console.info('You clicked the Chip.');
   };
+
+  const setFilterValues = (prefix, value, multiple) => {
+    console.log(prefix, value);
+  }
+
   return (
     <Fragment>
       <div className="container property-container">
@@ -83,60 +87,12 @@ const Property = () => {
             <div className="search-item">
               <input type="text" className="search-input" placeholder="Search Properties" />
             </div>
-            <div className="item">
-              <Select
-                options={min_price}
-                className="property_select"
-                value={values}
-                placeholder="Min Price"
-                onChange={(values) => setValues(values)}
-              />
-            </div>
-            <div className="item">
-              <Select
-                options={max_price}
-                className="property_select"
-                value={values}
-                placeholder="Max Price"
-                onChange={(values) => setValues(values)}
-              />
-            </div>
-            <div className="item">
-              <Select
-                options={cities}
-                className="property_select"
-                value={values}
-                placeholder="City"
-                onChange={(values) => setValues(values)}
-              />
-            </div>
-            <div className="item">
-              <Select
-                options={states}
-                className="property_select"
-                value={values}
-                placeholder="State"
-                onChange={(values) => setValues(values)}
-              />
-            </div>
-            <div className="item">
-              <Select
-                options={options}
-                className="property_select"
-                value={values}
-                placeholder="Type"
-                onChange={(values) => setValues(values)}
-              />
-            </div>
-            <div className="item">
-              <Select
-                options={ages}
-                className="property_select"
-                value={values}
-                placeholder="Age"
-                onChange={(values) => setValues(values)}
-              />
-            </div>
+            <FilterItem data={min_price} value="" prefix="min: " setFilterValues={setFilterValues} />
+            <FilterItem data={max_price} value="" prefix="max: " setFilterValues={setFilterValues} />
+            <FilterItem data={cities} value="" prefix="City: " setFilterValues={setFilterValues} />
+            <FilterItem data={states} value="" prefix="State: " setFilterValues={setFilterValues} />
+            <FilterItem data={options} multiple="true" value="" prefix="Type: " setFilterValues={setFilterValues} />
+            <FilterItem data={ages} value="" prefix="Built: " setFilterValues={setFilterValues} />            
           </div>
           <div className={`filter-values ${classes.root}`}>
             Filter:
