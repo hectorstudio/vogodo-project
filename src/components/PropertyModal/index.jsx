@@ -150,7 +150,7 @@ const PropertyModal = ({ setOpenModal, openFlag, favorite = true, share = false 
                 </div>
               </div>
               <div className="contact-info">
-                <div className="map" style={{ height: "200px", width: "100%" }}>
+                {/*<div className="map" style={{ height: "200px", width: "100%" }}>
                   <GoogleMapReact
                     bootstrapURLKeys={{
                       key: "AKLjsdjdjkjlkasdfhjkdaeueujndjAJJKLAJNA",
@@ -165,7 +165,7 @@ const PropertyModal = ({ setOpenModal, openFlag, favorite = true, share = false 
                     opts={opts}
                     onReady={_onReady}
                   />
-                </div>
+                  </div>*/}
 
                 <div className="contact-body">
                   <h3>Contact Info</h3>

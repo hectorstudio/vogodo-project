@@ -1,48 +1,49 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useMemo } from "react";
 import PropertyItem from "../components/PropertyItem";
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 import PropertyModal from "../components/PropertyModal";
 import FilterItem from "../components/FilterItem";
 import "./Property.style.scss";
 import Breadcrumbs from "../components/Breadcrumbs";
-import Chip from '@material-ui/core/Chip';
+import Chip from "@material-ui/core/Chip";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '& > *': {
+    display: "flex",
+    flexWrap: "wrap",
+    "& > *": {
       marginLeft: theme.spacing(0.5),
+      marginTop: theme.spacing(0.5),
     },
   },
 }));
 
 const options = [
-  { value: 1, label: "Condominiums" },
-  { value: 2, label: "Detached House" },
-  { value: 3, label: "Townhouse" },
-  { value: 4, label: "Semi-detached House" },
-  { value: 5, label: "Duplex/Triplex" },
+  { value: "Condominiums", label: "Condominiums" },
+  { value: "Detached House", label: "Detached House" },
+  { value: "Townhouse", label: "Townhouse" },
+  { value: "Semi-detached House", label: "Semi-detached House" },
+  { value: "Duplex/Triplex", label: "Duplex/Triplex" },
 ];
 
 const min_price = [
-  { value: "1K", label: "1K" },
-  { value: "2K", label: "2K" },
-  { value: "3K", label: "3K" },
-  { value: "4K", label: "4K" },
-  { value: "5K", label: "5K" },
+  { value: 1000, label: "1K" },
+  { value: 2000, label: "2K" },
+  { value: 3000, label: "3K" },
+  { value: 4000, label: "4K" },
+  { value: 5000, label: "5K" },
 ];
 
 const max_price = [
-  { value: "2K", label: "2K" },
-  { value: "3K", label: "3K" },
-  { value: "4K", label: "4K" },
-  { value: "5K", label: "5K" },
-  { value: "6K", label: "6K" },
+  { value: 2000, label: "2K" },
+  { value: 3000, label: "3K" },
+  { value: 4000, label: "4K" },
+  { value: 5000, label: "5K" },
+  { value: 6000, label: "5K" },
 ];
 
 const cities = [
-  { value: "San francisco", label: "San francisco" },
+  { value: "San Francisco", label: "San Francisco" },
   { value: "New York", label: "New York" },
   { value: "Boston", label: "Boston" },
   { value: "Los Angeles", label: "Los Angeles" },
@@ -61,90 +62,243 @@ const ages = [
   { value: "15 years", label: "15 years" },
 ];
 
+const MockupData = [
+  {
+    title: "Temporary Data",
+    price: 1500,
+    street: "Temporary Address",
+    city: "San Francisco",
+    state: "California",
+    type: "Duplex/Triplex",
+    age: 6,
+  },
+  {
+    title: "Property Test Data 1",
+    price: 2500,
+    street: "Temporary Address",
+    city: "San Francisco",
+    state: "California",
+    type: "Semi-detached House",
+    age: 4,
+  },
+  {
+    title: "Property Test Data 2",
+    price: 1700,
+    street: "Temporary Address",
+    city: "San Francisco",
+    state: "California",
+    type: "Townhouse",
+    age: 11,
+  },
+  {
+    title: "Condowminium Data",
+    price: 2000,
+    street: "Temporary Address",
+    city: "Los Angeles",
+    state: "California",
+    type: "Condominiums",
+    age: 7,
+  },
+  {
+    title: "New York Detached House",
+    price: 1500,
+    street: "Temporary Address",
+    city: "New York",
+    state: "New York",
+    type: "Detached House",
+    age: 16,
+  },
+  {
+    title: "Example Data",
+    price: 3500,
+    street: "Temporary Address",
+    city: "New York",
+    state: "New York",
+    type: "Townhouse",
+    age: 19,
+  },
+  {
+    title: "Temporary Data 12",
+    price: 4500,
+    street: "Temporary Address",
+    city: "New York",
+    state: "New York",
+    type: "Semi-detached House",
+    age: 13,
+  },
+  {
+    title: "Chicago example property",
+    price: 2500,
+    street: "Temporary Address",
+    city: "Chicago",
+    state: "Chicago",
+    type: "Condominiums",
+    age: 8,
+  },
+];
+
 const Property = () => {
   const classes = useStyles();
-  const [openModal, setOpenModal] = useState(false)
-  console.log(openModal);
+  const [openModal, setOpenModal] = useState(false);
   const [values, setValues] = useState([]);
-  const handleDelete = () => {
-    console.info('You clicked the delete icon.');
+  const [data, setData] = useState([]);
+
+  useMemo(() => {
+    if (data.length < 1) setData(MockupData);
+  });
+
+  const handleDelete = (index) => {
+    let data = [...values];
+    data.splice(index, 1);
+    setValues(data);
+    filterData(data);
   };
 
-  const handleClick = () => {
-    console.info('You clicked the Chip.');
+  const filterData = (filterValues) => {
+    let tempData = [...MockupData];
+    if (filterValues.length > 0) {
+      filterValues.map((item) => {
+        if (item.includes("Search By: ")) {
+          const arr = item.split(": ");
+          tempData = tempData.filter((element) =>
+            element.title.toLowerCase().includes(arr[1].toLowerCase())
+          );
+        }
+        if (item.includes("min: ")) {
+          const arr = item.split("$");
+          tempData = tempData.filter(
+            (element) => element.price > Number.parseInt(arr[1])
+          );
+        }
+        if (item.includes("max: ")) {
+          const arr = item.split("$");
+          tempData = tempData.filter(
+            (element) => element.price < Number.parseInt(arr[1])
+          );
+        }
+        if (item.includes("City: ")) {
+          const arr = item.split("City: ");
+          tempData = tempData.filter(
+            (element) => element.city === arr[1]
+          );
+        }
+        if (item.includes("State: ")) {
+          const arr = item.split("State: ");
+          tempData = tempData.filter(
+            (element) => element.state === arr[1]
+          );
+        }
+        if (item.includes("Over ")) {
+          const arr = item.split(" ");
+          tempData = tempData.filter(
+            (element) => element.age > Number.parseInt(arr[1])
+          );
+        }
+      });
+    }
+    setData(tempData);
   };
 
   const setFilterValues = (prefix, value, multiple) => {
-    console.log(prefix, value);
-  }
+    let data = [...values];
+    const parentIndex = data.findIndex((item) => item.includes(prefix));
+    if (parentIndex >= 0 && multiple === false)
+      data[parentIndex] = `${prefix}${value[0].value}`;
+    else data.push(`${prefix}${value[0].value}`);
+    setValues(data);
+    filterData(data);
+  };
+
+  const handleChagneSearch = (event) => {
+    let data = [...values];
+    const parentIndex = data.findIndex((item) => item.includes("Search By: "));
+    if (parentIndex >= 0)
+      data[parentIndex] = `Search By: ${event.target.value}`;
+    else data.push(`Search By: ${event.target.value}`);
+    setValues(data);
+    filterData(data);
+  };
 
   return (
     <Fragment>
       <div className="container property-container">
-        <Breadcrumbs parent="Home" child="Find properties"/>
+        <Breadcrumbs parent="Home" child="Find properties" />
         <div className="filter-container">
           <div className="filter-items">
             <div className="search-item">
-              <input type="text" className="search-input" placeholder="Search Properties" />
+              <input
+                type="text"
+                className="search-input"
+                onChange={handleChagneSearch}
+                placeholder="Search Properties"
+              />
             </div>
-            <FilterItem data={min_price} value="" prefix="min: " setFilterValues={setFilterValues} />
-            <FilterItem data={max_price} value="" prefix="max: " setFilterValues={setFilterValues} />
-            <FilterItem data={cities} value="" prefix="City: " setFilterValues={setFilterValues} />
-            <FilterItem data={states} value="" prefix="State: " setFilterValues={setFilterValues} />
-            <FilterItem data={options} multiple="true" value="" prefix="Type: " setFilterValues={setFilterValues} />
-            <FilterItem data={ages} value="" prefix="Built: " setFilterValues={setFilterValues} />            
+            <FilterItem
+              data={min_price}
+              value=""
+              prefix="min: $"
+              setFilterValues={setFilterValues}
+            />
+            <FilterItem
+              data={max_price}
+              value=""
+              prefix="max: $"
+              setFilterValues={setFilterValues}
+            />
+            <FilterItem
+              data={cities}
+              value=""
+              prefix="City: "
+              setFilterValues={setFilterValues}
+            />
+            <FilterItem
+              data={states}
+              value=""
+              prefix="State: "
+              setFilterValues={setFilterValues}
+            />
+            <FilterItem
+              data={options}
+              multiple="true"
+              value=""
+              prefix="Type: "
+              setFilterValues={setFilterValues}
+            />
+            <FilterItem
+              data={ages}
+              value=""
+              prefix="Over "
+              setFilterValues={setFilterValues}
+            />
           </div>
           <div className={`filter-values ${classes.root}`}>
-            Filter:
-            <Chip
-              label="Temparary Search String"
-              onClick={handleClick}
-              onDelete={handleDelete}
-            />
-            <Chip
-              label="min: 1K"
-              onClick={handleClick}
-              onDelete={handleDelete}
-            />
-            <Chip
-              label="max: 2K"
-              onClick={handleClick}
-              onDelete={handleDelete}
-            />
-            <Chip
-              label="City: New York"
-              onClick={handleClick}
-              onDelete={handleDelete}
-            />
-            <Chip
-              label="State: New York"
-              onClick={handleClick}
-              onDelete={handleDelete}
-            />
-            <Chip
-              label="Townhouse"
-              onClick={handleClick}
-              onDelete={handleDelete}
-            />
-            <Chip
-              label="5 years"
-              onClick={handleClick}
-              onDelete={handleDelete}
-            />
+            {values.length > 0 ? (
+              <Fragment>
+                <span>Filter:</span>
+                {values.map((item, index) => (
+                  <Chip
+                    key={`filter-item-${index}`}
+                    label={item}
+                    onDelete={() => handleDelete(index)}
+                  />
+                ))}
+              </Fragment>
+            ) : (
+              ""
+            )}
           </div>
         </div>
         <div className="items-container">
-          <PropertyItem setOpenModal={setOpenModal}/>
-          <PropertyItem setOpenModal={setOpenModal}/>
-          <PropertyItem setOpenModal={setOpenModal}/>
-          <PropertyItem setOpenModal={setOpenModal}/>
-          <PropertyItem setOpenModal={setOpenModal}/>
-          <PropertyItem setOpenModal={setOpenModal}/>
-          <PropertyItem setOpenModal={setOpenModal}/>
-          <PropertyItem setOpenModal={setOpenModal}/>
+          {data.map((element, index) => (
+            <PropertyItem
+              key={`element-${index}`}
+              data={element}
+              setOpenModal={setOpenModal}
+            />
+          ))}
         </div>
       </div>
-      <PropertyModal setOpenModal={setOpenModal} openFlag={openModal}/>
+      <PropertyModal setOpenModal={setOpenModal} openFlag={openModal} />
     </Fragment>
   );
 };

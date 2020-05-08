@@ -39,7 +39,7 @@ const properties = {
   },
 };
 
-const PropertyItem = ({ setOpenModal }) => {
+const PropertyItem = ({data, setOpenModal }) => {
   return (
     <div className="property-item">
       <div className="slide-container">
@@ -50,22 +50,22 @@ const PropertyItem = ({ setOpenModal }) => {
         </Slide>
       </div>
       <div className="item-description">
-        <h3>{slideImages.propertyTitle}</h3>
-        <p>{slideImages.address}</p>
+        <h3>{data.title || slideImages.propertyTitle}</h3>
+        <p>{`${data.street}, ${data.city} ${data.state}` || slideImages.address}</p>
         <div className="pricing">
           <div className="ind-plan">
             <span className="plan-title">1 Bedroom</span>
-            <span className="plan-price">$1,768</span>
+            <span className="plan-price">${data.price || 1768}</span>
             <span className="plan-detail">765sqft</span>
           </div>
           <div className="ind-plan">
             <span className="plan-title">2 Bedroom</span>
-            <span className="plan-price">$1,988</span>
+            <span className="plan-price">${data.price || 1768}</span>
             <span className="plan-detail">1052sqft</span>
           </div>
           <div className="ind-plan">
             <span className="plan-title">3 Bedroom</span>
-            <span className="plan-price">$2,132</span>
+            <span className="plan-price">${data.price || 1768}</span>
             <span className="plan-detail">1315sqft</span>
           </div>
         </div>
