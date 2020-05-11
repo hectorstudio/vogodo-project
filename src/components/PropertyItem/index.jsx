@@ -39,7 +39,7 @@ const properties = {
   },
 };
 
-const PropertyItem = ({data, setOpenModal }) => {
+const PropertyItem = ({data={}, setOpenModal }) => {
   return (
     <div className="property-item">
       <div className="slide-container">

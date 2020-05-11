@@ -23,7 +23,20 @@
   }
   .items-container {
     display: flex;
-    flex-wrap: wrap;
     margin-bottom: 50px;
+    .map {
+      width: 50%;
+      img {
+        width: 100%
+      }
+    }
+    .content-body {
+      width: 50%;
+      display: flex;
+      flex-wrap: wrap;
+      .property-item {
+        width: 49%;
+      }
+    }
   }
 }

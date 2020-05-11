@@ -6,6 +6,7 @@ import FilterItem from "../components/FilterItem";
 import "./Property.style.scss";
 import Breadcrumbs from "../components/Breadcrumbs";
 import Chip from "@material-ui/core/Chip";
+import map from "../assets/img/map.png";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -145,7 +146,7 @@ const Property = () => {
 
   useMemo(() => {
     if (data.length < 1) setData(MockupData);
-  });
+  }, [data]);
 
   const handleDelete = (index) => {
     let data = [...values];
@@ -178,15 +179,11 @@ const Property = () => {
         }
         if (item.includes("City: ")) {
           const arr = item.split("City: ");
-          tempData = tempData.filter(
-            (element) => element.city === arr[1]
-          );
+          tempData = tempData.filter((element) => element.city === arr[1]);
         }
         if (item.includes("State: ")) {
           const arr = item.split("State: ");
-          tempData = tempData.filter(
-            (element) => element.state === arr[1]
-          );
+          tempData = tempData.filter((element) => element.state === arr[1]);
         }
         if (item.includes("Over ")) {
           const arr = item.split(" ");
@@ -194,6 +191,7 @@ const Property = () => {
             (element) => element.age > Number.parseInt(arr[1])
           );
         }
+        return true;
       });
     }
     setData(tempData);
@@ -289,13 +287,18 @@ const Property = () => {
           </div>
         </div>
         <div className="items-container">
-          {data.map((element, index) => (
-            <PropertyItem
-              key={`element-${index}`}
-              data={element}
-              setOpenModal={setOpenModal}
-            />
-          ))}
+          <div className="map">
+            <img src={map} alt="map"/>
+          </div>
+          <div className="content-body">
+            {data.map((element, index) => (
+              <PropertyItem
+                key={`element-${index}`}
+                data={element}
+                setOpenModal={setOpenModal}
+              />
+            ))}
+          </div>
         </div>
       </div>
       <PropertyModal setOpenModal={setOpenModal} openFlag={openModal} />
