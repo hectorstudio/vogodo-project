@@ -1,4 +1,6 @@
 import React, { useState, Fragment, useMemo } from "react";
+import store from "../redux/service";
+import setVisibleType from "../redux/actions";
 import PropertyItem from "../components/PropertyItem";
 import { makeStyles } from "@material-ui/core/styles";
 import PropertyModal from "../components/PropertyModal";
@@ -145,6 +147,7 @@ const Property = () => {
   const [data, setData] = useState([]);
 
   useMemo(() => {
+    store.dispatch(setVisibleType({ type: "fixed-height" }));
     if (data.length < 1) setData(MockupData);
   }, [data]);
 
@@ -288,7 +291,7 @@ const Property = () => {
         </div>
         <div className="items-container">
           <div className="map">
-            <img src={map} alt="map"/>
+            <img src={map} alt="map" />
           </div>
           <div className="content-body">
             {data.map((element, index) => (

@@ -1,0 +1,1 @@
+export const SET_VISIBLE_TYPE = "SET_VISIBLE_TYPE";
