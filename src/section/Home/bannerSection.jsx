@@ -33,11 +33,13 @@ const BannerSection = () => {
         </div>
         <div className="property-actions">
           <Link to="/properties">
-          <button className="btn-property btn-available">
-            Available Properties
-          </button>
+            <button className="btn-property btn-available">
+              Available Properties
+            </button>
           </Link>
-          <button className="btn-property btn-list">List a Property</button>
+          <Link to="/properties/submit">
+            <button className="btn-property btn-list">List a Property</button>
+          </Link>
         </div>
         <div className="search-form">
           <form>

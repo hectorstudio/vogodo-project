@@ -4,15 +4,13 @@
 li.menu-item {
   padding: 10px 10px;
   border-radius: 20px;
-  display: flex;
   align-items: center;
   a {
     @include fontDef(#647883, "Lato", 16px, $bold, 11px);
   }
   &:hover {
-    background-color: #647883;
     a {
-      color: white;
+      text-decoration: underline;
     }
   }
 }

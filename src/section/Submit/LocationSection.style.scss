@@ -1,0 +1,19 @@
+.location-section {
+  text-align: left;
+  .title {
+    padding: 0px 22px;
+    font-size: 20px;
+    color: #8b9195;
+    font-family: Raleway, sans-serif;
+    font-weight: 600;
+  }
+  .address-container {
+    padding-top: 0px;
+  }
+  .map-container {
+    padding: 0px 22px;
+    img {
+      width: 100%;
+    }
+  }
+}

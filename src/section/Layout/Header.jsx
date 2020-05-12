@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import LogoItem from "../../components/MenuItem/LogoItem";
 import MenuItem from "../../components/MenuItem";
 import BaseDrawer from "../../components/BaseDrawer";
 import Login from "../../assets/svg/login.svg";
@@ -14,6 +13,8 @@ import Save from "@material-ui/icons/Save";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Settings from "@material-ui/icons/Settings";
 import History from "../../constants/History";
+import Logo from "../../assets/img/logo.png";
+import {Link} from 'react-router-dom';
 
 import "./Header.style.scss";
 
@@ -70,15 +71,16 @@ const Header = () => {
   };
 
   return (
-    <header>
-      <div className="container">
+    <header className="app-header">
+      <div className="container menu-container">
+        <div className="logo">
+          <Link to="/">
+            <img src={Logo} alt="Logo" />
+          </Link>
+        </div>
         <div className="menu" id="menu">
           <ul>
             <MenuItem url="/" title="HOME" />
-            <MenuItem url="#" title="ABOUT US" />
-            <MenuItem url="#" title="HELP" />
-            <MenuItem url="#" title="CONTACT US" />
-            <LogoItem url="#" title="Logo" />
             <MenuItem url="#" title="Find a Property Manager" />
             <MenuItem url="#" title="Find a Contractor" />
           </ul>
@@ -87,6 +89,8 @@ const Header = () => {
               //<div onClick={openDrawer}><i className="fa fa-facebook"></i></div>
               //<div onClick={openDrawer}><i className="fa fa-google"></i></div>
             }
+          </div>
+          <div className="login">
             {LoginFlag ? (
               <div>
                 <Avatar onClick={handleClick}>ES</Avatar>
