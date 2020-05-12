@@ -4,6 +4,7 @@ import Home from "./containers/Home";
 import SignUp from "./containers/SignUp";
 import Property from "./containers/Property";
 import SubmitProperty from "./containers/SubmitProperty";
+import PropertyDetail from "./containers/PropertyDetail";
 import AccountContainer from "./containers/AccountContainer";
 import Header from "./section/Layout/Header";
 import Footer from "./section/Layout/Footer";
@@ -15,15 +16,48 @@ import store from "./redux/service";
 function App() {
   return (
     <Provider store={store}>
-      <div className="App">
+      <div
+        className={`App`}
+      >
         <Router history={History}>
-          <Header visible={store.getState()}/>
+          <Header />
           <Switch>
-            <Route exact path={ROUTES.find_property}  component={Property} title="Property Container"></Route>
-            <Route exact path={ROUTES.home} component={Home} title="Home Container"></Route>
-            <Route exact path={ROUTES.submit_property} component={SubmitProperty} title="Submit Container"></Route>
-            <Route exact path={ROUTES.signup} component={SignUp} title="SignUp Container"></Route>
-            <Route exact path={ROUTES.account} component={AccountContainer} title="Account Container"></Route>
+            <Route
+              exact
+              path={ROUTES.find_property}
+              component={Property}
+              title="Property Container"
+            ></Route>
+            <Route
+              exact
+              path={ROUTES.home}
+              component={Home}
+              title="Home Container"
+            ></Route>
+            <Route
+              exact
+              path={ROUTES.submit_property}
+              component={SubmitProperty}
+              title="Submit Container"
+            ></Route>
+            <Route
+              exact
+              path={ROUTES.property_detail}
+              component={PropertyDetail}
+              title="PropertyDetail Container"
+            ></Route>
+            <Route
+              exact
+              path={ROUTES.signup}
+              component={SignUp}
+              title="SignUp Container"
+            ></Route>
+            <Route
+              exact
+              path={ROUTES.account}
+              component={AccountContainer}
+              title="Account Container"
+            ></Route>
           </Switch>
           <Footer />
         </Router>

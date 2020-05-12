@@ -9,7 +9,6 @@ const BaseDrawer = ({ isShowDrawer, setShowDrawer }) => {
   const [drawerContent, setDrawerContent] = useState("");
 
   useEffect(() => {
-    console.log(drawerContent);
     if (isShowDrawer === true && !drawerContent) {
       setDrawerContent("login");
     }

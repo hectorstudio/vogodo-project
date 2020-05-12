@@ -1,4 +1,8 @@
 .property-container {
+  height: calc(100vh - 135px);
+  &.has-filter {
+    height: calc(100vh - 135px);
+  }
   .filter-container {
     display: block;
     .filter-items {
@@ -23,17 +27,25 @@
   }
   .items-container {
     display: flex;
-    margin-bottom: 50px;
     .map {
       width: 50%;
       img {
-        width: 100%
+        width: 100%;
+        height: calc(100vh - 234px);
+        &.has-filter {
+          height: calc(100vh - 271px);
+        }
       }
     }
     .content-body {
       width: 50%;
       display: flex;
       flex-wrap: wrap;
+      height: calc(100vh - 232px);
+      &.has-filter {
+        height: calc(100vh - 270px);
+      }
+      overflow-y: scroll;
       .property-item {
         width: 49%;
       }

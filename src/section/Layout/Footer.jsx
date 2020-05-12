@@ -1,10 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import Logo from "../../assets/img/logo.png";
+import store from "../../redux/service";
 import "./Footer.style.scss";
 
 const Footer = () => {
+  const globalState = useSelector(state => state);
   return (
-    <footer>
+    <footer className={`${globalState.visible_type[0] ? globalState.visible_type[0].type : "" }`}>
       <div className="container">
         <div className="footer-item footer-logo">
           <img src={Logo} alt="footer-logo" />

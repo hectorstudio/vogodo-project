@@ -1,6 +1,6 @@
-import React, { useState, Fragment, useMemo } from "react";
-import store from "../redux/service";
-import setVisibleType from "../redux/actions";
+import React, { useState, Fragment, useMemo, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setVisibleType } from "../redux/actions";
 import PropertyItem from "../components/PropertyItem";
 import { makeStyles } from "@material-ui/core/styles";
 import PropertyModal from "../components/PropertyModal";
@@ -142,14 +142,41 @@ const MockupData = [
 
 const Property = () => {
   const classes = useStyles();
+  // Get State using Redux hooks api
+  const globalState = useSelector(state => state);
+  const dispatch = useDispatch();
+
   const [openModal, setOpenModal] = useState(false);
   const [values, setValues] = useState([]);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([]);  // ToDo: Should remove after finish filteredData using useMemo
+  const [filterOption, setFilterOption] = useState({
+    search: '',
+    min: '',
+    max: '',
+    city: '',
+    state: '',
+    type: '',
+    age: '',
+  });
 
-  useMemo(() => {
-    store.dispatch(setVisibleType({ type: "fixed-height" }));
+  useEffect(() => {
     if (data.length < 1) setData(MockupData);
-  }, [data]);
+  }, []);
+
+  useEffect(() => {
+    if (globalState.visible_type.length < 1) {
+      dispatch(setVisibleType({ type: "fixed-height" }));
+    }
+  }, [globalState]);
+
+  const filterMockdata = (option) => {
+    // ToDo: get filtered data using option
+    return [];
+  }
+
+  const filteredData = useMemo(() => {
+    return filterMockdata(filterOption);
+  }, [filterOption]);
 
   const handleDelete = (index) => {
     let data = [...values];
@@ -222,7 +249,7 @@ const Property = () => {
 
   return (
     <Fragment>
-      <div className="container property-container">
+      <div className={`container property-container ${values.length < 1 ? "" : "has-filter"}`}>
         <Breadcrumbs parent="Home" child="Find properties" />
         <div className="filter-container">
           <div className="filter-items">
@@ -291,9 +318,9 @@ const Property = () => {
         </div>
         <div className="items-container">
           <div className="map">
-            <img src={map} alt="map" />
+            <img className={`${values.length < 1 ? "" : "has-filter"}`} src={map} alt="map" />
           </div>
-          <div className="content-body">
+          <div className={`content-body ${values.length < 1 ? "" : "has-filter"}`}>
             {data.map((element, index) => (
               <PropertyItem
                 key={`element-${index}`}

@@ -53,7 +53,6 @@ const Header = () => {
   const [isShowDrawer, setShowDrawer] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const LoginFlag = localStorage.getItem("login") && true;
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -68,7 +67,7 @@ const Header = () => {
 
   const goToAccountPage = () => {
     History.push("/account");
-  }
+  };
 
   return (
     <header>
