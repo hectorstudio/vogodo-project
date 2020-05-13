@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     padding: 12,
     '& > *': {
       margin: theme.spacing(1),
-      width: '20ch',
+      width: '22%',
     },
   },
 }));

@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
     width: "100%",
+    minHeight: 610
   },
   margin: {
     margin: theme.spacing(2),
@@ -72,7 +73,7 @@ const BorderLinearProgress = withStyles({
 const SubmitProperty = () => {
   const classes = useStyles();
   const theme = useTheme();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(1);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -132,6 +133,9 @@ const SubmitProperty = () => {
                 <FileUploadSection />
               </TabPanel>
             </SwipeableViews>
+          </div>
+          <div className="submit-button">
+            <button>Submit</button>
           </div>
         </div>
         <div className="sidebar-container">
