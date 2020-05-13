@@ -15,5 +15,8 @@
     .property-item {
       min-width: 280px;
     }
+    &.listing {
+      display: block;
+    }
   }
 }

@@ -1,17 +1,18 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Breadcrumbs from "../components/Breadcrumbs";
 import "./AccountContainer.style.scss";
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Box from '@material-ui/core/Box';
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Box from "@material-ui/core/Box";
 import PropertyItem from "../components/PropertyItem";
 import PropertyModal from "../components/PropertyModal";
+import SavedProperties from "../section/Account/SavedProperties";
+import MyListing from "../section/Account/MyListing";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role="tabpanel"
@@ -21,11 +22,7 @@ function TabPanel(props) {
       aria-labelledby={`vertical-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box p={1}>
-          {children}
-        </Box>
-      )}
+      {value === index && <Box p={1}>{children}</Box>}
     </div>
   );
 }
@@ -39,7 +36,7 @@ TabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-tabpanel-${index}`,
+    "aria-controls": `vertical-tabpanel-${index}`,
   };
 }
 
@@ -47,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
-    display: 'flex',
+    display: "flex",
   },
   tabs: {
     borderRight: `1px solid ${theme.palette.divider}`,
@@ -59,6 +56,7 @@ const AccountContainer = () => {
   const classes = useStyles();
   const [value, setValue] = useState(2);
   const [openModal, setOpenModal] = useState(false);
+  const accountType = localStorage.getItem("account-type");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -77,7 +75,11 @@ const AccountContainer = () => {
         >
           <Tab label="Profile" {...a11yProps(0)} />
           <Tab label="Account Settings" {...a11yProps(1)} />
-          <Tab label="Saved Properties" {...a11yProps(2)} />
+          {accountType === "contractor" ? (
+            <Tab label="Saved Properties" {...a11yProps(2)} />
+          ) : (
+            <Tab label="My Listing" {...a11yProps(2)} />
+          )}
         </Tabs>
         <TabPanel value={value} index={0}>
           This page is preparing...
@@ -86,16 +88,14 @@ const AccountContainer = () => {
           This page is preparing...
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <div className="pane-title">Saved Properties - 4 Items</div>
-          <div className="pane-body">
-            <PropertyItem setOpenModal={setOpenModal}/>
-            <PropertyItem setOpenModal={setOpenModal}/>
-            <PropertyItem setOpenModal={setOpenModal}/>
-            <PropertyItem setOpenModal={setOpenModal}/>
-          </div>
+          {accountType === "contractor" ? (
+            <SavedProperties setOpenModal={setOpenModal} />
+          ) : (
+            <MyListing setOpenModal={setOpenModal} />
+          )}
         </TabPanel>
       </div>
-      <PropertyModal setOpenModal={setOpenModal} openFlag={openModal}/>
+      <PropertyModal setOpenModal={setOpenModal} openFlag={openModal} />
     </div>
   );
 };
