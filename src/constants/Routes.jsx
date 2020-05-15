@@ -5,6 +5,7 @@ const Routes = {
   submit_property: "/properties/submit",
   property_detail: "/properties/detail",
   findmanager: "/managers",
+  managerslisting: "/managers/listing",
   account: "/account"
 };
 

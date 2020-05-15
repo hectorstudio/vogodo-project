@@ -1,0 +1,45 @@
+.manager-item {
+  text-align: left;
+  margin: 10px 0px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0 8px rgba(0,0,0,.42);
+  .manager-profile {
+    flex: 2;
+    img {
+      width: 100%;
+    }
+  }
+  .manager-detail {
+    flex: 6;
+    padding: 0 20px;
+    .manager-name {
+      font-size: 24px;
+      color: #3f9dff;
+      line-height: 1.5;
+    }
+    .manager-title {
+      font-size: 18px;
+      line-height: 1.5;
+      font-family: Lato, sans-serif;
+    }
+    .manager-address {
+      color: #929eaa;
+      line-height: 1.5;
+    }
+    .languages {
+      color: #929eaa;
+      line-height: 1.5;
+    }
+  }
+  .manager-contact {
+    text-align: right;
+    flex: 4;
+    div {
+      color: #666;
+      font-size: 17px;
+      line-height: 1.5;     
+    }
+  }
+}

@@ -14,6 +14,7 @@ import "./App.scss";
 import { Router, Switch, Route } from "react-router-dom";
 import ROUTES from "./constants/Routes";
 import store from "./redux/service";
+import ManagersListing from "./containers/ManagersListing";
 function App() {
   return (
     <Provider store={store}>
@@ -62,6 +63,12 @@ function App() {
               path={ROUTES.findmanager}
               component={FindManager}
               title="Find a Property Manager"
+            ></Route>
+            <Route
+              exact
+              path={ROUTES.managerslisting}
+              component={ManagersListing}
+              title="List Managers"
             ></Route>
           </Switch>
           <Footer />

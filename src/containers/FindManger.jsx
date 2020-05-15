@@ -28,6 +28,7 @@ const FindManager = () => {
   const classes = useStyles();
   
   const goToManagersList = () => {
+    console.log("Manager listing");
     History.push("/managers/listing");
   }
 
@@ -45,9 +46,6 @@ const FindManager = () => {
                 <InputLabel id="demo-simple-select-label">Location</InputLabel>
                 <Input
                   id="demo-simple-select-label"
-                  startAdornment={
-                    <InputAdornment position="start"></InputAdornment>
-                  }
                 />
               </FormControl>
             </div>
@@ -56,9 +54,6 @@ const FindManager = () => {
                 <InputLabel id="demo-simple-select-label">Company Name</InputLabel>
                 <Input
                   id="demo-simple-select-label"
-                  startAdornment={
-                    <InputAdornment position="start"></InputAdornment>
-                  }
                 />
               </FormControl>
             </div>
@@ -93,24 +88,18 @@ const FindManager = () => {
                 <InputLabel id="demo-simple-select-label">First Name</InputLabel>
                 <Input
                   id="demo-simple-select-label"
-                  startAdornment={
-                    <InputAdornment position="start"></InputAdornment>
-                  }
                 />
               </FormControl>
               <FormControl className={classes.subFormControl}>
                 <InputLabel id="demo-simple-select-label">Last Name</InputLabel>
                 <Input
                   id="demo-simple-select-label"
-                  startAdornment={
-                    <InputAdornment position="start"></InputAdornment>
-                  }
                 />
               </FormControl>
             </div>
           </div>
           <div className="form-footer">
-            <button className="primary" type="submit" onClick={() => goToManagersList}>Search</button>
+            <button className="primary" type="button" onClick={() => goToManagersList()}>Search</button>
           </div>
         </form>
       </div>
