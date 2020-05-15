@@ -1,8 +1,5 @@
 import React from "react";
 import "./FileUploadSection.style.scss";
-import ImagesUploader from "react-images-uploader";
-import "react-images-uploader/styles.css";
-import "react-images-uploader/font.css";
 import {useDropzone} from 'react-dropzone';
 
 const FileUploadSection = () => {

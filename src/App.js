@@ -6,6 +6,7 @@ import Property from "./containers/Property";
 import SubmitProperty from "./containers/SubmitProperty";
 import PropertyDetail from "./containers/PropertyDetail";
 import AccountContainer from "./containers/AccountContainer";
+import FindManager from "./containers/FindManger";
 import Header from "./section/Layout/Header";
 import Footer from "./section/Layout/Footer";
 import History from "./constants/History";
@@ -16,9 +17,7 @@ import store from "./redux/service";
 function App() {
   return (
     <Provider store={store}>
-      <div
-        className={`App`}
-      >
+      <div className={`App`}>
         <Router history={History}>
           <Header />
           <Switch>
@@ -57,6 +56,12 @@ function App() {
               path={ROUTES.account}
               component={AccountContainer}
               title="Account Container"
+            ></Route>
+            <Route
+              exact
+              path={ROUTES.findmanager}
+              component={FindManager}
+              title="Find a Property Manager"
             ></Route>
           </Switch>
           <Footer />

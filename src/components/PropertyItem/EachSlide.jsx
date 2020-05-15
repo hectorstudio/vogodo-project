@@ -4,7 +4,7 @@ import "./PropertyItem.style.scss";
 const EachSlide = ({setOpenModal, url, propertyPrice}) => {
   const handleClick = () => {
     console.log("setOpenModal");
-    setOpenModal(true);
+    //setOpenModal(true);
   }
   return (
     <div className="each-slide" onClick={handleClick}>

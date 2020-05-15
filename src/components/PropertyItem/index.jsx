@@ -43,11 +43,13 @@ const PropertyItem = ({data={}, setOpenModal }) => {
   return (
     <div className="property-item">
       <div className="slide-container">
-        <Slide {...properties}>
-          <EachSlide setOpenModal={setOpenModal} url={slideImages.propertyImages[0].imageUrl} propertyPrice={slideImages.propertyPrice} />
-          <EachSlide setOpenModal={setOpenModal} url={slideImages.propertyImages[1].imageUrl} propertyPrice={slideImages.propertyPrice} />
-          <EachSlide setOpenModal={setOpenModal} url={slideImages.propertyImages[2].imageUrl} propertyPrice={slideImages.propertyPrice} />
-        </Slide>
+        <Link to="/properties/detail">
+          <Slide {...properties}>
+            <EachSlide url={slideImages.propertyImages[0].imageUrl} propertyPrice={slideImages.propertyPrice} />
+            <EachSlide url={slideImages.propertyImages[1].imageUrl} propertyPrice={slideImages.propertyPrice} />
+            <EachSlide url={slideImages.propertyImages[2].imageUrl} propertyPrice={slideImages.propertyPrice} />
+          </Slide>
+        </Link>
       </div>
       <div className="item-description">
         <h3>{data.title || slideImages.propertyTitle}</h3>

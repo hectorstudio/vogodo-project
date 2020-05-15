@@ -12,15 +12,15 @@ const ListingItem = () => {
       <div className="item-carousel">
         <Carousel showThumbs={false} >
           <div>
-            <img src={imgSrc} />
+            <img src={imgSrc} alt="carousel"/>
             <p className="legend">Legend 1</p>
           </div>
           <div>
-            <img src={imgSrc1} />
+            <img src={imgSrc1} alt="carousel"/>
             <p className="legend">Legend 2</p>
           </div>
           <div>
-            <img src={imgSrc2} />
+            <img src={imgSrc2} alt="carousel"/>
             <p className="legend">Legend 3</p>
           </div>
         </Carousel>

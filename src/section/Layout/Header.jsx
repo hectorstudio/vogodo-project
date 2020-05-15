@@ -81,7 +81,7 @@ const Header = () => {
         <div className="menu" id="menu">
           <ul>
             <MenuItem url="/" title="HOME" />
-            <MenuItem url="#" title="Find a Property Manager" />
+            <MenuItem url="/managers" title="Find a Property Manager" />
             <MenuItem url="#" title="Find a Contractor" />
           </ul>
           <div className="social-icons">

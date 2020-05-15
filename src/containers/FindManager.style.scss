@@ -1,0 +1,42 @@
+.find-form-container {
+  text-align: left;
+  font-family: Raleway, sans-serif;
+  margin: 0px 20px;
+  form {
+    width: 70%;
+    margin: auto auto auto 10%;
+    min-height: 500px;
+    .form-header {
+      h2 {
+        font-size: 30px;
+        font-weight: 500;
+      }
+    }
+    .form-body {
+      display: flex;
+      flex-wrap: wrap;
+      .form-group {
+        display: flex;
+        width: 48%;
+        padding: 0 1%;
+      }
+    }
+    .form-footer {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #dbdee0;
+      text-align: right;
+      button {
+        font-size: 20px;
+        padding: 10px 20px;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        &.primary {
+          background-color: #cf0000;
+          color: white;
+        }
+      }
+    }
+  }
+}
