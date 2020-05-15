@@ -6,6 +6,7 @@ const Routes = {
   property_detail: "/properties/detail",
   findmanager: "/managers",
   managerslisting: "/managers/listing",
+  managerdetail: "/managers/detail",
   account: "/account"
 };
 

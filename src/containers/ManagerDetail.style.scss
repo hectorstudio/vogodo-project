@@ -1,0 +1,72 @@
+.manager-container {
+  font-family: Raleway, sans-serif;
+  text-align: left;
+  .navigator {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    a {
+      text-decoration: none;
+      color: #4592ff;
+      display: flex;
+      align-items: center;
+    }
+  }
+  .manager-content {
+    padding: 20px;
+    .content-header {
+      .name {
+        font-size: 36px;
+      }
+      .title {
+        font-size: 25px;
+        line-height: 2;
+        color: #929eaa;
+      }
+    }
+    .content-body {
+      display: flex;
+      .personal-desc {
+        flex: 3;
+        img {
+          padding: 5px;
+          border: 1px solid black;
+        }
+        .license {
+          font-size: 22px;
+          font-weight: 900;
+          line-height: 2;
+        }
+        .address {
+          font-size: 18px;
+          line-height: 1.5;
+        }
+        .office-number {
+          font-size: 18px;
+          line-height: 1.5;
+        }
+        .mobile-number {
+          font-size: 18px;
+          line-height: 1.5;
+        }
+        .primary {
+          outline: none;
+          border: none;
+          font-size: 20px;
+          padding: 15px 30px;
+          margin: 20px 0px;
+          background-color: #cf0000;
+          color: white;
+        }
+      }
+      .full-desc {
+        flex: 9;
+        .map {
+          img {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

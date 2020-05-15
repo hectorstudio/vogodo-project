@@ -15,6 +15,7 @@ import { Router, Switch, Route } from "react-router-dom";
 import ROUTES from "./constants/Routes";
 import store from "./redux/service";
 import ManagersListing from "./containers/ManagersListing";
+import ManagerDetail from "./containers/ManagerDetail";
 function App() {
   return (
     <Provider store={store}>
@@ -68,6 +69,12 @@ function App() {
               exact
               path={ROUTES.managerslisting}
               component={ManagersListing}
+              title="List Managers"
+            ></Route>
+            <Route
+              exact
+              path={ROUTES.managerdetail}
+              component={ManagerDetail}
               title="List Managers"
             ></Route>
           </Switch>
