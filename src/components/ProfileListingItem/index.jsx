@@ -8,7 +8,7 @@ import imgSrc2 from "../../assets/img/realestate2.jpg";
 
 const ProfileListingItem = () => {
   return (
-    <div className="listing-item-container">
+    <div className="mylisting-item-container">
       <div className="item-carousel">
         <Carousel showThumbs={false} >
           <div>

@@ -61,9 +61,19 @@
       }
       .full-desc {
         flex: 9;
-        .map {
-          img {
-            width: 100%;
+        .tab-header {
+          width: 500px;
+          box-shadow: none;
+          background: transparent;
+          .tabs-list {
+            button {
+              border-bottom: 2px solid #bdbbbb;
+            }
+          }
+        }
+        .tab-panel {
+          .MuiBox-root {
+            padding: 10px;
           }
         }
       }

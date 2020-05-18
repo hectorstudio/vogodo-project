@@ -1,0 +1,11 @@
+.section-item {
+  display: flex;
+  padding: 15px 0px;
+  border-bottom: 1px solid #bbb4b4;
+  font-family: Lato, sans-serif;
+  .label {
+    width: 150px;
+    min-width: 150px;
+    padding-right: 20px;
+  }
+}
