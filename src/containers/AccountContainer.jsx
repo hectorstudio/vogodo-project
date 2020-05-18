@@ -6,7 +6,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
-import PropertyModal from "../components/PropertyModal";
 import SavedProperties from "../section/Account/SavedProperties";
 import MyListing from "../section/Account/MyListing";
 
@@ -54,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
 const AccountContainer = () => {
   const classes = useStyles();
   const [value, setValue] = useState(2);
-  const [openModal, setOpenModal] = useState(false);
   const accountType = localStorage.getItem("account-type");
 
   const handleChange = (event, newValue) => {
@@ -88,13 +86,12 @@ const AccountContainer = () => {
         </TabPanel>
         <TabPanel value={value} index={2}>
           {accountType === "contractor" ? (
-            <SavedProperties setOpenModal={setOpenModal} />
+            <SavedProperties />
           ) : (
-            <MyListing setOpenModal={setOpenModal} />
+            <MyListing />
           )}
         </TabPanel>
       </div>
-      <PropertyModal setOpenModal={setOpenModal} openFlag={openModal} />
     </div>
   );
 };

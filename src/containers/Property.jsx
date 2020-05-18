@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { setVisibleType } from "../redux/actions";
 import PropertyItem from "../components/PropertyItem";
 import { makeStyles } from "@material-ui/core/styles";
-import PropertyModal from "../components/PropertyModal";
 import FilterItem from "../components/FilterItem";
 import "./Property.style.scss";
 import Breadcrumbs from "../components/Breadcrumbs";
@@ -331,7 +330,6 @@ const Property = () => {
           </div>
         </div>
       </div>
-      <PropertyModal setOpenModal={setOpenModal} openFlag={openModal} />
     </Fragment>
   );
 };

@@ -31,7 +31,8 @@
     "react-youtube": "^7.11.2",
     "reactjs-file-uploader": "^1.0.8",
     "redux": "^4.0.5",
-    "suneditor-react": "^2.10.1"
+    "suneditor-react": "^2.10.1",
+    "video-react": "^0.14.1"
   },
   "scripts": {
     "dev": "react-scripts start",

@@ -11,7 +11,9 @@ import "react-image-gallery/styles/css/image-gallery.css";
 import "./PropertyDetail.style.scss";
 import map from "../assets/img/map1.png";
 import avatar from "../assets/img/avatar.jpg";
-import YouTube from "react-youtube";
+import "video-react/dist/video-react.css";
+import { Player } from 'video-react';
+import Poster from "../assets/img/poster.png";
 
 const images = [
   {
@@ -29,19 +31,6 @@ const images = [
 ];
 
 const PropertyDetail = ({id = 0}) => {
-
-  const opts = {
-    height: "160",
-    width: "100%",
-    playerVars: {
-      // https://developers.google.com/youtube/player_parameters
-      autoplay: 1,
-    },
-  };
-  const _onReady = (event) => {
-    // access to player in all event handlers via event.target
-    event.target.pauseVideo();
-  };
   return (
     <div className="container">
       <BreadCrumbs parent="Properties" child={`Detail ${id}`} />
@@ -143,10 +132,11 @@ const PropertyDetail = ({id = 0}) => {
               <button className="contact-input btn">Submit</button>
             </div>
             <div className="video">
-              <YouTube
-                videoId="2g811Eo7K8U"
-                opts={opts}
-                onReady={_onReady}
+              <Player
+                playsInline
+                poster={Poster}
+                src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
+                width="100%"
               />
             </div>
           </div>        
