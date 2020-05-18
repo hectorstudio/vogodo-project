@@ -8,6 +8,7 @@ import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
 import SavedProperties from "../section/Account/SavedProperties";
 import MyListing from "../section/Account/MyListing";
+import AccountSettings from "../section/Account/AccountSettings"
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -52,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 
 const AccountContainer = () => {
   const classes = useStyles();
-  const [value, setValue] = useState(2);
+  const [value, setValue] = useState(0);
   const accountType = localStorage.getItem("account-type");
 
   const handleChange = (event, newValue) => {
@@ -82,7 +83,7 @@ const AccountContainer = () => {
           This page is preparing...
         </TabPanel>
         <TabPanel value={value} index={1}>
-          This page is preparing...
+          <AccountSettings />
         </TabPanel>
         <TabPanel value={value} index={2}>
           {accountType === "contractor" ? (

@@ -124,7 +124,7 @@ const Header = () => {
               <ListItemIcon>
                 <Save fontSize="small" />
               </ListItemIcon>
-              <ListItemText primary="Saved Properties" />
+              <ListItemText primary="My Listing" />
             </StyledMenuItem>
             <StyledMenuItem>
               <ListItemIcon>

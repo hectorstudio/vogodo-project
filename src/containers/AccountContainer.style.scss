@@ -29,6 +29,11 @@
     .property-item {
       min-width: 280px;
     }
+    &.account-settings {
+      width: 500px;
+      margin: auto;
+      display: block;
+    }
     &.listing {
       display: block;
     }
