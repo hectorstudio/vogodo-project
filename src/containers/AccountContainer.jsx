@@ -8,7 +8,8 @@ import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
 import SavedProperties from "../section/Account/SavedProperties";
 import MyListing from "../section/Account/MyListing";
-import AccountSettings from "../section/Account/AccountSettings"
+import AccountSettings from "../section/Account/AccountSettings";
+import AccountProfile from "../section/Account/AccountProfile";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -80,7 +81,7 @@ const AccountContainer = () => {
           )}
         </Tabs>
         <TabPanel value={value} index={0}>
-          This page is preparing...
+          <AccountProfile />
         </TabPanel>
         <TabPanel value={value} index={1}>
           <AccountSettings />

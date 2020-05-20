@@ -1,0 +1,12 @@
+.member-type {
+  width: 48%;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0px;
+}
+.member-name {
+  width: 100%;
+  &:first-child {
+    margin-right: 20px !important;
+  }
+}

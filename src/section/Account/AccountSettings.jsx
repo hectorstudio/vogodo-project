@@ -1,14 +1,9 @@
 import React, { Fragment } from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import FormControl from "@material-ui/core/FormControl";
-import { AlternateEmail, VpnKey } from "@material-ui/icons";
-import Radio from "@material-ui/core/Radio";
+import {Input, InputLabel, InputAdornment, FormControl, FormControlLabel, Button, Radio } from "@material-ui/core";
+import { AlternateEmail, VpnKey, PersonPin, Place } from "@material-ui/icons";
 import { green } from "@material-ui/core/colors";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Button from "@material-ui/core/Button";
+import "./AccountSettings.style.scss";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -54,6 +49,7 @@ const AccountSettings = () => {
               inputProps={{ "aria-label": "B" }}
             />
           }
+          className="member-type"
           label="Manager"
         />
         <FormControlLabel
@@ -67,8 +63,37 @@ const AccountSettings = () => {
               inputProps={{ "aria-label": "C" }}
             />
           }
+          className="member-type"
           label="Contractor"
         />
+        
+        <FormControl className={classes.margin}>
+          <InputLabel htmlFor="input-with-icon-adornment">
+            Full Name
+          </InputLabel>
+          <Input
+            id="input-with-icon-adornment"
+            startAdornment={
+              <InputAdornment position="start">
+                <PersonPin />
+              </InputAdornment>
+            }
+          />
+        </FormControl>
+        
+        <FormControl className={classes.margin}>
+          <InputLabel htmlFor="input-with-icon-adornment">
+            Address
+          </InputLabel>
+          <Input
+            id="input-with-icon-adornment"
+            startAdornment={
+              <InputAdornment position="start">
+                <Place />
+              </InputAdornment>
+            }
+          />
+        </FormControl>
 
         <FormControl className={classes.margin}>
           <InputLabel htmlFor="input-with-icon-adornment">
