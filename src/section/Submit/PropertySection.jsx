@@ -85,9 +85,6 @@ const PropertySection = () => {
               id="demo-simple-select-label"
               value={value}
               onChange={handleChange("amount")}
-              startAdornment={
-                <InputAdornment position="start"></InputAdornment>
-              }
             />
           </FormControl>
           <FormControl className={classes.subFormControl}>
@@ -96,9 +93,6 @@ const PropertySection = () => {
               id="demo-simple-select-label"
               value={value}
               onChange={handleChange("amount")}
-              startAdornment={
-                <InputAdornment position="start"></InputAdornment>
-              }
             />
           </FormControl>
           <FormControl className={classes.formControl}>
@@ -135,9 +129,6 @@ const PropertySection = () => {
               id="demo-simple-select-label"
               value={value}
               onChange={handleChange("amount")}
-              startAdornment={
-                <InputAdornment position="start"></InputAdornment>
-              }
             />
           </FormControl>
           <FormControl className={classes.formControl}>

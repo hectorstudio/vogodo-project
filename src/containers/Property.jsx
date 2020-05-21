@@ -145,7 +145,6 @@ const Property = () => {
   const globalState = useSelector(state => state);
   const dispatch = useDispatch();
 
-  const [openModal, setOpenModal] = useState(false);
   const [values, setValues] = useState([]);
   const [data, setData] = useState([]);  // ToDo: Should remove after finish filteredData using useMemo
   const [filterOption, setFilterOption] = useState({
@@ -324,7 +323,6 @@ const Property = () => {
               <PropertyItem
                 key={`element-${index}`}
                 data={element}
-                setOpenModal={setOpenModal}
               />
             ))}
           </div>
