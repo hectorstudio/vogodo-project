@@ -10,6 +10,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Power from "@material-ui/icons/PowerSettingsNew";
 import Save from "@material-ui/icons/Save";
+import ChatBubble from "@material-ui/icons/ChatBubble";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Settings from "@material-ui/icons/Settings";
 import History from "../../constants/History";
@@ -76,6 +77,11 @@ const Header = () => {
     History.push("/account");
   };
 
+  const goToMessageRoom = () => {
+    setAnchorEl(null);
+    History.push("/messages");
+  }
+
   const LogOut = () => {
     localStorage.removeItem("account-type");
     localStorage.removeItem("login");
@@ -138,6 +144,12 @@ const Header = () => {
                 <Save fontSize="small" />
               </ListItemIcon>
               <ListItemText primary="My Listing" />
+            </StyledMenuItem>
+            <StyledMenuItem onClick={goToMessageRoom}>
+              <ListItemIcon>
+                <ChatBubble fontSize="small" />
+              </ListItemIcon>
+              <ListItemText primary="Messages" />
             </StyledMenuItem>
             <StyledMenuItem onClick={LogOut}>
               <ListItemIcon>

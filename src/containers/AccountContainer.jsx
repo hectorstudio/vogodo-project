@@ -10,6 +10,7 @@ import SavedProperties from "../section/Account/SavedProperties";
 import MyListing from "../section/Account/MyListing";
 import AccountSettings from "../section/Account/AccountSettings";
 import AccountProfile from "../section/Account/AccountProfile";
+import AccountNotifications from "../section/Account/AccountNotifications";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -79,6 +80,7 @@ const AccountContainer = () => {
           ) : (
             <Tab label="My Listing" {...a11yProps(2)} />
           )}
+          <Tab label="Notifications" {...a11yProps(3)} />
         </Tabs>
         <TabPanel value={value} index={0}>
           <AccountProfile />
@@ -92,6 +94,9 @@ const AccountContainer = () => {
           ) : (
             <MyListing />
           )}
+        </TabPanel>
+        <TabPanel value={value} index={3}>
+          <AccountNotifications />
         </TabPanel>
       </div>
     </div>
