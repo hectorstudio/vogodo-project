@@ -7,7 +7,8 @@ const Routes = {
   findmanager: "/managers",
   managerslisting: "/managers/listing",
   managerdetail: "/managers/detail",
-  account: "/account"
+  account: "/account",
+  messages: "/messages",
 };
 
 export default Routes;

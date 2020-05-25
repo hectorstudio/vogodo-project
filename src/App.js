@@ -16,6 +16,7 @@ import ROUTES from "./constants/Routes";
 import store from "./redux/service";
 import ManagersListing from "./containers/ManagersListing";
 import ManagerDetail from "./containers/ManagerDetail";
+import MessageContainer from "./containers/MessageContainer";
 function App() {
   return (
     <Provider store={store}>
@@ -75,7 +76,13 @@ function App() {
               exact
               path={ROUTES.managerdetail}
               component={ManagerDetail}
-              title="List Managers"
+              title="Manager Detail"
+            ></Route>
+            <Route
+              exact
+              path={ROUTES.messages}
+              component={MessageContainer}
+              title="Message Room"
             ></Route>
           </Switch>
           <Footer />
