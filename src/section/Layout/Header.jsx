@@ -143,6 +143,12 @@ const Header = () => {
               <ListItemIcon>
                 <Save fontSize="small" />
               </ListItemIcon>
+              <ListItemText primary="Saved Properties" />
+            </StyledMenuItem>
+            <StyledMenuItem onClick={goToAccountPage}>
+              <ListItemIcon>
+                <Save fontSize="small" />
+              </ListItemIcon>
               <ListItemText primary="My Listing" />
             </StyledMenuItem>
             <StyledMenuItem onClick={goToMessageRoom}>

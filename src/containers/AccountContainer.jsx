@@ -56,7 +56,6 @@ const useStyles = makeStyles((theme) => ({
 const AccountContainer = () => {
   const classes = useStyles();
   const [value, setValue] = useState(0);
-  const accountType = localStorage.getItem("account-type");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -75,12 +74,9 @@ const AccountContainer = () => {
         >
           <Tab label="Profile" {...a11yProps(0)} />
           <Tab label="Account Settings" {...a11yProps(1)} />
-          {accountType === "contractor" ? (
-            <Tab label="Saved Properties" {...a11yProps(2)} />
-          ) : (
-            <Tab label="My Listing" {...a11yProps(2)} />
-          )}
-          <Tab label="Notifications" {...a11yProps(3)} />
+          <Tab label="Saved Properties" {...a11yProps(2)} />
+          <Tab label="My Listing" {...a11yProps(3)} />
+          <Tab label="Notifications" {...a11yProps(4)} />
         </Tabs>
         <TabPanel value={value} index={0}>
           <AccountProfile />
@@ -89,13 +85,12 @@ const AccountContainer = () => {
           <AccountSettings />
         </TabPanel>
         <TabPanel value={value} index={2}>
-          {accountType === "contractor" ? (
-            <SavedProperties />
-          ) : (
-            <MyListing />
-          )}
+          <SavedProperties />
         </TabPanel>
         <TabPanel value={value} index={3}>
+          <MyListing />
+        </TabPanel>
+        <TabPanel value={value} index={4}>
           <AccountNotifications />
         </TabPanel>
       </div>
