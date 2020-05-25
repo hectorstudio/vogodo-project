@@ -1,20 +1,10 @@
 import React from "react";
-import YouTube from 'react-youtube';
 import "../../containers/Home.style.scss";
+import "video-react/dist/video-react.css";
+import { Player } from 'video-react';
+import Poster from "../../assets/img/poster.png";
 
 const IntroSection = () => {
-  const opts = {
-    height: "390",
-    width: "640",
-    playerVars: {
-      // https://developers.google.com/youtube/player_parameters
-      autoplay: 1,
-    },
-  };
-  const _onReady = (event) => {
-    // access to player in all event handlers via event.target
-    event.target.pauseVideo();
-  };
   return (
     <section className="section section-intro">
       <div className="container">
@@ -32,7 +22,12 @@ const IntroSection = () => {
         </p>
       </div>
       <div className="intro-video">
-        <YouTube videoId="2g811Eo7K8U" opts={opts} onReady={_onReady} />
+        <Player
+          playsInline
+          poster={Poster}
+          src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
+          width="70%"
+        />
       </div>
     </section>
   );
