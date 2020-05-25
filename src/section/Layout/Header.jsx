@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MenuItem from "../../components/MenuItem";
 import BaseDrawer from "../../components/BaseDrawer";
 import Login from "../../assets/svg/login.svg";
@@ -53,7 +53,12 @@ const StyledMenuItem = withStyles((theme) => ({
 const Header = () => {
   const [isShowDrawer, setShowDrawer] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const LoginFlag = localStorage.getItem("login") && true;
+  const [LoginFlag, setLoginFlag] = useState(false); 
+
+  useEffect(() => {
+    setLoginFlag(localStorage.getItem("login") && true);
+  }, [LoginFlag]);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -67,8 +72,16 @@ const Header = () => {
   };
 
   const goToAccountPage = () => {
+    setAnchorEl(null);
     History.push("/account");
   };
+
+  const LogOut = () => {
+    localStorage.removeItem("account-type");
+    localStorage.removeItem("login");
+    setAnchorEl(null);
+    History.push("/");
+  }
 
   return (
     <header className="app-header">
@@ -108,13 +121,13 @@ const Header = () => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <StyledMenuItem>
+            <StyledMenuItem onClick={goToAccountPage}>
               <ListItemIcon>
                 <AccountCircle fontSize="small" />
               </ListItemIcon>
               <ListItemText primary="Profile" />
             </StyledMenuItem>
-            <StyledMenuItem>
+            <StyledMenuItem onClick={goToAccountPage}>
               <ListItemIcon>
                 <Settings fontSize="small" />
               </ListItemIcon>
@@ -126,7 +139,7 @@ const Header = () => {
               </ListItemIcon>
               <ListItemText primary="My Listing" />
             </StyledMenuItem>
-            <StyledMenuItem>
+            <StyledMenuItem onClick={LogOut}>
               <ListItemIcon>
                 <Power fontSize="small" />
               </ListItemIcon>
