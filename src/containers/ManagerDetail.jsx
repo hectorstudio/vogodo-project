@@ -14,6 +14,7 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import ListingSection from "../section/ManagerDetails/ListingSection";
 import AboutMeSection from "../section/ManagerDetails/AboutMeSection";
+import SendMessageModal from "../components/SendMessageModal";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -63,6 +64,7 @@ const ManagerDetail = () => {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = useState(1);
+  const [open, setOpen] = useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -71,6 +73,10 @@ const ManagerDetail = () => {
   const handleChangeIndex = (index) => {
     setValue(index);
   };
+
+  const openDialog = () => {
+    setOpen(true);
+  }
 
   return (
     <div className="container">
@@ -95,7 +101,7 @@ const ManagerDetail = () => {
               <div className="mobile-number">
                 mobile 305-305-6091
               </div>
-              <button className="primary" type="button">Send a Message</button>
+              <button className="primary" type="button" onClick={openDialog}>Send a Message</button>
             </div>
             <div className="full-desc">              
               <div className={classes.root}>
@@ -140,6 +146,7 @@ const ManagerDetail = () => {
           </div>
         </div>
       </div>
+      <SendMessageModal open={open} setOpen={setOpen} />
     </div>
   );
 };
