@@ -23,7 +23,7 @@ const SignUpForm = () => {
             className={type === "manager" ? "border-blur" : ""}
             onClick={() => clickAccountType("manager")}
           >
-            <img src={Manager} alt="property manger" />
+            <img src={Manager} alt="property manager" />
           </button>
         </div>
         <div className="account contractor">

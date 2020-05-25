@@ -6,7 +6,7 @@ import Property from "./containers/Property";
 import SubmitProperty from "./containers/SubmitProperty";
 import PropertyDetail from "./containers/PropertyDetail";
 import AccountContainer from "./containers/AccountContainer";
-import FindManager from "./containers/FindManger";
+import FindManager from "./containers/FindManager";
 import Header from "./section/Layout/Header";
 import Footer from "./section/Layout/Footer";
 import History from "./constants/History";
