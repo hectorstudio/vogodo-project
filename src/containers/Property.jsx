@@ -20,30 +20,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const options = [
-  { value: "Condominiums", label: "Condominiums" },
-  { value: "Detached House", label: "Detached House" },
-  { value: "Townhouse", label: "Townhouse" },
-  { value: "Semi-detached House", label: "Semi-detached House" },
-  { value: "Duplex/Triplex", label: "Duplex/Triplex" },
-];
-
-const min_price = [
-  { value: 1000, label: "1K" },
-  { value: 2000, label: "2K" },
-  { value: 3000, label: "3K" },
-  { value: 4000, label: "4K" },
-  { value: 5000, label: "5K" },
-];
-
-const max_price = [
-  { value: 2000, label: "2K" },
-  { value: 3000, label: "3K" },
-  { value: 4000, label: "4K" },
-  { value: 5000, label: "5K" },
-  { value: 6000, label: "5K" },
-];
-
 const cities = [
   { value: "San Francisco", label: "San Francisco" },
   { value: "New York", label: "New York" },
@@ -259,17 +235,17 @@ const Property = () => {
                 placeholder="Search Properties"
               />
             </div>
-            <FilterItem
-              data={min_price}
-              value=""
-              prefix="min: $"
-              setFilterValues={setFilterValues}
+            <input
+              type="text"
+              className="price-input"
+              onChange={handleChagneSearch}
+              placeholder="min: $"
             />
-            <FilterItem
-              data={max_price}
-              value=""
-              prefix="max: $"
-              setFilterValues={setFilterValues}
+            <input
+              type="text"
+              className="price-input"
+              onChange={handleChagneSearch}
+              placeholder="max: $"
             />
             <FilterItem
               data={cities}
@@ -284,16 +260,9 @@ const Property = () => {
               setFilterValues={setFilterValues}
             />
             <FilterItem
-              data={options}
-              multiple="true"
-              value=""
-              prefix="Type: "
-              setFilterValues={setFilterValues}
-            />
-            <FilterItem
               data={ages}
               value=""
-              prefix="Over "
+              prefix="Year "
               setFilterValues={setFilterValues}
             />
           </div>
