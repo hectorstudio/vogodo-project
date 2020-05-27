@@ -11,16 +11,6 @@ const Footer = () => {
         <div className="footer-item footer-logo">
           <img src={Logo} alt="footer-logo" />
         </div>
-        <div className="footer-item property-types">
-          <div className="info">Property Types</div>
-          <ul>
-            <li>Condominiums</li>
-            <li>Detached House</li>
-            <li>Townhouse</li>
-            <li>Semi-detached House</li>
-            <li>Duplex/Triplex</li>
-          </ul>
-        </div>
         <div className="footer-item company-info">
           <div className="info">Info</div>
           <ul>
