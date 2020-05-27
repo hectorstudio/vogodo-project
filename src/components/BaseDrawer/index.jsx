@@ -5,14 +5,21 @@ import LoginForm from "../../components/LoginForm";
 import SignUpForm from "../../components/SignUpForm";
 import "./Basedrawer.style.scss";
 
-const BaseDrawer = ({ isShowDrawer, setShowDrawer }) => {
+const BaseDrawer = ({ isShowDrawer, setShowDrawer, isSignUp, setSignUp }) => {
   const [drawerContent, setDrawerContent] = useState("");
 
   useEffect(() => {
-    if (isShowDrawer === true && !drawerContent) {
-      setDrawerContent("login");
+    if (isShowDrawer === true) {
+      if (isSignUp === true) {
+        console.log("signup");
+        setDrawerContent("signup")
+      }
+      else {
+        console.log("login");
+        setDrawerContent("login");
+      }
     }
-  }, [isShowDrawer, drawerContent]);
+  }, [isShowDrawer, isSignUp]);
 
   const closeDrawer = () => {
     setShowDrawer(false);
@@ -20,11 +27,13 @@ const BaseDrawer = ({ isShowDrawer, setShowDrawer }) => {
 
   const openSignUpForm = () => {
     setShowDrawer(true);
+    setSignUp(true);
     setDrawerContent("signup");
   };
 
   const openLogInForm = () => {
     setShowDrawer(true);
+    setSignUp(false);
     setDrawerContent("login");
   };
 

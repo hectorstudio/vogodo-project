@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
+import {
+  PowerSettingsNew,
+  Save,
+  ChatBubble,
+  AccountCircle,
+  Settings,
+} from "@material-ui/icons";
+import { Avatar, Menu, ListItemIcon, ListItemText } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
+import Menuitem from "@material-ui/core/MenuItem";
 import MenuItem from "../../components/MenuItem";
 import BaseDrawer from "../../components/BaseDrawer";
-import Login from "../../assets/svg/login.svg";
-import Avatar from "@material-ui/core/Avatar";
-import { withStyles } from "@material-ui/core/styles";
-import Menu from "@material-ui/core/Menu";
-import Menuitem from "@material-ui/core/MenuItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import Power from "@material-ui/icons/PowerSettingsNew";
-import Save from "@material-ui/icons/Save";
-import ChatBubble from "@material-ui/icons/ChatBubble";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import Settings from "@material-ui/icons/Settings";
 import History from "../../constants/History";
 import Logo from "../../assets/img/logo.png";
-import {Link} from 'react-router-dom';
+import Login from "../../assets/svg/login.svg";
+import { Link } from "react-router-dom";
 
 import "./Header.style.scss";
 
@@ -53,8 +52,9 @@ const StyledMenuItem = withStyles((theme) => ({
 
 const Header = () => {
   const [isShowDrawer, setShowDrawer] = useState(false);
+  const [isSignUp, setSignUp] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [LoginFlag, setLoginFlag] = useState(false); 
+  const [LoginFlag, setLoginFlag] = useState(false);
 
   useEffect(() => {
     setLoginFlag(localStorage.getItem("login") && true);
@@ -70,6 +70,12 @@ const Header = () => {
 
   const openLoginDrawer = () => {
     setShowDrawer(true);
+    setSignUp(false);
+  };
+
+  const openSignUpDrawer = () => {
+    setShowDrawer(true);
+    setSignUp(true);
   };
 
   const goToAccountPage = () => {
@@ -80,14 +86,14 @@ const Header = () => {
   const goToMessageRoom = () => {
     setAnchorEl(null);
     History.push("/messages");
-  }
+  };
 
   const LogOut = () => {
     localStorage.removeItem("account-type");
     localStorage.removeItem("login");
     setAnchorEl(null);
     History.push("/");
-  }
+  };
 
   return (
     <header className="app-header">
@@ -98,26 +104,20 @@ const Header = () => {
           </Link>
         </div>
         <div className="menu" id="menu">
-          <ul>
-            <MenuItem url="/" title="HOME" />
-            <MenuItem url="/managers" title="Find a Property Manager" />
-            <MenuItem url="#" title="Find a Contractor" />
-          </ul>
-          <div className="social-icons">
-            {
-              //<div onClick={openDrawer}><i className="fa fa-facebook"></i></div>
-              //<div onClick={openDrawer}><i className="fa fa-google"></i></div>
-            }
-          </div>
           <div className="login">
             {LoginFlag ? (
               <div>
                 <Avatar onClick={handleClick}>ES</Avatar>
               </div>
             ) : (
-              <div onClick={openLoginDrawer}>
-                <img src={Login} alt="login icon" />
-              </div>
+              <Fragment>
+                <div className="login" onClick={openLoginDrawer}>
+                  Log In
+                </div>
+                <div className="signup" onClick={openSignUpDrawer}>
+                  Sign Up
+                </div>
+              </Fragment>
             )}
           </div>
           <StyledMenu
@@ -159,14 +159,19 @@ const Header = () => {
             </StyledMenuItem>
             <StyledMenuItem onClick={LogOut}>
               <ListItemIcon>
-                <Power fontSize="small" />
+                <PowerSettingsNew fontSize="small" />
               </ListItemIcon>
               <ListItemText primary="Log Out" />
             </StyledMenuItem>
           </StyledMenu>
         </div>
       </div>
-      <BaseDrawer isShowDrawer={isShowDrawer} setShowDrawer={setShowDrawer} />
+      <BaseDrawer
+        isShowDrawer={isShowDrawer}
+        setShowDrawer={setShowDrawer}
+        isSignUp={isSignUp}
+        setSignUp={setSignUp}
+      />
     </header>
   );
 };

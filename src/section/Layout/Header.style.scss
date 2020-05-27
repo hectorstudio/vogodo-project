@@ -13,7 +13,7 @@ header.app-header {
     flex-wrap: wrap;
     justify-content: space-between;
     .logo {
-
+      margin-left: 40%;
     }
     .menu {
       display: flex;
@@ -39,42 +39,20 @@ header.app-header {
           display: block;
         }
       }
-      .social-icons {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        div{
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          img {
-            width: 40px;
-            height: 40px;
-          }
-          //border-radius: 20px;
-          //background-color: #647883;
-        }
-      }
       .login {
         flex: 1;
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        div{
+        div {
+          padding-right: 10px;
           cursor: pointer;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: white;
-          img {
-            width: 40px;
-            height: 40px;
-          }
-          //border-radius: 20px;
-          //background-color: #647883;
+          color: #647883;
+          font-family: Raleway, sans-serif;
+          font-size: 18px;
         }
       }
     }
