@@ -15,7 +15,7 @@ const SignUpForm = () => {
   return (
     <div className="container">
       <Breadcrumbs parent="Home" child="SignUp"/>
-      <h2 className="section-title color-dark">User Type</h2>
+      {/*<h2 className="section-title color-dark">User Type</h2>
       <div className="account-type">
         <div className="account manager">
           <label>Property Manager</label>
@@ -35,7 +35,7 @@ const SignUpForm = () => {
             <img src={Contractor} alt="property contractor" />
           </button>
         </div>
-      </div>
+      </div>*/}
       <PlanSection type={type}></PlanSection>
     </div>
   );

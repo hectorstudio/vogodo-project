@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Select from "react-dropdown-select";
 import banner1 from "../../assets/img/banner1.jpg";
 import "../../containers/Home.style.scss";
+import History from "../../constants/History";
 
 const options = [
   { value: 1, label: "Condominiums" },
@@ -14,6 +15,14 @@ const options = [
 
 const BannerSection = () => {
   const [values, setValues] = useState([]);
+
+  const goToSubmitPage = () => {
+    const login = localStorage.getItem("login");
+    if(login)
+      History.push("/properties/submit");
+    else
+      History.push("/signup");
+  };
 
   return (
     <section className="section section-top">
@@ -30,9 +39,7 @@ const BannerSection = () => {
               Available Properties
             </button>
           </Link>
-          <Link to="/properties/submit">
-            <button className="btn-property btn-list">List a Property</button>
-          </Link>
+          <button className="btn-property btn-list" onClick={goToSubmitPage} style={{ cursor:"pointer" }}>List a Property</button>
         </div>
         <div className="search-form">
           <form>
@@ -57,6 +64,11 @@ const BannerSection = () => {
             </div>
           </form>
         </div>
+        <Link to ="/signup">
+          <button className={`btn btn-semi-rounded btn-register uppercase`} style={{ cursor: "pointer" }}>
+            Register Today!
+          </button>
+        </Link>
       </div>
     </section>
   );

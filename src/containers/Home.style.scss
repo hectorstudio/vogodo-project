@@ -23,9 +23,9 @@ section {
 .banner-content {
   max-width: 1180px;
   margin: 0 auto;
-  margin-top: -486px;
+  margin-top: -505px;
   position: relative;
-  padding: 64px 0 135px 0;
+  padding: 64px 0 80px 0;
 
   @media (max-width: $smalldeskBreakpoint) {
     padding: 1px 0 0 0;
@@ -79,6 +79,7 @@ section {
   }
 
   .search-form {
+    padding-bottom: 25px;
     form {
       background-color: rgba($color: #fff, $alpha: 0.5);
       display: flex;
