@@ -109,7 +109,7 @@ const Header = () => {
               </div>
             ) : (
               <Fragment>
-                <div className="login" onClick={openLoginDrawer}>
+                <div className="login" onClick={openLoginDrawer} style={{ paddingRight: "10px"}}>
                   Log In
                 </div>
                 <div className="signup" onClick={openSignUpDrawer}>
