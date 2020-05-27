@@ -11,7 +11,9 @@ section {
   }
 }
 .slider-container {
-  height: 486px;
+  img {
+    width: 100%;
+  }
 }
 .section-title {
   font-family: 'Lato', sans-serif;

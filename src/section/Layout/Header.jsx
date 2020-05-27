@@ -6,10 +6,8 @@ import {
   AccountCircle,
   Settings,
 } from "@material-ui/icons";
-import { Avatar, Menu, ListItemIcon, ListItemText } from "@material-ui/core";
+import { Avatar, Menu, ListItemIcon, ListItemText, MenuItem } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
-import Menuitem from "@material-ui/core/MenuItem";
-import MenuItem from "../../components/MenuItem";
 import BaseDrawer from "../../components/BaseDrawer";
 import History from "../../constants/History";
 import Logo from "../../assets/img/logo.png";
@@ -48,7 +46,7 @@ const StyledMenuItem = withStyles((theme) => ({
       },
     },
   },
-}))(Menuitem);
+}))(MenuItem);
 
 const Header = () => {
   const [isShowDrawer, setShowDrawer] = useState(false);

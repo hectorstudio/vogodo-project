@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Select from "react-dropdown-select";
-import Slider from "nuka-carousel";
 import banner1 from "../../assets/img/banner1.jpg";
-import banner2 from "../../assets/img/banner2.jpg";
-import banner3 from "../../assets/img/banner3.jpg";
 import "../../containers/Home.style.scss";
 
 const options = [
@@ -21,11 +18,7 @@ const BannerSection = () => {
   return (
     <section className="section section-top">
       <div className="slider-container">
-        <Slider easing="easeInOutElastic" slideWidth={1} width="100%">
-          <img src={banner1} alt="banner 1" />
-          <img src={banner2} alt="banner 2" />
-          <img src={banner3} alt="banner 3" />
-        </Slider>
+        <img src={banner1} alt="banner 1" />
       </div>
       <div className="banner-content">
         <div className="banner">
