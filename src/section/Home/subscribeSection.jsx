@@ -11,7 +11,7 @@ const SubscribeSection = () => {
           <h2>Find the Best Real Estate Deals In the U.S</h2>
           <p>don't wait Invest in Real Estate today!</p>
           <Link to ="/signup">
-            <button className={`btn btn-semi-rounded btn-register uppercase`} style={{ cursor: "pointer" }}>
+            <button className={`btn btn-primary btn-semi-rounded btn-register uppercase`} style={{ cursor: "pointer" }}>
               Register Today!
             </button>
           </Link>

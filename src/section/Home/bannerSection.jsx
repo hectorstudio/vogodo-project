@@ -65,7 +65,7 @@ const BannerSection = () => {
           </form>
         </div>
         <Link to ="/signup">
-          <button className={`btn btn-semi-rounded btn-register uppercase`} style={{ cursor: "pointer" }}>
+          <button className={`btn btn-primary btn-semi-rounded btn-register uppercase`} style={{ cursor: "pointer" }}>
             Register Today!
           </button>
         </Link>

@@ -5,10 +5,15 @@
   border-radius: 3px;
   @include fontDef(white, 'Raleway', 14px, 700, 36px);
   padding: 0px 10px;
+  font-size: 18px;
 }
 
 .btn-blue {
   background-color: #49a0ae;
+}
+
+.btn-primary {
+  background-color: #c02a26;
 }
 
 .btn-white {
@@ -38,6 +43,6 @@
 }
 
 .btn-semi-rounded {
-  border-radius: 5px;
-  padding: 5px 32px;
+  border-radius: 15px;
+  padding: 8px 41px;
 }
