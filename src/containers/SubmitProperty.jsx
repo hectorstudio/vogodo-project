@@ -1,157 +1,131 @@
 import React, { useState } from "react";
 import Breadcrumbs from "../components/Breadcrumbs";
-import PropTypes from "prop-types";
-import SwipeableViews from "react-swipeable-views";
-import { lighten, makeStyles, withStyles, useTheme } from '@material-ui/core/styles';
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import LinearProgress from "@material-ui/core/LinearProgress";
+import { makeStyles } from "@material-ui/core/styles";
+import { TextField, FormControl, InputLabel, Select, MenuItem, FormControlLabel, Checkbox } from '@material-ui/core';
+import SunEditor from "suneditor-react";
+import {useDropzone} from 'react-dropzone';
+import PropertyElement from "../components/PropertyElement";
+import "suneditor/dist/css/suneditor.min.css";
 import "./SubmitProperty.style.scss";
 
-import LocationSection from "../section/Submit/LocationSection";
-import PropertySection from "../section/Submit/PropertySection";
-import FileUploadSection from "../section/Submit/FileUploadSection";
-
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`full-width-tabpanel-${index}`}
-      aria-labelledby={`full-width-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography component={'span'} variant={'body2'}>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `full-width-tab-${index}`,
-    "aria-controls": `full-width-tabpanel-${index}`,
-  };
-}
-
 const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: theme.palette.background.paper,
-    width: "100%",
-    minHeight: 610
-  },
-  margin: {
-    margin: theme.spacing(2),
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: "23%",
   },
 }));
 
-const BorderLinearProgress = withStyles({
-  root: {
-    height: 10,
-    backgroundColor: lighten("#3f51b5", 0.5),
-  },
-  bar: {
-    borderRadius: 20,
-    backgroundColor: "#3f51b5",
-  },
-})(LinearProgress);
-
 const SubmitProperty = () => {
   const classes = useStyles();
-  const theme = useTheme();
-  const [value, setValue] = useState(1);
+  const [invest_type, setInvestType] = useState("residential");
+  const [property_type, setPropertyType] = useState(null);
+  const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
+  const [checkedA, setCheckA] = useState(false);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  const files = acceptedFiles.map(file => (
+    <li key={file.path}>
+      {file.path} - {file.size} bytes
+    </li>
+  ));
 
-  const handleChangeIndex = (index) => {
-    setValue(index);
-  };
+  const handleChangeInvestType = (value) => {
+    setInvestType(value);
+  }
+  
+  const handleChangePropertyType = (value) => {
+    setPropertyType(value);
+  }
+
+  const handleChange = (value) => {
+    console.log(value);
+  }
+
   return (
     <div className="container">
       <Breadcrumbs parent="Properties" child="Submit" />
       <div className="listing-property">
-        <div className="submit-container">
-          <div className={classes.root}>
-            <AppBar className="tab-header" position="static" color="default">
-              <Tabs
-                value={value}
-                onChange={handleChange}
-                className="tabs-list"
-                indicatorColor="primary"
-                textColor="primary"
-                variant="fullWidth"
-                aria-label="full width tabs example"
-              >
-                <Tab label="Location" {...a11yProps(0)} />
-                <Tab label="Property" {...a11yProps(1)} />
-                <Tab label="Files" {...a11yProps(2)} />
-              </Tabs>
-            </AppBar>
-            <SwipeableViews
-              axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-              index={value}
-              onChangeIndex={handleChangeIndex}
+        <div className="options-container">
+          <FormControl className={classes.formControl}>
+            <InputLabel id="demo-simple-select-label">Invest Type</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={invest_type}
+              onChange={handleChangeInvestType}
             >
-              <TabPanel
-                className="tab-panel"
-                value={value}
-                index={0}
-                dir={theme.direction}
-              >
-                <LocationSection />
-              </TabPanel>
-              <TabPanel
-                className="tab-panel"
-                value={value}
-                index={1}
-                dir={theme.direction}
-              >
-                <PropertySection />
-              </TabPanel>
-              <TabPanel
-                className="tab-panel"
-                value={value}
-                index={2}
-                dir={theme.direction}
-              >
-                <FileUploadSection />
-              </TabPanel>
-            </SwipeableViews>
+              <MenuItem value="residential">Residential</MenuItem>
+              <MenuItem value="commercial">Commercial</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl className={classes.formControl}>
+            <InputLabel id="demo-simple-select-label">Property Type</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={property_type}
+              onChange={handleChangePropertyType}
+            >
+              <MenuItem value="residential">Residential</MenuItem>
+              <MenuItem value="commercial">Commercial</MenuItem>
+            </Select>
+          </FormControl>
+          <TextField className={classes.formControl} id="price" label="Price" />
+          <TextField className={classes.formControl} id="rate" label="Rent Rate(Optional)" />
+        </div>
+        <div className="address-container">
+          <TextField className="address" id="city-basic" label="Property Address" />
+        </div>
+        <div className="property-area">
+          <TextField className="element" label="Beds" />
+          <TextField className="element" label="Bath" />
+          <PropertyElement className="element" label="Storm Shelter" avatar="S" />
+          <TextField className="element" label="Year built" />
+          <TextField className="element" label="Roof Type" />
+          <PropertyElement className="element" label="Carport" avatar="C" />
+          <PropertyElement className="element" label="Yard" avatar="Y" />
+          <PropertyElement className="element" label="Fence" avatar="F" />
+          <PropertyElement className="element" label="Brick" avatar="B" />
+          <PropertyElement className="element" label="Siding" avatar="S" />
+          <PropertyElement className="element" label="Store" avatar="S" />
+          <TextField className="element" label="HOA Fees" />
+        </div>
+        <div className="property-description">
+          <SunEditor
+            lang="en"
+            setOptions={{
+              height: 280,
+            }}
+          />
+        </div>
+        <div className="upload-area">
+          <div className="photo-container">
+            <div {...getRootProps({className: 'dropzone'})}>
+              <input {...getInputProps()} />
+              <p>Drag & drop some photos here, or click to select files</p>
+            </div>
+            <aside>
+              <h4>Files</h4>
+              <ul>{files}</ul>
+            </aside>
           </div>
-          <div className="submit-button">
-            <button>Submit</button>
+          <div className="video-container">
+            <div {...getRootProps({className: 'dropzone'})}>
+              <input {...getInputProps()} />
+              <p>Drag & drop some videos here, or click to select files</p>
+            </div>
+            <aside>
+              <h4>Files</h4>
+              <ul>{files}</ul>
+            </aside>
           </div>
         </div>
-        <div className="sidebar-container">
-          <h2>Listing Property Completition</h2>
-          <span>75%</span>
-          <BorderLinearProgress
-            className={classes.margin}
-            variant="determinate"
-            color="secondary"
-            value={50}
-          />
-          <div className="divider"></div>
-          <h3>Add Details To Increase Exposure</h3>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and</p>
+        <div className="contact-information">
+          <TextField label="Full Name" />
+          <TextField label="Email" />
+          <TextField label="Phone Number" />
+        </div>
+        <div className="submit-button">
+          <button>Submit</button>
         </div>
       </div>
     </div>

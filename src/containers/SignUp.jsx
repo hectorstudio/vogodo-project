@@ -1,16 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import PlanSection from "../section/Home/planSection";
 import Breadcrumbs from "../components/Breadcrumbs";
-import Manager from "../assets/img/manager.png";
-import Contractor from "../assets/img/contractor.png";
 import "./SignUp.style.scss";
 
 const SignUpForm = () => {
-  const [type, setType] = useState("");
-
-  const clickAccountType = (accountType) => {
-    setType(accountType);
-  };
 
   return (
     <div className="container">
@@ -36,7 +29,7 @@ const SignUpForm = () => {
           </button>
         </div>
       </div>*/}
-      <PlanSection type={type}></PlanSection>
+      <PlanSection></PlanSection>
     </div>
   );
 };

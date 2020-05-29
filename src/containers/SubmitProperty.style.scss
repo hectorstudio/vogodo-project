@@ -1,69 +1,78 @@
 .listing-property {
-  display: flex;
-  .submit-container {
-    width: 75%;
-    .tab-header {
-      width: 500px;
-      box-shadow: none;
-      background: transparent;
-      .tabs-list {
-        button {
-          border-bottom: 2px solid #bdbbbb;
-        }
-      }
+  text-align: left;
+  width: 75%;
+  margin: auto;
+  .options-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  .address-container {
+    margin: 8px;
+    .address {
+      width: 100%;
     }
-    .tab-panel {
-      .MuiBox-root {
-        padding: 10px;
-      }
-    }
-    .submit-button {
-      text-align: right;
-      button {
-        cursor: pointer;
-        margin-right: 10px;
-        outline: none;
-        border: none;
-        font-size: 22px;
-        padding: 15px 35px;
-        border-radius: 5px;
-        background-color: #647883;
-        color: white;
-        font-family: Lato, sans-serif;
-        font-weight: 600;
+  }
+  .property-area {
+    margin: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    .element {
+      width: 23%;
+      &.last {
+        padding-top: 10px;
       }
     }
   }
-  .sidebar-container {
-    width: 25%;
-    margin: 50px 10px 16px 0px;
-    border: 1px solid #bdbbbb;
-    h2 {
-      font-family: Lato, sans-serif;
-      font-size: 28px;
-      color: #3f51b5;
-      line-height: 1.5;
+  .property-description {
+    margin: 8px;
+  }
+  .upload-area {
+    margin: 8px;
+    display: flex;
+    .photo-container {
+      margin-right: 20px;
     }
-    span {
-      font-size: 30px;
+    .dropzone {
+      p {
+        border: 2px dashed #647883;
+        color: #647883;
+        font-size: 20px;
+        font-family: Raleway, sans-serif;
+        padding: 40px 20px;
+      }
+    }
+    aside {
+      text-align: left;
+      margin: 5px 15px;
+      color: #647883;
       font-family: Raleway, sans-serif;
-      font-weight: 600;
-      color: #3f51b5;
     }
-    .divider {
-      border: 1px solid #bdbbbb;
-      margin: 20px;
+  }
+  .contact-information {
+    margin: 8px;
+    display: flex;
+    justify-content: space-between;
+    .MuiTextField-root {
+      width: 32%;
     }
-    h3 {
+  }
+  .submit-button {
+    text-align: right;
+    margin-bottom: 20px;
+    button {
+      cursor: pointer;
+      margin-right: 10px;
+      outline: none;
+      border: none;
       font-size: 22px;
-      margin: 20px 36px;
-      line-height: 2;
-      font-family: Raleway, sans-serif;
-    }
-    p {
-      margin: 0px 36px 14px 36px;
-      font-family: Raleway, sans-serif;
-      line-height: 1.5;
+      padding: 15px 35px;
+      border-radius: 5px;
+      background-color: #647883;
+      color: white;
+      font-family: Lato, sans-serif;
+      font-weight: 600;
     }
   }
 }

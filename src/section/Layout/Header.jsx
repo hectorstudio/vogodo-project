@@ -11,7 +11,6 @@ import { withStyles } from "@material-ui/core/styles";
 import BaseDrawer from "../../components/BaseDrawer";
 import History from "../../constants/History";
 import Logo from "../../assets/img/logo.png";
-import Login from "../../assets/svg/login.svg";
 import { Link } from "react-router-dom";
 
 import "./Header.style.scss";
