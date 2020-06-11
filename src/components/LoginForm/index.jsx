@@ -1,28 +1,76 @@
-import React from "react";
+import React, { useState } from "react";
 import History from "../../constants/History";
 import "./LoginForm.style.scss";
+import UserService from "../../services/UserService";
 
 const LoginForm = ({ setShowDrawer, openSignUpForm }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const goToHomePage = () => {
     setShowDrawer(false);
     localStorage.setItem("login", true);
     localStorage.setItem("account-type", "manager");
     History.push("/");
   };
+
+  const handleChangeEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleChangePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const validateEmailAddress = (value, callback) => {
+    if (value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+      callback("Please enter correct format email");
+    }
+    callback();
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await onSubmit();
+  };
+
+  const onSubmit = async () => {
+    const result = await UserService.login(email, password);
+    if (result && result.user && result.token) {
+      localStorage.setItem('token', result.token);
+      setShowDrawer(false);
+      localStorage.setItem("login", true);
+      localStorage.setItem("account-type", "manager");
+      History.push("/");
+    }
+  }
+
   return (
     <div className="login-form">
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
           <div className="form-control">
-            <input type="text" name="user_email" placeholder="User Email" />
+            <input
+              type="text"
+              name="emailAddress"
+              placeholder="User Email"
+              onChange={handleChangeEmail}
+              value={email}
+            />
           </div>
           <div className="form-control">
-            <input type="password" name="user_pass" placeholder="Password" />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={handleChangePassword}
+              value={password}
+            />
           </div>
         </div>
         <div className="form-group">
           <div className="form-control">
-            <button type="submit" onClick={goToHomePage}>Log In</button>
+            <button type="submit">Log In</button>
           </div>
         </div>
       </form>

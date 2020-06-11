@@ -11,11 +11,9 @@ const BaseDrawer = ({ isShowDrawer, setShowDrawer, isSignUp, setSignUp }) => {
   useEffect(() => {
     if (isShowDrawer === true) {
       if (isSignUp === true) {
-        console.log("signup");
         setDrawerContent("signup")
       }
       else {
-        console.log("login");
         setDrawerContent("login");
       }
     }
