@@ -6,6 +6,8 @@ import {
   AccountCircle,
   Settings,
 } from "@material-ui/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { setAuthenticate, setUserId } from "../../redux/actions";
 import { Avatar, Menu, ListItemIcon, ListItemText, MenuItem } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import BaseDrawer from "../../components/BaseDrawer";
@@ -52,10 +54,13 @@ const Header = () => {
   const [isSignUp, setSignUp] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [LoginFlag, setLoginFlag] = useState(false);
+  const loginState = localStorage.getItem("loggedin");
+  const globalState = useSelector(state => state);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    setLoginFlag(localStorage.getItem("login") && true);
-  }, [LoginFlag]);
+    setLoginFlag(loginState && true);
+  }, [loginState, globalState]);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -86,8 +91,10 @@ const Header = () => {
   };
 
   const LogOut = () => {
-    localStorage.removeItem("account-type");
-    localStorage.removeItem("login");
+    localStorage.removeItem("token");
+    localStorage.removeItem("loggedin");
+    dispatch(setAuthenticate({type: false}));
+    dispatch(setUserId({type: 0}));
     setAnchorEl(null);
     History.push("/");
   };
@@ -124,12 +131,6 @@ const Header = () => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <StyledMenuItem onClick={goToAccountPage}>
-              <ListItemIcon>
-                <AccountCircle fontSize="small" />
-              </ListItemIcon>
-              <ListItemText primary="Profile" />
-            </StyledMenuItem>
             <StyledMenuItem onClick={goToAccountPage}>
               <ListItemIcon>
                 <Settings fontSize="small" />

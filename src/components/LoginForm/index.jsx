@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setAuthenticate, setUserId } from "../../redux/actions";
 import History from "../../constants/History";
 import "./LoginForm.style.scss";
 import UserService from "../../services/UserService";
@@ -6,6 +8,8 @@ import UserService from "../../services/UserService";
 const LoginForm = ({ setShowDrawer, openSignUpForm }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
 
   const goToHomePage = () => {
     setShowDrawer(false);
@@ -22,12 +26,12 @@ const LoginForm = ({ setShowDrawer, openSignUpForm }) => {
     setPassword(e.target.value);
   };
 
-  const validateEmailAddress = (value, callback) => {
-    if (value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
-      callback("Please enter correct format email");
-    }
-    callback();
-  };
+  // const validateEmailAddress = (value, callback) => {
+  //   if (value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+  //     callback("Please enter correct format email");
+  //   }
+  //   callback();
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,11 +41,12 @@ const LoginForm = ({ setShowDrawer, openSignUpForm }) => {
   const onSubmit = async () => {
     const result = await UserService.login(email, password);
     if (result && result.user && result.token) {
-      localStorage.setItem('token', result.token);
+      console.log(result.user);
+      localStorage.setItem('token', result.token.accessToken);
+      localStorage.setItem('loggedin', true);
       setShowDrawer(false);
-      localStorage.setItem("login", true);
-      localStorage.setItem("account-type", "manager");
-      History.push("/");
+      dispatch(setAuthenticate({type: true}));
+      dispatch(setUserId({type: result.user.id}));
     }
   }
 
