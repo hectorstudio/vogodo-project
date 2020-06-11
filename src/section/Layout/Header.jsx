@@ -3,7 +3,6 @@ import {
   PowerSettingsNew,
   Save,
   ChatBubble,
-  AccountCircle,
   Settings,
 } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -93,6 +92,7 @@ const Header = () => {
   const LogOut = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("loggedin");
+    localStorage.removeItem("userId");
     dispatch(setAuthenticate({type: false}));
     dispatch(setUserId({type: 0}));
     setAnchorEl(null);

@@ -10,4 +10,15 @@ export default class UserService {
     const apiUrl = '/user/login';
     return BaseService.fetchData(REQUEST_TYPE.POST, apiUrl, params);
   }
+
+  static async updateUser(id, user) {
+    const params = user;
+    const apiUrl = `/user/${id}`;
+    return BaseService.fetchData(REQUEST_TYPE.PUT, apiUrl, params);
+  }
+
+  static async getUser(id) {
+    const apiUrl = `/user/${id}`;
+    return BaseService.fetchData(REQUEST_TYPE.GET, apiUrl, null);
+  }
 }

@@ -1,9 +1,11 @@
-import React, { Fragment } from "react";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
-import {Input, InputLabel, InputAdornment, FormControl, FormControlLabel, Button, Radio } from "@material-ui/core";
-import { AlternateEmail, VpnKey, PersonPin, Place } from "@material-ui/icons";
-import { green } from "@material-ui/core/colors";
+import React, { Fragment, useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { useSelector } from "react-redux";
+import {Input, InputLabel, InputAdornment, FormControl, Button, Grid } from "@material-ui/core";
+import { Title, AlternateEmail, VpnKey, PersonPin, Place } from "@material-ui/icons";
 import "./AccountSettings.style.scss";
+
+import UserService from "../../services/UserService";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -16,77 +18,121 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const GreenRadio = withStyles({
-  root: {
-    color: green[400],
-    "&$checked": {
-      color: green[600],
-    },
-  },
-  checked: {},
-})((props) => <Radio color="default" {...props} />);
-
 const AccountSettings = () => {
-  const [selectedValue, setSelectedValue] = React.useState("a");
-
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value);
-  };
-
   const classes = useStyles();
+  const globalState = useSelector(state => state);
+  const userId = localStorage.getItem('userId');
+  const [user, setUser] = useState({});
+  const [confirm, setConfirm] = useState("");
+  const [allowSubmit, setAllow] = useState(false);
+
+  useEffect(() => {
+    fetchUserData();
+  }, [userId]);
+
+  const fetchUserData = async () => {
+    const result = await UserService.getUser(userId || globalState.userId);
+    setUser(result.user);
+  }
+
+  const submitUpdatedUserInfo = async () => {
+    const result = await UserService.updateUser(userId || globalState.userId, user);
+  }
+
+  const onChangeFirstName = (e) => {
+    let tempUser = {...user};
+    tempUser.firstName = e.target.value;
+    setUser(tempUser);
+  }
+
+  const onChangeLastName = (e) => {
+    let tempUser = {...user};
+    tempUser.lastName = e.target.value;
+    setUser(tempUser);
+  }
+
+  const onChangeAddress = (e) => {
+    let tempUser = {...user};
+    tempUser.address = e.target.value;
+    setUser(tempUser);
+  }
+
+  const onChangeEmailAddress = (e) => {
+    let tempUser = {...user};
+    tempUser.address = e.target.value;
+    setUser(tempUser);
+  }
+
+  const onChangePassword = (e) => {
+    let tempUser = {...user};
+    tempUser.password = e.target.value;
+    setUser(tempUser);
+  }
+
+  const onChangeTitle = (e) => {
+    let tempUser = {...user};
+    tempUser.title = e.target.value;
+    setUser(tempUser);
+  }
+
+  const onChangeConfirm = (e) => {
+    setConfirm(e.target.value);
+    if (confirm !== "" && confirm === user.password) {
+      setAllow(true);
+    } else {
+      setAllow(false);
+    }
+  }
+
   return (
     <Fragment>
       <div className="pane-title">Account Settings</div>
-      <div className="pane-body account-settings">
-        <FormControlLabel
-          value="Manager"
-          control={
-            <Radio
-              checked={selectedValue === "b"}
-              onChange={handleChange}
-              value="b"
-              name="radio-button-demo"
-              inputProps={{ "aria-label": "B" }}
-            />
-          }
-          className="member-type"
-          label="Manager"
-        />
-        <FormControlLabel
-          value="Contractor"
-          control={
-            <GreenRadio
-              checked={selectedValue === "c"}
-              onChange={handleChange}
-              value="c"
-              name="radio-button-demo"
-              inputProps={{ "aria-label": "C" }}
-            />
-          }
-          className="member-type"
-          label="Contractor"
-        />
+      <div className="pane-body account-settings">   
+        <Grid container spacing={3}>
+          <Grid item xs={6}>     
+            <FormControl className={classes.margin}>
+              <InputLabel htmlFor="firstName">
+                First Name
+              </InputLabel>
+              <Input
+                id="firstName"
+                value={user.firstName}
+                onChange={onChangeFirstName}
+                startAdornment={
+                  <InputAdornment position="start">
+                    <PersonPin />
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+          </Grid>  
+          <Grid item xs={6}>     
+            <FormControl className={classes.margin}>
+              <InputLabel htmlFor="lastName">
+                Last Name
+              </InputLabel>
+              <Input
+                id="lastName"
+                value={user.lastName}
+                onChange={onChangeLastName}
+                startAdornment={
+                  <InputAdornment position="start">
+                    <PersonPin />
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+          </Grid>
+        </Grid>
         
         <FormControl className={classes.margin}>
-          <InputLabel htmlFor="input-with-icon-adornment">
-            Full Name
-          </InputLabel>
-          <Input
-            id="input-with-icon-adornment"
-            startAdornment={
-              <InputAdornment position="start">
-                <PersonPin />
-              </InputAdornment>
-            }
-          />
-        </FormControl>
-        
-        <FormControl className={classes.margin}>
-          <InputLabel htmlFor="input-with-icon-adornment">
+          <InputLabel htmlFor="address">
             Address
           </InputLabel>
           <Input
-            id="input-with-icon-adornment"
+            id="address"
+            value={user.address}
+            onChange={onChangeAddress}
             startAdornment={
               <InputAdornment position="start">
                 <Place />
@@ -96,11 +142,13 @@ const AccountSettings = () => {
         </FormControl>
 
         <FormControl className={classes.margin}>
-          <InputLabel htmlFor="input-with-icon-adornment">
+          <InputLabel htmlFor="emailAddress">
             Email Address
           </InputLabel>
           <Input
-            id="input-with-icon-adornment"
+            id="emailAddress"
+            value={user.emailAddress}
+            onChange={onChangeEmailAddress}
             startAdornment={
               <InputAdornment position="start">
                 <AlternateEmail />
@@ -109,9 +157,11 @@ const AccountSettings = () => {
           />
         </FormControl>
         <FormControl className={classes.margin}>
-          <InputLabel htmlFor="input-with-icon-adornment">Password</InputLabel>
+          <InputLabel htmlFor="password">Password</InputLabel>
           <Input
-            id="input-with-icon-adornment"
+            id="password"
+            value={user.password}
+            onChange={onChangePassword}
             startAdornment={
               <InputAdornment position="start">
                 <VpnKey />
@@ -120,24 +170,41 @@ const AccountSettings = () => {
           />
         </FormControl>
         <FormControl className={classes.margin}>
-          <InputLabel htmlFor="input-with-icon-adornment">
+          <InputLabel htmlFor="confirm">
             Confirm Password
           </InputLabel>
           <Input
-            id="input-with-icon-adornment"
+            id="confirm"
+            value={confirm}
+            onChange={onChangeConfirm}
+            onBlur={onChangeConfirm}
             startAdornment={
               <InputAdornment position="start">
                 <VpnKey />
+              </InputAdornment>
+            }
+          />
+        </FormControl>
+        <FormControl className={classes.margin}>
+          <InputLabel htmlFor="title">Title</InputLabel>
+          <Input
+            id="title"
+            value={user.title}
+            onChange={onChangeTitle}
+            startAdornment={
+              <InputAdornment position="start">
+                <Title />
               </InputAdornment>
             }
           />
         </FormControl>
         <FormControl className={classes.margin}>
           <Button
-            type="submit"
             variant="outlined"
             color="primary"
+            disabled={!allowSubmit}
             className={classes.button}
+            onClick={submitUpdatedUserInfo}
           >
             Change Account Settings
           </Button>

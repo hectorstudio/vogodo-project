@@ -6,9 +6,8 @@ export default class BaseService {
   static async fetchData (method, apiUrl, params) {
     const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
     const callAPI = new Promise(async (resolve, reject) => {
-      const token = localStorage.getItem('accessToken');
+      const token = localStorage.getItem('token');
       let url = API_ENDPOINT + apiUrl;
-      console.log(process.env);
       if ( method === REQUEST_TYPE.GET && params) {
         url = url + '?' + QueryString.stringify(params);
       }
@@ -18,7 +17,7 @@ export default class BaseService {
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authrization': `Bearer ${token}`,
+            'Authorization': `Bearer ${token}`,
           },
         };
         if (params) {

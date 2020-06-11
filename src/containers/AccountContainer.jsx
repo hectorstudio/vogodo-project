@@ -9,8 +9,6 @@ import Box from "@material-ui/core/Box";
 import SavedProperties from "../section/Account/SavedProperties";
 import MyListing from "../section/Account/MyListing";
 import AccountSettings from "../section/Account/AccountSettings";
-import AccountProfile from "../section/Account/AccountProfile";
-import AccountNotifications from "../section/Account/AccountNotifications";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -62,7 +60,7 @@ const AccountContainer = () => {
   };
   return (
     <div className="container account-container">
-      <Breadcrumbs parent="Home" child="Accuont Page" />
+      <Breadcrumbs parent="Home" child="Account Page" />
       <div className={`account-area ${classes.root}`}>
         <Tabs
           orientation="vertical"
@@ -72,26 +70,18 @@ const AccountContainer = () => {
           aria-label="Vertical tabs example"
           className={classes.tabs}
         >
-          <Tab label="Profile" {...a11yProps(0)} />
-          <Tab label="Account Settings" {...a11yProps(1)} />
-          <Tab label="Saved Properties" {...a11yProps(2)} />
-          <Tab label="My Listing" {...a11yProps(3)} />
-          <Tab label="Notifications" {...a11yProps(4)} />
+          <Tab label="Account Settings" {...a11yProps(0)} />
+          <Tab label="Saved Properties" {...a11yProps(1)} />
+          <Tab label="My Listing" {...a11yProps(2)} />
         </Tabs>
         <TabPanel value={value} index={0}>
-          <AccountProfile />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
           <AccountSettings />
         </TabPanel>
-        <TabPanel value={value} index={2}>
+        <TabPanel value={value} index={1}>
           <SavedProperties />
         </TabPanel>
-        <TabPanel value={value} index={3}>
+        <TabPanel value={value} index={2}>
           <MyListing />
-        </TabPanel>
-        <TabPanel value={value} index={4}>
-          <AccountNotifications />
         </TabPanel>
       </div>
     </div>

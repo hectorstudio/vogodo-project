@@ -41,9 +41,9 @@ const LoginForm = ({ setShowDrawer, openSignUpForm }) => {
   const onSubmit = async () => {
     const result = await UserService.login(email, password);
     if (result && result.user && result.token) {
-      console.log(result.user);
       localStorage.setItem('token', result.token.accessToken);
-      localStorage.setItem('loggedin', true);
+      localStorage.setItem('loggedin', true)
+      localStorage.setItem('userId', result.user.id);
       setShowDrawer(false);
       dispatch(setAuthenticate({type: true}));
       dispatch(setUserId({type: result.user.id}));
