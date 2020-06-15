@@ -36,7 +36,7 @@ const AccountSettings = () => {
   }
 
   const submitUpdatedUserInfo = async () => {
-    const result = await UserService.updateUser(userId || globalState.userId, user);
+    await UserService.updateUser(userId || globalState.userId, user);
   }
 
   const onChangeFirstName = (e) => {

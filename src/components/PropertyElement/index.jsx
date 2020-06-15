@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
@@ -17,29 +17,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PropertyElement = ({label, avatar}) => {
+const PropertyElement = ({label, avatar, defaultValue, setValue}) => {
   const classes = useStyles();
   const [color, setColor] = useState("default");
   const [icon, setIcon] = useState(<Done />);
 
-  const handleDelete = () => {
-    if (color === "primary") {
-      setColor("default");
-      setIcon(<Done />);
-    } else {
+  useEffect(() => {
+    if (defaultValue) {
       setColor("primary");
       setIcon(<CloseOutlined />);
+    } else {
+      setColor("default");
+      setIcon(<Done />);
     }
+  }, [defaultValue])
+
+  const handleDelete = () => {
+    setValue(!defaultValue);
   };
 
   const handleClick = () => {
-    if (color === "primary") {
-      setColor("default");
-      setIcon(<Done />);
-    } else {
-      setColor("primary");
-      setIcon(<CloseOutlined />);
-    }
+    setValue(!defaultValue);
   };
 
   return (

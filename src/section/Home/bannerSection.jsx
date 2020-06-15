@@ -17,7 +17,7 @@ const BannerSection = () => {
   const [values, setValues] = useState([]);
 
   const goToSubmitPage = () => {
-    const login = localStorage.getItem("login");
+    const login = localStorage.getItem("loggedin");
     if(login)
       History.push("/properties/submit");
     else
