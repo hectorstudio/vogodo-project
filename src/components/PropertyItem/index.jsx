@@ -39,36 +39,39 @@ const properties = {
   },
 };
 
-const PropertyItem = ({data={}, setOpenModal }) => {
+const PropertyItem = ({ data = {} }) => {
+  console.log(data);
   return (
     <div className="property-item">
       <div className="slide-container">
-        <Link to="/properties/detail">
+        <Link to={`/properties/detail/${data.id}`}>
           <Slide {...properties}>
-            <EachSlide url={slideImages.propertyImages[0].imageUrl} propertyPrice={slideImages.propertyPrice} />
-            <EachSlide url={slideImages.propertyImages[1].imageUrl} propertyPrice={slideImages.propertyPrice} />
-            <EachSlide url={slideImages.propertyImages[2].imageUrl} propertyPrice={slideImages.propertyPrice} />
+            <EachSlide
+              url={slideImages.propertyImages[0].imageUrl}
+              propertyPrice={data.details.price || 1768}
+            />
+            <EachSlide
+              url={slideImages.propertyImages[1].imageUrl}
+              propertyPrice={data.details.price || 1768}
+            />
+            <EachSlide
+              url={slideImages.propertyImages[2].imageUrl}
+              propertyPrice={data.details.price || 1768}
+            />
           </Slide>
         </Link>
       </div>
       <div className="item-description">
         <h3>{data.title || slideImages.propertyTitle}</h3>
-        <p>{`${data.street}, ${data.city} ${data.state}` || slideImages.address}</p>
+        <p>{`${data.address}` || slideImages.address}</p>
         <div className="pricing">
           <div className="ind-plan">
-            <span className="plan-title">1 Bedroom</span>
-            <span className="plan-price">${data.price || 1768}</span>
-            <span className="plan-detail">765sqft</span>
-          </div>
-          <div className="ind-plan">
-            <span className="plan-title">2 Bedroom</span>
-            <span className="plan-price">${data.price || 1768}</span>
-            <span className="plan-detail">1052sqft</span>
-          </div>
-          <div className="ind-plan">
-            <span className="plan-title">3 Bedroom</span>
-            <span className="plan-price">${data.price || 1768}</span>
-            <span className="plan-detail">1315sqft</span>
+            <span className="plan-title">
+              {data.details.beds ? `${data.details.beds} Beds` : ""}{" "}
+              {data.details.bath ? `${data.details.bath} Bathroom` : ""}{" "}
+              {data.details.store ? `1 Store` : ""}
+            </span>
+            <div className="plan-price">${data.details.price || 1768} <span className="plan-detail">rate: ${data.details.rate || 11}</span></div>
           </div>
         </div>
         <div className="more">

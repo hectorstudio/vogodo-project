@@ -2,7 +2,7 @@ import React from "react";
 import Select from "react-dropdown-select";
 import "./FilterItem.style.scss";
 
-const FilterItem = ({data, multiple=false, prefix, value, setFilterValues}) => {
+const FilterItem = ({data, multiple=false, prefix, value, onChange}) => {
   return (
     <div className="item">
       <Select
@@ -10,7 +10,7 @@ const FilterItem = ({data, multiple=false, prefix, value, setFilterValues}) => {
         className="property_select"
         value={value}
         placeholder={prefix}
-        onChange={(value) => setFilterValues(prefix, value, multiple)}
+        onChange={onChange}
       />
     </div>
   );

@@ -59,6 +59,12 @@ const SubmitProperty = () => {
     setPropertyInfo(info);
   };
 
+  const handleChangeTitle = (e) => {
+    let info = { ...propertyInfo };
+    info.title = e.target.value;
+    setPropertyInfo(info);
+  };
+
   const handleChangeAddress = (e) => {
     let info = { ...propertyInfo };
     info.address = e.target.value;
@@ -170,7 +176,7 @@ const SubmitProperty = () => {
   };
 
   const addNewProperty = async (info) => {    
-    const result = await PropertiesService.addNewProperty(info);
+    await PropertiesService.addNewProperty(info);
   }
   return (
     <div className="container">
@@ -223,6 +229,15 @@ const SubmitProperty = () => {
             label="Property Address"
             onChange={handleChangeAddress}
             value={propertyInfo.address}
+          />
+        </div>
+        <div className="address-container">
+          <TextField
+            className="address"
+            id="city-basic"
+            label="Property Title"
+            onChange={handleChangeTitle}
+            value={propertyInfo.title}
           />
         </div>
         <div className="property-area">
