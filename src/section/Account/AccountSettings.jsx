@@ -28,16 +28,22 @@ const AccountSettings = () => {
   const [allowSubmit, setAllow] = useState(false);
 
   useEffect(() => {
-    fetchUserData();
-  }, [userId]);
-
-  const fetchUserData = async () => {
-    const result = await UserService.getUser(userId || globalState.userId);
-    setUser(result.user);
-  }
+    (async () => {
+      try {
+        const result = await UserService.getUser(userId || globalState.userId);
+        if (result && result.user) {
+          const { user } = result;
+          setUser(user);
+        } else {
+          console.log("Loading User Data Error: ");
+        }
+      } catch (error) {
+        console.log("Loading USer Data Error: ");
+      }
+    })();
+  }, [userId, globalState.userId]);
 
   const submitUpdatedUserInfo = async () => {
-    console.log(user);
     await UserService.updateUser(userId || globalState.userId, user);
   }
 

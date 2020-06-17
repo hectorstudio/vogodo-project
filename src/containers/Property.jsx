@@ -21,14 +21,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const defaultProps = {
-  center: {
-    lat: 59.95,
-    lng: 30.33
-  },
-  zoom: 11
-};
-
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 const Property = () => {
@@ -41,6 +33,15 @@ const Property = () => {
   const [filterOption, setFilterOption] = useState({});
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
+  const [geoInfo, setGeoInfo] = useState(null);
+
+  useEffect(() => {
+    if (!geoInfo) {
+      const userGeoInfo = JSON.parse(localStorage.getItem("geoInfo"));
+      setGeoInfo(userGeoInfo);
+    }
+  });
+
   useEffect(() => {
     if (states.length < 1) {
       (async () => {
@@ -124,6 +125,7 @@ const Property = () => {
   };
 
   const handleChangeCity = (e) => {
+    setGeoInfo({latitude: parseFloat(e[0].lat), longitude: parseFloat(e[0].lng)})
     let options = {...filterOption};
     options.city = e[0].value;
     setFilterOption(options);
@@ -146,6 +148,8 @@ const Property = () => {
     options[item] = '';
     setFilterOption(options);
   }
+
+  console.log(geoInfo);
 
   return (
     <Fragment>
@@ -216,13 +220,17 @@ const Property = () => {
               bootstrapURLKeys={{
                 key: "AIzaSyB6ABnTCVsOqCaU_vwH6uPN3pLqaRQhyU0",
               }}
-              defaultCenter={defaultProps.center}
-              defaultZoom={defaultProps.zoom}
+              defaultCenter={
+                geoInfo && geoInfo.latitude ? 
+                { lat: geoInfo.latitude, lng: geoInfo.longitude } : 
+                { lat: 59.955413, lng: 30.337844 }
+              }
+              defaultZoom={15}
             >
               <AnyReactComponent
-                lat={59.955413}
-                lng={30.337844}
-                text="Available Properties"
+                lat={ geoInfo && geoInfo.latitude ? geoInfo.latitude : 59.955413 }
+                lng={ geoInfo && geoInfo.longitude ? geoInfo.longitude : 30.337844 }
+                text="Current Position"
               />
             </GoogleMapReact>
           </div>
