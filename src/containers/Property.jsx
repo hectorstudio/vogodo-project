@@ -8,7 +8,7 @@ import PropertiesService from "../services/PropertiesService";
 import "./Property.style.scss";
 import Breadcrumbs from "../components/Breadcrumbs";
 import Chip from "@material-ui/core/Chip";
-import map from "../assets/img/map.png";
+import GoogleMapReact from 'google-map-react';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,19 +21,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const cities = [
-  { value: "San Francisco", label: "San Francisco" },
-  { value: "New York", label: "New York" },
-  { value: "Boston", label: "Boston" },
-  { value: "Los Angeles", label: "Los Angeles" },
-  { value: "Chicago", label: "Chicago" },
-];
+const defaultProps = {
+  center: {
+    lat: 59.95,
+    lng: 30.33
+  },
+  zoom: 11
+};
 
-const states = [
-  { value: "New York", label: "New York" },
-  { value: "California", label: "California" },
-  { value: "Chicago", label: "Chicago" },
-];
+const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 const Property = () => {
   const classes = useStyles();
@@ -43,18 +39,61 @@ const Property = () => {
 
   const [data, setData] = useState([]);  
   const [filterOption, setFilterOption] = useState({});
-
-  useEffect(async () => {
-    if (data.length < 1 && Object.keys(filterOption).length < 1) {
-      const result = await PropertiesService.getProperties();
-      if (result) {
-        const { Properties } = result;
-        setData(Properties);
-      } else {
-        console.log("Loading Properties Data Error: ");
-      }
+  const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
+  useEffect(() => {
+    if (states.length < 1) {
+      (async () => {
+        try {
+          const result = await PropertiesService.getStates();
+          if (result) {
+            const { states } = result;
+            setStates(states);
+          } else {
+            console.log("Loading States Data Error: ");
+          }
+        } catch (error) {
+          console.log("Loading States Data Error: ");
+        }
+      })();
     }
-  }, []);
+  }, [states]);
+  
+  useEffect(() => {
+    if (filterOption.state) {
+      (async () => {
+        try {
+          const result = await PropertiesService.getCitiesById(filterOption.state);
+          if (result && result.cities) {
+            const { cities } = result;
+            setCities(cities);
+          } else {
+            console.log("Loading Cities Data Error: ");
+          }
+        } catch (error) {
+          console.log("Loading Cities Data Error: ");
+        }
+      })();
+    }
+  }, [filterOption.state])
+
+  useEffect(() => {
+    if (data.length < 1 && Object.keys(filterOption).length < 1) {
+      (async () => {
+        try {
+          const result = await PropertiesService.getProperties();
+          if (result && result.Properties) {
+            const { Properties } = result;
+            setData(Properties);
+          } else {
+            console.log("Loading Properties Data Error: ");
+          }
+        } catch (error) {
+          console.log("Loading Properties Data Error: ");
+        }
+      })();
+    }
+  }, [data, filterOption]);
 
   useEffect(() => {
     console.log("Filter Data");
@@ -64,12 +103,7 @@ const Property = () => {
     if (globalState.visible_type.length < 1) {
       dispatch(setVisibleType({ type: "fixed-height" }));
     }
-  }, [globalState]);
-
-  const getProperties = async () => {
-    const result = await PropertiesService.getProperties();
-    return result;
-  }
+  }, [globalState, dispatch]);
 
   const handleChangeSearch = (e) => {
     let options = {...filterOption};
@@ -178,7 +212,19 @@ const Property = () => {
         </div>
         <div className="items-container">
           <div className="map">
-            <img className={`${Object.keys(filterOption).length < 1 ? "" : "has-filter"}`} src={map} alt="map" />
+            <GoogleMapReact
+              bootstrapURLKeys={{
+                key: "AIzaSyB6ABnTCVsOqCaU_vwH6uPN3pLqaRQhyU0",
+              }}
+              defaultCenter={defaultProps.center}
+              defaultZoom={defaultProps.zoom}
+            >
+              <AnyReactComponent
+                lat={59.955413}
+                lng={30.337844}
+                text="Available Properties"
+              />
+            </GoogleMapReact>
           </div>
           <div className={`content-body ${Object.keys(filterOption).length < 1 ? "" : "has-filter"}`}>
             {data.length > 0 ? 

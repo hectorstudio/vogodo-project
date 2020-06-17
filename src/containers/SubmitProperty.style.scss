@@ -9,6 +9,25 @@
   .address-container {
     margin: 8px;
     .address {
+      font: inherit;
+      width: 100%;
+      border: 0;
+      height: 1.1876em;
+      margin: 0;
+      display: block;
+      padding: 6px 0 7px;
+      min-width: 0;
+      background: none;
+      box-sizing: content-box;
+      border-bottom: 1px solid #949494;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .title-container {
+    margin: 8px;
+    .title {
       width: 100%;
     }
   }

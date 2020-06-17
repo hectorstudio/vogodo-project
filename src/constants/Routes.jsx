@@ -3,10 +3,10 @@ const Routes = {
   signup: "/signup",
   find_property: "/properties",
   submit_property: "/properties/submit",
-  property_detail: "/properties/detail",
+  property_detail: "/properties/detail/:id",
   findmanager: "/managers",
   managerslisting: "/managers/listing",
-  managerdetail: "/managers/detail",
+  managerdetail: "/managers/detail/",
   account: "/account",
   messages: "/messages",
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useMemo, useState} from "react";
 import BreadCrumbs from "../components/Breadcrumbs";
 import ImageGallery from "react-image-gallery";
 import Constructed from "../assets/svg/constructed.svg";
@@ -14,6 +14,7 @@ import avatar from "../assets/img/avatar.jpg";
 import "video-react/dist/video-react.css";
 import { Player } from 'video-react';
 import Poster from "../assets/img/poster.png";
+import PropertiesService from "../services/PropertiesService";
 
 const images = [
   {
@@ -30,16 +31,34 @@ const images = [
   },
 ];
 
-const PropertyDetail = ({id = 0}) => {
+const PropertyDetail = ({match}) => {
+  const { id } = match.params;
+  const [property, setProperty] = useState({});
+
+  useMemo(() => {
+    (async () => {
+      try {
+        const result = await PropertiesService.getProperty(id);
+        if ( result && result.Property) {
+          setProperty(result.Property);
+        } else {
+          console.log("Property Detail Data Load Failed");
+        }
+      } catch (error) {
+        console.log("Property Detail Data Load Failed");
+      }
+    })();
+  }, [id]);
+
   return (
     <div className="container">
-      <BreadCrumbs parent="Properties" child={`Detail ${id}`} />
+      <BreadCrumbs parent="Properties" child={`Detail: ${property.title || "Temp Property"}`} />
       <div className="detail-content">
         <div className="property-detail-container">
           <div className="body-title">
             <span className="title">View</span>
             <span className="address">
-              Oregon Warrenton 97146 97146 80 Nw Birch Ave
+              {property.address || "Oregon Warrenton 97146 97146 80 Nw Birch Ave"}
             </span>
           </div>
           <div className="content-body">

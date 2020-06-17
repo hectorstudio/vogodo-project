@@ -19,6 +19,16 @@ export default class PropertiesService {
     return BaseService.fetchData(REQUEST_TYPE.GET, apiUrl, null);
   }
 
+  static async getStates() {
+    const apiUrl = '/geo/';
+    return BaseService.fetchData(REQUEST_TYPE.GET, apiUrl, null);
+  }
+
+  static async getCitiesById(id) {
+    const apiUrl = `/geo/${id}`;
+    return BaseService.fetchData(REQUEST_TYPE.GET, apiUrl, null);
+  }
+
   static async getPropertiesByOwnerId() {
     const apiUrl = '/property/';
     return BaseService.fetchData(REQUEST_TYPE.GET, apiUrl, null);

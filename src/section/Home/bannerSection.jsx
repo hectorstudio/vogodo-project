@@ -4,13 +4,11 @@ import Select from "react-dropdown-select";
 import banner1 from "../../assets/img/banner1.jpg";
 import "../../containers/Home.style.scss";
 import History from "../../constants/History";
+import Autocomplete from 'react-google-autocomplete';
 
 const options = [
-  { value: 1, label: "Condominiums" },
-  { value: 2, label: "Detached House" },
-  { value: 3, label: "Townhouse" },
-  { value: 4, label: "Semi-detached House" },
-  { value: 5, label: "Duplex/Triplex" },
+  { value: "residential", label: "Residential" },
+  { value: "commercial", label: "Detached House" },
 ];
 
 const BannerSection = () => {
@@ -53,10 +51,13 @@ const BannerSection = () => {
               />
             </div>
             <div className="form-control input">
-              <input
-                type="text"
-                name="city"
-                placeholder="Enter a name of city"
+              <Autocomplete
+                style={{width: '95%'}}
+                onPlaceSelected={(place) => {
+                  console.log(place);
+                }}
+                types={['(regions)']}
+                componentRestrictions={{country: "us"}}
               />
             </div>
             <div className="form-control button">

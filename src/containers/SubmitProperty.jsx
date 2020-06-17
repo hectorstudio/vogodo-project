@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Breadcrumbs from "../components/Breadcrumbs";
 import { makeStyles } from "@material-ui/core/styles";
 import History from "../constants/History";
+import Autocomplete from 'react-google-autocomplete';
 import {
   TextField,
   FormControl,
@@ -65,9 +66,9 @@ const SubmitProperty = () => {
     setPropertyInfo(info);
   };
 
-  const handleChangeAddress = (e) => {
+  const handleChangeAddress = (value) => {
     let info = { ...propertyInfo };
-    info.address = e.target.value;
+    info.address = value.formatted_address;
     setPropertyInfo(info);
   };
 
@@ -223,17 +224,16 @@ const SubmitProperty = () => {
           />
         </div>
         <div className="address-container">
-          <TextField
+          <Autocomplete
             className="address"
-            id="city-basic"
-            label="Property Address"
-            onChange={handleChangeAddress}
-            value={propertyInfo.address}
+            onPlaceSelected={handleChangeAddress}
+            types={['(regions)']}
+            componentRestrictions={{country: "us"}}
           />
         </div>
-        <div className="address-container">
+        <div className="title-container">
           <TextField
-            className="address"
+            className="title"
             id="city-basic"
             label="Property Title"
             onChange={handleChangeTitle}
