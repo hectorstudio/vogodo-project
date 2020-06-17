@@ -93,6 +93,7 @@ const Header = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("loggedin");
     localStorage.removeItem("userId");
+    localStorage.removeItem("geoInfo");
     dispatch(setAuthenticate({type: false}));
     dispatch(setUserId({type: 0}));
     setAnchorEl(null);

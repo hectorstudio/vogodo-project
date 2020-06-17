@@ -40,7 +40,6 @@ const properties = {
 };
 
 const PropertyItem = ({ data = {} }) => {
-  console.log(data);
   return (
     <div className="property-item">
       <div className="slide-container">

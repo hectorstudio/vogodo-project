@@ -26,13 +26,6 @@ const LoginForm = ({ setShowDrawer, openSignUpForm }) => {
     setPassword(e.target.value);
   };
 
-  // const validateEmailAddress = (value, callback) => {
-  //   if (value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
-  //     callback("Please enter correct format email");
-  //   }
-  //   callback();
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     await onSubmit();
@@ -41,9 +34,11 @@ const LoginForm = ({ setShowDrawer, openSignUpForm }) => {
   const onSubmit = async () => {
     const result = await UserService.login(email, password);
     if (result && result.user && result.token) {
+      const geoInfo = {latitude: result.user.latitude, longitude: result.user.longitude};
       localStorage.setItem('token', result.token.accessToken);
       localStorage.setItem('loggedin', true)
       localStorage.setItem('userId', result.user.id);
+      localStorage.setItem('geoInfo', JSON.stringify(geoInfo));
       setShowDrawer(false);
       dispatch(setAuthenticate({type: true}));
       dispatch(setUserId({type: result.user.id}));

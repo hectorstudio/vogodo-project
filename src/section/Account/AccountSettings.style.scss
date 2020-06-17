@@ -10,3 +10,14 @@
     margin-right: 20px !important;
   }
 }
+.address {    
+  border: none;
+  border-bottom: 1px solid #000000;
+  outline: none;
+  padding: 6px 0;
+  font-size: 16px;
+  font-family: Roboto, sans-serif;
+  &::placeholder {
+    color: #000000;
+  }
+}

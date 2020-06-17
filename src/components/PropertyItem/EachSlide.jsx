@@ -1,13 +1,9 @@
 import React from "react";
 import "./PropertyItem.style.scss";
 
-const EachSlide = ({setOpenModal, url, propertyPrice}) => {
-  const handleClick = () => {
-    console.log("setOpenModal");
-    //setOpenModal(true);
-  }
+const EachSlide = ({url, propertyPrice}) => {
   return (
-    <div className="each-slide" onClick={handleClick}>
+    <div className="each-slide">
       <div
         style={{
           backgroundImage: `url(${url})`,

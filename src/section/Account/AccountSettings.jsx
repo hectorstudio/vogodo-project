@@ -2,7 +2,8 @@ import React, { Fragment, useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import {Input, InputLabel, InputAdornment, FormControl, Button, Grid } from "@material-ui/core";
-import { Title, AlternateEmail, VpnKey, PersonPin, Place } from "@material-ui/icons";
+import { Title, AlternateEmail, VpnKey, PersonPin } from "@material-ui/icons";
+import Autocomplete from 'react-google-autocomplete';
 import "./AccountSettings.style.scss";
 
 import UserService from "../../services/UserService";
@@ -36,6 +37,7 @@ const AccountSettings = () => {
   }
 
   const submitUpdatedUserInfo = async () => {
+    console.log(user);
     await UserService.updateUser(userId || globalState.userId, user);
   }
 
@@ -53,7 +55,9 @@ const AccountSettings = () => {
 
   const onChangeAddress = (e) => {
     let tempUser = {...user};
-    tempUser.address = e.target.value;
+    tempUser.address = e.formatted_address;
+    tempUser.latitude = e.geometry.location.lat();
+    tempUser.longitude = e.geometry.location.lng();
     setUser(tempUser);
   }
 
@@ -126,18 +130,12 @@ const AccountSettings = () => {
         </Grid>
         
         <FormControl className={classes.margin}>
-          <InputLabel htmlFor="address">
-            Address
-          </InputLabel>
-          <Input
-            id="address"
+          <Autocomplete
+            className="address"
+            onPlaceSelected={onChangeAddress}
+            types={['(regions)']}
             value={user.address}
-            onChange={onChangeAddress}
-            startAdornment={
-              <InputAdornment position="start">
-                <Place />
-              </InputAdornment>
-            }
+            componentRestrictions={{country: "us"}}
           />
         </FormControl>
 
