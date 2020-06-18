@@ -6,7 +6,7 @@ import "./Footer.style.scss";
 const Footer = () => {
   const globalState = useSelector(state => state);
   return (
-    <footer className={`${globalState.visible_type[0] ? globalState.visible_type[0].type : "" }`}>
+    <footer className={`${globalState.visible_type}`}>
       <div className="container">
         <div className="footer-item footer-logo">
           <img src={Logo} alt="footer-logo" />

@@ -6,7 +6,7 @@ import imgSrc from "../../assets/img/realestate.jpg";
 import imgSrc1 from "../../assets/img/realestate1.jpg";
 import imgSrc2 from "../../assets/img/realestate2.jpg";
 
-const ListingItem = () => {
+const ListingItem = ({data}) => {
   return (
     <div className="listing-item-container">
       <div className="item-carousel">
@@ -27,14 +27,14 @@ const ListingItem = () => {
       </div>
       <div className="item-details">
         <div className="address">
-          1099 14th St NW - Franklin Court
+          {data.address || "1099 14th St NW - Franklin Court"}
         </div>
         <div className="property-detail">
-          East End Submarket - Office
+          {data.title || "East End Submarket - Office"}
         </div>
         <div className="sale-info">
           <div className="title">For sale</div>
-          <div className="info">6 Spaces | $23000 - 35100</div>
+          <div className="info">rate: ${data.details.rate || 11} | ${data.details.price || 23000}</div>
         </div>
       </div>
       <div className="item-review-details">
@@ -43,12 +43,8 @@ const ListingItem = () => {
         <span>Want to improve?</span>
       </div>
       <div className="item-action">
-        <div className="action-status">
-          Added Today
-        </div>
-        <button className="confirm-button">Confirm up-to-date</button>
-        <button className="edit-button">Edit Listing</button>
-        <button className="delete-button">delete Lisiting</button>
+        <button className="button edit-button">Edit Listing</button>
+        <button className="button delete-button">delete Listing</button>
       </div>
     </div>
   );

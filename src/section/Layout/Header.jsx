@@ -6,13 +6,12 @@ import {
   Settings,
 } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { setAuthenticate, setUserId } from "../../redux/actions";
+import { setAuthenticate, setUserId, setVisibleType } from "../../redux/actions";
 import { Avatar, Menu, ListItemIcon, ListItemText, MenuItem } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import BaseDrawer from "../../components/BaseDrawer";
 import History from "../../constants/History";
 import Logo from "../../assets/img/logo.png";
-import { Link } from "react-router-dom";
 
 import "./Header.style.scss";
 
@@ -94,19 +93,24 @@ const Header = () => {
     localStorage.removeItem("loggedin");
     localStorage.removeItem("userId");
     localStorage.removeItem("geoInfo");
-    dispatch(setAuthenticate({type: false}));
-    dispatch(setUserId({type: 0}));
+    dispatch(setAuthenticate(false));
+    dispatch(setUserId(0));
     setAnchorEl(null);
     History.push("/");
   };
+
+  const goToHomePage = () => {
+    dispatch(setVisibleType(""));
+    History.push("/");
+  }
 
   return (
     <header className="app-header">
       <div className="container menu-container">
         <div className="logo">
-          <Link to="/">
+          <div onClick={goToHomePage} style={{ cursor: 'pointer' }}>
             <img src={Logo} alt="Logo" />
-          </Link>
+          </div>
         </div>
         <div className="menu" id="menu">
           <div className="login">

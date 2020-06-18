@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import FacebookLogin from 'react-facebook-login';
+import GoogleLogin from 'react-google-login';
 import { setAuthenticate, setUserId } from "../../redux/actions";
-import History from "../../constants/History";
 import "./LoginForm.style.scss";
 import UserService from "../../services/UserService";
 
@@ -10,13 +11,14 @@ const LoginForm = ({ setShowDrawer, openSignUpForm }) => {
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
+  
+  const responseFacebook = (response) => {
+    console.log(response);
+  }
 
-  const goToHomePage = () => {
-    setShowDrawer(false);
-    localStorage.setItem("login", true);
-    localStorage.setItem("account-type", "manager");
-    History.push("/");
-  };
+  const responseGoogle = (response) => {
+    console.log(response);
+  }
 
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
@@ -40,8 +42,8 @@ const LoginForm = ({ setShowDrawer, openSignUpForm }) => {
       localStorage.setItem('userId', result.user.id);
       localStorage.setItem('geoInfo', JSON.stringify(geoInfo));
       setShowDrawer(false);
-      dispatch(setAuthenticate({type: true}));
-      dispatch(setUserId({type: result.user.id}));
+      dispatch(setAuthenticate(true));
+      dispatch(setUserId(result.user.id));
     }
   }
 
@@ -82,12 +84,26 @@ const LoginForm = ({ setShowDrawer, openSignUpForm }) => {
       </div>
       <div className="divider"></div>
       <div className="social-login">
-        <button className="facebook" onClick={goToHomePage}>
-          <i className="fa fa-facebook"></i> Log In With Facebook
-        </button>
-        <button className="google" onClick={goToHomePage}>
-          <i className="fa fa-google"></i> Log In With Google
-        </button>
+        <FacebookLogin
+          appId="594376748148190"
+          autoLoad={false}
+          fields="name,email,picture"
+          scope="public_profile,user_friends"
+          cssClass="facebook"
+          icon="fa-facebook"
+          callback={responseFacebook}/>
+        <GoogleLogin
+          clientId="1078489387813-s6iplpe35dnbu7c9pdh24j9hq75sb6om.apps.googleusercontent.com"
+          render={renderProps => (
+            <button className="google" onClick={renderProps.onClick} disabled={renderProps.disabled}>
+              <i className="fa fa-google"></i> Log In With Google
+            </button>
+          )}
+          buttonText="Login"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+          cookiePolicy={'single_host_origin'}
+        />
       </div>
     </div>
   );

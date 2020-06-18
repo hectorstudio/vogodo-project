@@ -97,12 +97,8 @@ const Property = () => {
   }, [data, filterOption]);
 
   useEffect(() => {
-    console.log("Filter Data");
-  }, [filterOption])
-
-  useEffect(() => {
-    if (globalState.visible_type.length < 1) {
-      dispatch(setVisibleType({ type: "fixed-height" }));
+    if (globalState.visible_type === "") {
+      dispatch(setVisibleType("fixed-height"));
     }
   }, [globalState, dispatch]);
 
@@ -147,9 +143,7 @@ const Property = () => {
     let options = {...filterOption};
     options[item] = '';
     setFilterOption(options);
-  }
-
-  console.log(geoInfo);
+  } 
 
   return (
     <Fragment>

@@ -1,7 +1,7 @@
 import { SET_VISIBLE_TYPE, SET_AUTHENTICATE, SET_USER_ID, SET_ACCOUNT_SETTING } from "../constants/action-types";
 
 const initialState = {
-  visible_type: [],
+  visible_type: "",
   authenticate: false,
   userId: 0,
   accountSetting: 0,
@@ -9,9 +9,10 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
   if (action.type === SET_VISIBLE_TYPE) {
-    return Object.assign({}, state, {
-      visible_type: state.visible_type.concat(action.payload),
-    });
+    return {
+      ...state,
+      visible_type: action.payload,
+    }
   }
   if (action.type === SET_AUTHENTICATE) {
     return {
