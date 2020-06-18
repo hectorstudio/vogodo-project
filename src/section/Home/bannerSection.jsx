@@ -5,6 +5,8 @@ import banner1 from "../../assets/img/banner1.jpg";
 import "../../containers/Home.style.scss";
 import History from "../../constants/History";
 import Autocomplete from 'react-google-autocomplete';
+import { useDispatch } from "react-redux";
+import { setOpenSignUp } from "../../redux/actions";
 
 const options = [
   { value: "residential", label: "Residential" },
@@ -13,6 +15,8 @@ const options = [
 
 const BannerSection = () => {
   const [values, setValues] = useState([]);
+  const dispatch = useDispatch();
+  const loggedin = localStorage.getItem('loggedin');
 
   const goToSubmitPage = () => {
     const login = localStorage.getItem("loggedin");
@@ -21,6 +25,12 @@ const BannerSection = () => {
     else
       History.push("/signup");
   };
+
+  const openSignUpDrawer = () => {
+    if (!loggedin) {
+      dispatch(setOpenSignUp(true));
+    }
+  }
 
   return (
     <section className="section section-top">
@@ -65,11 +75,11 @@ const BannerSection = () => {
             </div>
           </form>
         </div>
-        <Link to ="/signup">
-          <button className={`btn btn-primary btn-semi-rounded btn-register uppercase`} style={{ cursor: "pointer" }}>
+        <div>
+          <button className={`btn btn-primary btn-semi-rounded btn-register uppercase`} style={{ cursor: "pointer" }} onClick={openSignUpDrawer}>
             Register Today!
           </button>
-        </Link>
+        </div>
       </div>
     </section>
   );

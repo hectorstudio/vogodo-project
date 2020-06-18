@@ -40,18 +40,18 @@ const Property = () => {
       const userGeoInfo = JSON.parse(localStorage.getItem("geoInfo"));
       setGeoInfo(userGeoInfo);
     }
-  });
+  }, [geoInfo]);
 
   useEffect(() => {
     if (states.length < 1) {
       (async () => {
         try {
           const result = await PropertiesService.getStates();
-          if (result) {
+          if (result && result.states) {
             const { states } = result;
             setStates(states);
           } else {
-            console.log("Loading States Data Error: ");
+            setStates([]);
           }
         } catch (error) {
           console.log("Loading States Data Error: ");

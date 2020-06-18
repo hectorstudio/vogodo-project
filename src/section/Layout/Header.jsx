@@ -58,6 +58,8 @@ const Header = () => {
 
   useEffect(() => {
     setLoginFlag(loginState && true);
+    setShowDrawer(globalState.openSignUp);
+    setSignUp(globalState.openSignUp);
   }, [loginState, globalState]);
 
   const handleClick = (event) => {

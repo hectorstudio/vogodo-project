@@ -1,11 +1,24 @@
 import React from "react";
 import History from "../../constants/History";
 import "./SignUpForm.style.scss";
+import FacebookLogin from 'react-facebook-login';
+import GoogleLogin from 'react-google-login';
 
-const SignUpForm = ({setShowDrawer, openLogInForm}) => {
-  const goToSignUpPage = () => {
-    setShowDrawer(false);
-    History.push("/signup");
+const SignUpForm = ({setShowDrawer, openLogInForm}) => {  
+  const responseFacebook = (response) => {
+    console.log(response);
+    if (response.data) {
+      setShowDrawer(false);
+      History.push("/signup");
+    }
+  }
+
+  const responseGoogle = (response) => {
+    console.log(response);
+    if (response.data) {
+      setShowDrawer(false);
+      History.push("/signup");
+    }
   }
   return (
     <div className="signup-form">
@@ -14,12 +27,26 @@ const SignUpForm = ({setShowDrawer, openLogInForm}) => {
       </div>
       <div className="divider"></div>
       <div className="social-login">
-        <button className="facebook" onClick={goToSignUpPage}>
-          <i className="fa fa-facebook"></i> Sign Up With Facebook
-        </button>
-        <button className="google" onClick={goToSignUpPage}>
-          <i className="fa fa-google"></i> Sign Up With Google
-        </button>
+        <FacebookLogin
+          appId="594376748148190"
+          autoLoad={false}
+          fields="name,email,picture"
+          scope="public_profile,user_friends"
+          cssClass="facebook"
+          icon="fa-facebook"
+          callback={responseFacebook}/>
+        <GoogleLogin
+          clientId="1078489387813-s6iplpe35dnbu7c9pdh24j9hq75sb6om.apps.googleusercontent.com"
+          render={renderProps => (
+            <button className="google" onClick={renderProps.onClick} disabled={renderProps.disabled}>
+              <i className="fa fa-google"></i> Log In With Google
+            </button>
+          )}
+          buttonText="Login"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+          cookiePolicy={'single_host_origin'}
+        />
       </div>
     </div>
   );
