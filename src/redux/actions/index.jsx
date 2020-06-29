@@ -1,4 +1,15 @@
-import { SET_VISIBLE_TYPE, SET_AUTHENTICATE, SET_USER_ID, SET_ACCOUNT_SETTING, SET_FILTER_TYPE, SET_OPEN_SIGNUP } from "../constants/action-types";
+import {
+  SET_VISIBLE_TYPE,
+  SET_AUTHENTICATE,
+  SET_USER_ID,
+  SET_ACCOUNT_SETTING,
+  SET_FILTER_TYPE,
+  SET_OPEN_SIGNUP,
+  SET_SEARCH_CITY,
+  SET_SEARCH_CITY_GEOINFO,
+  SET_SEARCH_VAL,
+  SET_MENU_TYPE,
+} from "../constants/action-types";
 
 export function setVisibleType(payload) {
   return { type: SET_VISIBLE_TYPE, payload };
@@ -24,10 +35,30 @@ export function setFilterType(payload) {
   return { type: SET_FILTER_TYPE, payload };
 }
 
+export function setSearchCity(payload) {
+  return { type: SET_SEARCH_CITY, payload };
+}
+
+export function setSearchCityGeoInfo(payload) {
+  return { type: SET_SEARCH_CITY_GEOINFO, payload };
+}
+
+export function setSearchVal(payload) {
+  return { type: SET_SEARCH_VAL, payload };
+}
+
+export function setMenuType(payload) {
+  return { type: SET_MENU_TYPE, payload };
+}
+
 export default {
   setVisibleType,
   setOpenSignUp,
   setAuthenticate,
   setUserId,
-  setAccountSetting
+  setAccountSetting,
+  setSearchCity,
+  setSearchCityGeoInfo,
+  setSearchVal,
+  setMenuType,
 };

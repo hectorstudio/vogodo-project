@@ -78,12 +78,6 @@ function App() {
               component={ManagerDetail}
               title="Manager Detail"
             ></Route>
-            <Route
-              exact
-              path={ROUTES.messages}
-              component={MessageContainer}
-              title="Message Room"
-            ></Route>
           </Switch>
           <Footer />
         </Router>

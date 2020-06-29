@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Breadcrumbs from "../components/Breadcrumbs";
+import { useSelector, useDispatch } from "react-redux";
+import { setMenuType } from "../redux/actions";
 import "./AccountContainer.style.scss";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -51,10 +53,11 @@ const useStyles = makeStyles((theme) => ({
 
 const AccountContainer = () => {
   const classes = useStyles();
-  const [value, setValue] = useState(0);
-
+  const value = useSelector(state => state.menuType);
+  const dispatch = useDispatch();
+  
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    dispatch(setMenuType(newValue));
   };
   return (
     <div className="container account-container">

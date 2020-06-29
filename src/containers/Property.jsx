@@ -52,8 +52,10 @@ const Property = () => {
         try {
           const res = await UserService.getUser(userId);
           if (res && res.user) {
-            setCurrentPos(res.user.address);
-            setGeoInfo({latitude: parseFloat(res.user.latitude), longitude: parseFloat(res.user.longitude)});
+            if (globalState.searchCity === '') {
+              setCurrentPos(res.user.address);
+              setGeoInfo({latitude: parseFloat(res.user.latitude), longitude: parseFloat(res.user.longitude)});
+            }
           } else {
             setCurrentPos("No Selected Current Position");
           }
@@ -93,10 +95,23 @@ const Property = () => {
   }, [data]);
 
   useEffect(() => {
+    let option = globalState.filterType === 'all' ? filterOption : {...filterOption, type: globalState.filterType};
+    if ( globalState.searchCity !== '') {
+      option.search = globalState.searchCity;
+      setCurrentPos(globalState.searchCity);
+    }
+    if ( globalState.searchCityGeoInfo.latitude ) {
+      setGeoInfo(globalState.searchCityGeoInfo);
+    }
+    if (globalState.visible_type === "") {
+      dispatch(setVisibleType("fixed-height"));
+    }
+  }, [globalState]);
+
+  useEffect(() => {
     (async () => {
       try {
-        let option = globalState.filterType === 'all' ? filterOption : {...filterOption, type: globalState.filterType};
-        const result = await PropertiesService.filterProperties(option);
+        const result = await PropertiesService.filterProperties(filterOption);
         if (result && result.Properties) {
           const { Properties } = result;
           setData(Properties);
@@ -107,13 +122,7 @@ const Property = () => {
         console.log("Loading filtered Properties Data Error: ");
       }
     })();
-  }, [filterOption, globalState]);
-
-  useEffect(() => {
-    if (globalState.visible_type === "") {
-      dispatch(setVisibleType("fixed-height"));
-    }
-  }, [globalState, dispatch]);
+  }, [filterOption]);
 
   const handleChangeSearch = (e) => {
     let options = {...filterOption};

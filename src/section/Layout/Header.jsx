@@ -6,7 +6,7 @@ import {
   Settings,
 } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { setAuthenticate, setUserId, setFilterType, setVisibleType, setOpenSignUp } from "../../redux/actions";
+import { setAuthenticate, setUserId, setFilterType, setVisibleType, setOpenSignUp, setMenuType } from "../../redux/actions";
 import { Avatar, Menu, ListItemIcon, ListItemText, MenuItem, Grid } from "@material-ui/core";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import BaseDrawer from "../../components/BaseDrawer";
@@ -108,16 +108,12 @@ const Header = () => {
     setSignUp(true);
   };
 
-  const goToAccountPage = () => {
+  const goToAccountPage = (value) => {
+    console.log(value);
     setAnchorEl(null);
     dispatch(setOpenSignUp(false));
+    dispatch(setMenuType(value))
     History.push("/account");
-  };
-
-  const goToMessageRoom = () => {
-    setAnchorEl(null);
-    dispatch(setOpenSignUp(false));
-    History.push("/messages");
   };
 
   const LogOut = () => {
@@ -185,29 +181,23 @@ const Header = () => {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <StyledMenuItem onClick={goToAccountPage}>
+                  <StyledMenuItem onClick={() => goToAccountPage(0)}>
                     <ListItemIcon>
                       <Settings fontSize="small" />
                     </ListItemIcon>
                     <ListItemText primary="Settings" />
                   </StyledMenuItem>
-                  <StyledMenuItem onClick={goToAccountPage}>
+                  <StyledMenuItem onClick={() => goToAccountPage(1)}>
                     <ListItemIcon>
                       <Save fontSize="small" />
                     </ListItemIcon>
                     <ListItemText primary="Saved Properties" />
                   </StyledMenuItem>
-                  <StyledMenuItem onClick={goToAccountPage}>
+                  <StyledMenuItem onClick={() => goToAccountPage(2)}>
                     <ListItemIcon>
                       <Save fontSize="small" />
                     </ListItemIcon>
                     <ListItemText primary="My Listing" />
-                  </StyledMenuItem>
-                  <StyledMenuItem onClick={goToMessageRoom}>
-                    <ListItemIcon>
-                      <ChatBubble fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText primary="Messages" />
                   </StyledMenuItem>
                   <StyledMenuItem onClick={LogOut}>
                     <ListItemIcon>
@@ -255,29 +245,23 @@ const Header = () => {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <StyledMenuItem onClick={goToAccountPage}>
+                  <StyledMenuItem onClick={() => goToAccountPage(0)}>
                     <ListItemIcon>
                       <Settings fontSize="small" />
                     </ListItemIcon>
                     <ListItemText primary="Settings" />
                   </StyledMenuItem>
-                  <StyledMenuItem onClick={goToAccountPage}>
+                  <StyledMenuItem onClick={() => goToAccountPage(1)}>
                     <ListItemIcon>
                       <Save fontSize="small" />
                     </ListItemIcon>
                     <ListItemText primary="Saved Properties" />
                   </StyledMenuItem>
-                  <StyledMenuItem onClick={goToAccountPage}>
+                  <StyledMenuItem onClick={() => goToAccountPage(2)}>
                     <ListItemIcon>
                       <Save fontSize="small" />
                     </ListItemIcon>
                     <ListItemText primary="My Listing" />
-                  </StyledMenuItem>
-                  <StyledMenuItem onClick={goToMessageRoom}>
-                    <ListItemIcon>
-                      <ChatBubble fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText primary="Messages" />
                   </StyledMenuItem>
                   <StyledMenuItem onClick={LogOut}>
                     <ListItemIcon>
