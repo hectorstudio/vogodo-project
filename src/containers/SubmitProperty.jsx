@@ -177,8 +177,6 @@ const SubmitProperty = ({match}) => {
       await PropertiesService.updateProperty(info.id, info, acceptedFiles);
     }
   }
-  
-  console.log(propertyInfo);
 
   return (
     <div className="container">
@@ -221,7 +219,7 @@ const SubmitProperty = ({match}) => {
             id="price"
             label="$ Price"
             onChange={handleChangePrice}
-            defaultValue={propertyInfo.details.price ? propertyInfo.details.price : "100"} 
+            defaultValue={propertyInfo.details.price ? propertyInfo.details.price : "100000"} 
             value={propertyInfo.details.price}
             helperText="Amount generally should not exceed 150% of the base rent"
           />
@@ -231,14 +229,14 @@ const SubmitProperty = ({match}) => {
             className="element"
             label="Beds"
             onChange={handleChangeBeds}
-            defaultValue={propertyInfo.details.beds ? propertyInfo.details.beds : "100"} 
+            defaultValue={propertyInfo.details.beds ? propertyInfo.details.beds : "1"} 
             value={propertyInfo.details.beds}
           />
           <TextField
             className="element"
             label="Bath"
             onChange={handleChangeBath}
-            defaultValue={propertyInfo.details.bath ? propertyInfo.details.bath : "100"} 
+            defaultValue={propertyInfo.details.bath ? propertyInfo.details.bath : "1"} 
             value={propertyInfo.details.bath}
           />
           <TextField
@@ -258,21 +256,21 @@ const SubmitProperty = ({match}) => {
             className="element"
             label="Year built"
             onChange={handleChangeBuiltYear}
-            defaultValue={propertyInfo.details.built_year ? propertyInfo.details.built_year : "100"} 
+            defaultValue={propertyInfo.details.built_year ? propertyInfo.details.built_year : "2000"} 
             value={propertyInfo.details.built_year}
           />
           <TextField
             className="element"
             label="Roof Type"
             onChange={handleChangeRoofType}
-            defaultValue={propertyInfo.details.roof_type ? propertyInfo.details.roof_type : "100"} 
+            defaultValue={propertyInfo.details.roof_type ? propertyInfo.details.roof_type : "Metal Roofing"} 
             value={propertyInfo.details.roof_type}
           />
           <TextField
             className="element"
             label="HOA Fees"
             onChange={handleChangeFees}
-            defaultValue={propertyInfo.details.fees ? propertyInfo.details.fees : "100"} 
+            defaultValue={propertyInfo.details.fees ? propertyInfo.details.fees : "11"} 
             value={propertyInfo.details.fees}
           />
         </div>

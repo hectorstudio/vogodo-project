@@ -16,7 +16,6 @@ import ROUTES from "./constants/Routes";
 import store from "./redux/service";
 import ManagersListing from "./containers/ManagersListing";
 import ManagerDetail from "./containers/ManagerDetail";
-import MessageContainer from "./containers/MessageContainer";
 function App() {
   return (
     <Provider store={store}>

@@ -31,10 +31,11 @@ const PropertyDetail = ({match}) => {
         if ( result && result.Property) {
           setProperty(result.Property);
           const resources = JSON.parse(result.Property.resources);
+          const thumbnails = JSON.parse(result.Property.thumbnails);
           const resourceImages = [];
           console.log(resources);
-          resources.forEach(el => {
-            resourceImages.push({original: el, thumbnail: el});
+          resources.forEach((el, index) => {
+            resourceImages.push({original: el, thumbnail: thumbnails.filter(el => el.order === index)[0].url});
           })
           setImages(resourceImages);
         } else {

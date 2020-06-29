@@ -6,7 +6,13 @@ import PropertiesService from "../../services/PropertiesService";
 import History from "../../constants/History";
 
 const PropertyModal = ({ setOpenModal, openFlag }) => {
-  const [propertyInfo, setPropertyInfo] = useState({ details: {} });
+  const [propertyInfo, setPropertyInfo] = useState({ 
+    details: {
+      invest_type: "residential", 
+      property_type: "rent"
+    }, 
+    type: "rent"
+  });
   const userId = localStorage.getItem('userId');
 
   const handleClose = () => {
@@ -22,6 +28,7 @@ const PropertyModal = ({ setOpenModal, openFlag }) => {
     let info = { ...propertyInfo };
     info.details.property_type = e.target.value;
     info.type = e.target.value;
+    console.log(info);
     setPropertyInfo(info);
   };
   const handleChangeAddress = (e) => {

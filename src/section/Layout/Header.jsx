@@ -2,7 +2,6 @@ import React, { useState, useEffect, Fragment } from "react";
 import {
   PowerSettingsNew,
   Save,
-  ChatBubble,
   Settings,
 } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";

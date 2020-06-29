@@ -40,13 +40,7 @@ const Property = () => {
   const [saved, setSaved] = useState([]);
 
   useEffect(() => {
-    if (!geoInfo) {
-      const userGeoInfo = JSON.parse(localStorage.getItem("geoInfo"));
-      setGeoInfo(userGeoInfo);
-    }
-  }, [geoInfo]);
-
-  useEffect(() => {
+    console.log("===== User ID =====");
     if (currentPos === "") {
       (async () => {
         try {
@@ -74,9 +68,6 @@ const Property = () => {
         }
       })();
     }
-  }, [userId]);
-
-  useEffect(() => {
     if (data.length < 1) {
       (async () => {
         try {
@@ -92,9 +83,10 @@ const Property = () => {
         }
       })();
     }
-  }, [data]);
+  }, [userId]);
 
   useEffect(() => {
+    console.log("===== Global State =====");
     let option = globalState.filterType === 'all' ? filterOption : {...filterOption, type: globalState.filterType};
     if ( globalState.searchCity !== '') {
       option.search = globalState.searchCity;
@@ -106,9 +98,11 @@ const Property = () => {
     if (globalState.visible_type === "") {
       dispatch(setVisibleType("fixed-height"));
     }
+    setFilterOption(option);
   }, [globalState]);
 
   useEffect(() => {
+    console.log("===== Filter Option =====");
     (async () => {
       try {
         const result = await PropertiesService.filterProperties(filterOption);

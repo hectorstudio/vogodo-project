@@ -13,9 +13,9 @@ const ListingItem = ({data, onDelete}) => {
       <div className="item-carousel">
         <Carousel showThumbs={false} >
           {
-            data.resources.map((element, index) => (
+            data.thumbnails.map((element, index) => (
               <div key={`carousel-${index}`}>
-                <img src={element} alt={`carousel-${index}`}/>
+                <img src={element.url} alt={`carousel-${index}`}/>
               </div>
             ))
           }

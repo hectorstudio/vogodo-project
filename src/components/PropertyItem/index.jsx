@@ -30,10 +30,10 @@ const PropertyItem = ({ data = {}, saved, onUpdate }) => {
       <div className="slide-container">
         <Slide {...properties}>
           {
-            data.resources.map((element, index) => (
+            data.thumbnails.map((element, index) => (
               <EachSlide
                 key={`slide-${index}`}
-                url={element}
+                url={element.url}
               />
             ))
           }
