@@ -3,12 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { setVisibleType } from "../redux/actions";
 import PropertyItem from "../components/PropertyItem";
 import { makeStyles } from "@material-ui/core/styles";
-import FilterItem from "../components/FilterItem";
 import PropertiesService from "../services/PropertiesService";
+import UserService from "../services/UserService";
 import "./Property.style.scss";
 import Breadcrumbs from "../components/Breadcrumbs";
 import Chip from "@material-ui/core/Chip";
 import GoogleMapReact from 'google-map-react';
+import History from "../constants/History";
+import { Place } from '@material-ui/icons';
+import Autocomplete from 'react-google-autocomplete';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,19 +24,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const CurrentPosition = () => <div><Place fontSize="large" color="primary"/></div>;
+const PropertyPosition = ({onClick}) => <div onClick={onClick} style={{ cursor: 'pointer' }}><Place color="secondary"/></div>;
 
 const Property = () => {
   const classes = useStyles();
   // Get State using Redux hooks api
   const globalState = useSelector(state => state);
   const dispatch = useDispatch();
-
+  const userId = localStorage.getItem("userId");
   const [data, setData] = useState([]);  
   const [filterOption, setFilterOption] = useState({});
-  const [states, setStates] = useState([]);
-  const [cities, setCities] = useState([]);
   const [geoInfo, setGeoInfo] = useState(null);
+  const [currentPos, setCurrentPos] = useState("");
+  const [saved, setSaved] = useState([]);
 
   useEffect(() => {
     if (!geoInfo) {
@@ -43,43 +47,35 @@ const Property = () => {
   }, [geoInfo]);
 
   useEffect(() => {
-    if (states.length < 1) {
+    if (currentPos === "") {
       (async () => {
         try {
-          const result = await PropertiesService.getStates();
-          if (result && result.states) {
-            const { states } = result;
-            setStates(states);
+          const res = await UserService.getUser(userId);
+          if (res && res.user) {
+            setCurrentPos(res.user.address);
+            setGeoInfo({latitude: parseFloat(res.user.latitude), longitude: parseFloat(res.user.longitude)});
           } else {
-            setStates([]);
+            setCurrentPos("No Selected Current Position");
           }
         } catch (error) {
-          console.log("Loading States Data Error: ");
+          console.log("Loading Data Error: ");
+        }
+        try {
+          const { result } = await PropertiesService.getFavorites(userId);
+          if (result) {
+            setSaved(result);
+          } else {
+            console.log("Saved Data Loading Error");
+          }
+        } catch (error) {
+          console.log("Loading Data Error: ");
         }
       })();
     }
-  }, [states]);
-  
-  useEffect(() => {
-    if (filterOption.state) {
-      (async () => {
-        try {
-          const result = await PropertiesService.getCitiesById(filterOption.state);
-          if (result && result.cities) {
-            const { cities } = result;
-            setCities(cities);
-          } else {
-            console.log("Loading Cities Data Error: ");
-          }
-        } catch (error) {
-          console.log("Loading Cities Data Error: ");
-        }
-      })();
-    }
-  }, [filterOption.state])
+  }, [userId]);
 
   useEffect(() => {
-    if (data.length < 1 && Object.keys(filterOption).length < 1) {
+    if (data.length < 1) {
       (async () => {
         try {
           const result = await PropertiesService.getProperties();
@@ -94,7 +90,24 @@ const Property = () => {
         }
       })();
     }
-  }, [data, filterOption]);
+  }, [data]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        let option = globalState.filterType === 'all' ? filterOption : {...filterOption, type: globalState.filterType};
+        const result = await PropertiesService.filterProperties(option);
+        if (result && result.Properties) {
+          const { Properties } = result;
+          setData(Properties);
+        } else {
+          console.log("Loading filtered Properties Data Error: ");
+        }
+      } catch (error) {
+        console.log("Loading filtered Properties Data Error: ");
+      }
+    })();
+  }, [filterOption, globalState]);
 
   useEffect(() => {
     if (globalState.visible_type === "") {
@@ -104,46 +117,52 @@ const Property = () => {
 
   const handleChangeSearch = (e) => {
     let options = {...filterOption};
-    options.search = e.target.value;
+    setGeoInfo({latitude: e.geometry.location.lat(), longitude: e.geometry.location.lng()});
+    setCurrentPos(e.formatted_address);
+    options.search = e.formatted_address;
     setFilterOption(options);
   };
 
   const handleChangeMin = (e) => {
-    let options = {...filterOption};
-    options.min = e.target.value;
-    setFilterOption(options);
+    if (e.target.value !== '') {
+      let options = {...filterOption};
+      options.min = e.target.value;
+      setFilterOption(options);
+    }
   };
 
   const handleChangeMax = (e) => {
-    let options = {...filterOption};
-    options.max = e.target.value;
-    setFilterOption(options);
-  };
-
-  const handleChangeCity = (e) => {
-    setGeoInfo({latitude: parseFloat(e[0].lat), longitude: parseFloat(e[0].lng)})
-    let options = {...filterOption};
-    options.city = e[0].value;
-    setFilterOption(options);
-  };
-
-  const handleChangeState = (e) => {
-    let options = {...filterOption};
-    options.state = e[0].value;
-    setFilterOption(options);
+    if (e.target.value !== '') {
+      let options = {...filterOption};
+      options.max = e.target.value;
+      setFilterOption(options);
+    }
   };
 
   const handleChangeYear = (e) => {
-    let options = {...filterOption};
-    options.built = e.target.value;
-    setFilterOption(options);
+    if (e.target.value !== '') {
+      let options = {...filterOption};
+      options.built = e.target.value;
+      setFilterOption(options);
+    }
   };
 
   const handleDelete = (item) => {
     let options = {...filterOption};
     options[item] = '';
     setFilterOption(options);
-  } 
+  };
+
+  const handleUpdateSaved = (item) => {
+    if(saved.some(el => el.property_id === item.pid)) {
+      setSaved(saved.map(el => el.property_id === item.pid ? {...el, favorite: item.favorite} : el));
+    } else {
+      let items = [...saved];
+      items.push({owner_id: parseInt(userId), property_id: item.pid, favorite: item.favorite});
+      setSaved(items);
+    }    
+    PropertiesService.saveAsFavorite({uid: userId, pid: item.pid, favorite: item.favorite});
+  };
 
   return (
     <Fragment>
@@ -152,11 +171,11 @@ const Property = () => {
         <div className="filter-container">
           <div className="filter-items">
             <div className="search-item">
-              <input
-                type="text"
+              <Autocomplete
                 className="search-input"
-                onBlur={handleChangeSearch}
-                placeholder="Search Properties"
+                onPlaceSelected={handleChangeSearch}
+                types={['(cities)']}
+                componentRestrictions={{country: "us"}}
               />
             </div>
             <input
@@ -170,18 +189,6 @@ const Property = () => {
               className="price-input"
               onBlur={handleChangeMax}
               placeholder="max: $"
-            />
-            <FilterItem
-              data={cities}
-              value=""
-              prefix="City: "
-              onChange={handleChangeCity}
-            />
-            <FilterItem
-              data={states}
-              value=""
-              prefix="State: "
-              onChange={handleChangeState}
             />
             <input
               type="text"
@@ -219,25 +226,50 @@ const Property = () => {
                 { lat: geoInfo.latitude, lng: geoInfo.longitude } : 
                 { lat: 59.955413, lng: 30.337844 }
               }
-              defaultZoom={15}
+              center={
+                geoInfo && geoInfo.latitude ? 
+                { lat: geoInfo.latitude, lng: geoInfo.longitude } : 
+                { lat: 59.955413, lng: 30.337844 }
+              }
+              defaultZoom={9}
             >
-              <AnyReactComponent
+              <CurrentPosition
                 lat={ geoInfo && geoInfo.latitude ? geoInfo.latitude : 59.955413 }
                 lng={ geoInfo && geoInfo.longitude ? geoInfo.longitude : 30.337844 }
                 text="Current Position"
               />
+              { data.length > 0 && data.map((el, index) => (
+                <PropertyPosition 
+                  onClick={() => History.push(`/properties/detail/${el.id}`)}
+                  key={`pos-${index}`}
+                  lat={ parseFloat(el.latitude) }
+                  lng={ parseFloat(el.longitude) }
+                  text="Property Position"
+                />
+              )) }
             </GoogleMapReact>
           </div>
-          <div className={`content-body ${Object.keys(filterOption).length < 1 ? "" : "has-filter"}`}>
-            {data.length > 0 ? 
-              data.map((element, index) => (
-                <PropertyItem
-                  key={`element-${index}`}
-                  data={element}
-                />
-              )) : (
-                <div className="no-properties"> No properties </div>
-              )}
+          <div className="content">
+            <div className="content-header">
+              <div className="current-position">{currentPos}</div>
+              <div className="search-details">
+                <span>{`${data.length} results`}</span>
+                <span>{`${saved.filter(el => el.favorite === 1).length} saved items`}</span>
+              </div>
+            </div>
+            <div className={`content-body ${Object.keys(filterOption).length < 1 ? "" : "has-filter"}`}>
+              {data.length > 0 ? 
+                data.map((element, index) => (
+                  <PropertyItem
+                    key={`element-${index}`}
+                    data={element}
+                    saved={saved.find(el => el.property_id === element.id)}
+                    onUpdate={handleUpdateSaved}
+                  />
+                )) : (
+                  <div className="no-properties"> No properties </div>
+                )}
+              </div>
           </div>
         </div>
       </div>

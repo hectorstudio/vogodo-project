@@ -1,29 +1,13 @@
 import React from "react";
 import { Slide } from "react-slideshow-image";
-import imgSrc from "../../assets/img/realestate.jpg";
-import imgSrc1 from "../../assets/img/realestate1.jpg";
-import imgSrc2 from "../../assets/img/realestate2.jpg";
 import { Link } from "react-router-dom";
 import EachSlide from "./EachSlide";
+import { FavoriteBorder, Favorite } from "@material-ui/icons";
 import "./PropertyItem.style.scss";
 
 const slideImages = {
   address: "Temp Street 1 Oklabahma",
   propertyTitle: "Temp Property",
-  propertyImages: [
-    {
-      imageUrl: imgSrc,
-      imageTitle: "Temp Property 1",
-    },
-    {
-      imageUrl: imgSrc1,
-      imageTitle: "Temp Property 2",
-    },
-    {
-      imageUrl: imgSrc2,
-      imageTitle: "Temp Property 3",
-    },
-  ],
   propertyPrice: "2100.89",
 };
 
@@ -34,47 +18,41 @@ const properties = {
   indicators: false,
   arrows: true,
   pauseOnHover: true,
-  onChange: (oldIndex, newIndex) => {
-    //console.log(`slide transition from ${oldIndex} to ${newIndex}`);
-  },
 };
 
-const PropertyItem = ({ data = {} }) => {
+const PropertyItem = ({ data = {}, saved, onUpdate }) => {
+  const loggedin = localStorage.getItem('loggedin');
+  const handleClickFavorite = () => {
+    onUpdate({pid: data.id, favorite: saved ? (!saved.favorite ? 1 : 0) : 1});
+  }
   return (
     <div className="property-item">
       <div className="slide-container">
-        <Link to={`/properties/detail/${data.id}`}>
-          <Slide {...properties}>
-            <EachSlide
-              url={slideImages.propertyImages[0].imageUrl}
-              propertyPrice={data.details.price || 1768}
-            />
-            <EachSlide
-              url={slideImages.propertyImages[1].imageUrl}
-              propertyPrice={data.details.price || 1768}
-            />
-            <EachSlide
-              url={slideImages.propertyImages[2].imageUrl}
-              propertyPrice={data.details.price || 1768}
-            />
-          </Slide>
-        </Link>
+        <Slide {...properties}>
+          {
+            data.resources.map((element, index) => (
+              <EachSlide
+                key={`slide-${index}`}
+                url={element}
+              />
+            ))
+          }
+        </Slide>
+        <span className="badge">${data.details.price || 1768}</span>
+        <span className="save" onClick={handleClickFavorite}>{saved && saved.favorite===1 ? <Favorite className="icon"/> :<FavoriteBorder className="icon"/>}</span>
       </div>
       <div className="item-description">
-        <h3>{data.title || slideImages.propertyTitle}</h3>
-        <p>{`${data.address}` || slideImages.address}</p>
-        <div className="pricing">
-          <div className="ind-plan">
-            <span className="plan-title">
-              {data.details.beds ? `${data.details.beds} Beds` : ""}{" "}
-              {data.details.bath ? `${data.details.bath} Bathroom` : ""}{" "}
-              {data.details.store ? `1 Store` : ""}
-            </span>
-            <div className="plan-price">${data.details.price || 1768} <span className="plan-detail">rate: ${data.details.rate || 11}</span></div>
-          </div>
+        <div className="dec-header">
+          <h3>${data.details.price || 1768}</h3>
+          <span className="plan-title">
+            {data.details.beds ? `${data.details.beds} Beds` : "3 bds"}{"|"}
+            {data.details.bath ? `${data.details.bath} Bathroom` : "3 ba"}{"|"}
+            {data.details.store ? `1 Store` : "1 St"}
+          </span>
         </div>
+        <p>{`${data.address}` || slideImages.address}</p>
         <div className="more">
-          <Link to="/">More info...</Link>
+          <Link to={ loggedin ? `/properties/detail/${data.id}` : '/signup' }>More info...</Link>
         </div>
       </div>
     </div>

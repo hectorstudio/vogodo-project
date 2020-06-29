@@ -1,10 +1,20 @@
+.list-map {
+  width: 100%;
+  height: 170px;
+}
 .listing-property {
   text-align: left;
-  width: 75%;
+  width: 60%;
   margin: auto;
   .options-container {
-    display: flex;
+    display: block;
     justify-content: space-between;
+    flex-direction: column;
+  }
+  .option-title {    
+    font-size: 24px;
+    font-weight: 600;
+    font-family: Lato, sans-serif;
   }
   .address-container {
     margin: 8px;
@@ -25,12 +35,6 @@
       }
     }
   }
-  .title-container {
-    margin: 8px;
-    .title {
-      width: 100%;
-    }
-  }
   .property-area {
     margin: 8px;
     display: flex;
@@ -38,21 +42,41 @@
     align-items: flex-end;
     flex-wrap: wrap;
     .element {
-      width: 23%;
+      width: 32%;
       &.last {
         padding-top: 10px;
       }
     }
   }
+  .options-area {
+    margin: 8px;
+    display: flex;
+    flex-direction: column;
+    .element {
+      width: 32%;
+      &.last {
+        padding-top: 10px;
+      }
+    }
+  }
+  .property-area-details {
+    p {
+      font-size: 13px;
+      font-family: Raleway, sans-serif;
+      margin: 5px 0;
+    }
+  }
   .property-description {
     margin: 8px;
+    textarea {
+      width: 100%;
+      &:focus {
+        outline: none;
+      }
+    }
   }
   .upload-area {
     margin: 8px;
-    display: flex;
-    .photo-container {
-      margin-right: 20px;
-    }
     .dropzone {
       p {
         border: 2px dashed #647883;

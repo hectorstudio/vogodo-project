@@ -1,4 +1,4 @@
-import { SET_VISIBLE_TYPE, SET_AUTHENTICATE, SET_USER_ID, SET_ACCOUNT_SETTING, SET_OPEN_SIGNUP } from "../constants/action-types";
+import { SET_VISIBLE_TYPE, SET_AUTHENTICATE, SET_USER_ID, SET_ACCOUNT_SETTING, SET_FILTER_TYPE, SET_OPEN_SIGNUP } from "../constants/action-types";
 
 export function setVisibleType(payload) {
   return { type: SET_VISIBLE_TYPE, payload };
@@ -18,6 +18,10 @@ export function setAccountSetting(payload) {
 
 export function setOpenSignUp(payload) {
   return { type: SET_OPEN_SIGNUP, payload };
+}
+
+export function setFilterType(payload) {
+  return { type: SET_FILTER_TYPE, payload };
 }
 
 export default {

@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from "react";
+import React, {useEffect, useState} from "react";
 import BreadCrumbs from "../components/Breadcrumbs";
 import ImageGallery from "react-image-gallery";
 import Constructed from "../assets/svg/constructed.svg";
@@ -9,38 +9,34 @@ import Rent from "../assets/svg/rent.svg";
 import Lot from "../assets/svg/lot.svg";
 import "react-image-gallery/styles/css/image-gallery.css";
 import "./PropertyDetail.style.scss";
-import map from "../assets/img/map1.png";
 import avatar from "../assets/img/avatar.jpg";
 import "video-react/dist/video-react.css";
 import { Player } from 'video-react';
 import Poster from "../assets/img/poster.png";
 import PropertiesService from "../services/PropertiesService";
+import GoogleMapReact from 'google-map-react';
+import { Place } from '@material-ui/icons';
 
-const images = [
-  {
-    original: "https://picsum.photos/id/1018/1000/600/",
-    thumbnail: "https://picsum.photos/id/1018/250/150/",
-  },
-  {
-    original: "https://picsum.photos/id/1015/1000/600/",
-    thumbnail: "https://picsum.photos/id/1015/250/150/",
-  },
-  {
-    original: "https://picsum.photos/id/1019/1000/600/",
-    thumbnail: "https://picsum.photos/id/1019/250/150/",
-  },
-];
+const CurrentPosition = () => <div><Place fontSize="large" color="primary"/></div>;
 
 const PropertyDetail = ({match}) => {
   const { id } = match.params;
-  const [property, setProperty] = useState({});
+  const [property, setProperty] = useState({details:{}, latitude: 59.955413, longitude: 30.337844 });
+  const [images, setImages] = useState([]);
 
-  useMemo(() => {
+  useEffect(() => {
     (async () => {
       try {
         const result = await PropertiesService.getProperty(id);
         if ( result && result.Property) {
           setProperty(result.Property);
+          const resources = JSON.parse(result.Property.resources);
+          const resourceImages = [];
+          console.log(resources);
+          resources.forEach(el => {
+            resourceImages.push({original: el, thumbnail: el});
+          })
+          setImages(resourceImages);
         } else {
           console.log("Property Detail Data Load Failed");
         }
@@ -49,7 +45,7 @@ const PropertyDetail = ({match}) => {
       }
     })();
   }, [id]);
-
+  
   return (
     <div className="container">
       <BreadCrumbs parent="Properties" child={`Detail: ${property.title || "Temp Property"}`} />
@@ -66,54 +62,57 @@ const PropertyDetail = ({match}) => {
             <div className="description">
               <div className="desc-info">
                 <div className="street-address">
-                  <span>80 NW Birch Ave</span>
-                  <span>$25,900</span>
+                  <span>{property.address || "Property Title"}</span>
+                  <span>${property.details.price || 1768}</span>
                 </div>
                 <div className="city-and-state">
-                  Warrenton, OR 97146, United States
+                  {property.address || "Warrenton, OR 97146, United States"}
                 </div>
                 <div className="real-estate-info">
                   <span>
-                    <img src={Constructed} alt="Year built" /> 5 years old
+                    <img src={Constructed} alt="Year built" /> Built at {property.details.built_year || 1900}
                   </span>
                   <span>
-                    <img src={Feet} alt="Feets" /> 1600 feets
+                    <img src={Feet} alt="Feets" /> {property.details.square || 0} feets
+                  </span>
+                  { property.details.carport ? 
+                    <span>
+                      <img src={Garage} alt="Garages" /> 1 Garage
+                    </span>
+                    : ( "" ) 
+                  }
+                  <span>
+                    <img src={Roof} alt="roof age" /> {property.details.roof_type || "Metal Roof"}
                   </span>
                   <span>
-                    <img src={Garage} alt="Garages" /> 1 Garage
-                  </span>
-                  <span>
-                    <img src={Roof} alt="roof age" /> 2 months
-                  </span>
-                  <span>
-                    <img src={Lot} alt="Lot Size" /> 0.05
+                    <img src={Lot} alt="Lot Size" /> {property.details.fees || 100}
                   </span>
                 </div>
                 <div className="real-estate-info">
                   <span>
                     <img src={Rent} alt="For Rent" />
-                    Rate: $15
+                    Rate: ${property.details.rate || 10}
                   </span>
                 </div>
                 <div className="real-estate-desc">
-                  <p className="italic">
-                    Note: This property is not currently for sale or for rent on
-                    Zillow. The description below may be from a previous
-                    listing.
-                  </p>
                   <p>
-                    Wonderful Warrenton 3 bedroom home with an oversized
-                    garage/shop space & located on a nice corner lot.Enjoy a
-                    large main bedroom on the main floor along with 2 full
-                    bathrooms, laundry room, living room. The kitchen has oak
-                    cabinetry, the dining area has lots of natural light and an
-                    adorable built in hutch! Enjoy a fully fenced backyard with
-                    a large deck for those summer BBQ's. This could be where you
-                    call home! Call today for a showing.
+                    {property.description || "No Description"}
                   </p>
                 </div>
                 <div className="property-map">
-                  <img src={map} alt="property map" />
+                  <GoogleMapReact
+                    bootstrapURLKeys={{
+                      key: "AIzaSyB6ABnTCVsOqCaU_vwH6uPN3pLqaRQhyU0",
+                    }}
+                    defaultCenter={{ lat: parseFloat(property.latitude), lng: parseFloat(property.longitude) }}
+                    defaultZoom={15}
+                    center={{ lat: parseFloat(property.latitude), lng: parseFloat(property.longitude) }}
+                  >
+                    <CurrentPosition
+                      lat={ parseFloat(property.latitude) }
+                      lng={ parseFloat(property.longitude) }
+                    />
+                  </GoogleMapReact>
                 </div>
               </div>
             </div>
@@ -121,22 +120,14 @@ const PropertyDetail = ({match}) => {
         </div>
         <div className="contact-container">
           <div className="contact-info">
-            {/*<div className="map" style={{ height: "200px", width: "100%" }}>
-              <GoogleMapReact
-                bootstrapURLKeys={{
-                  key: "AKLjsdjdjkjlkasdfhjkdaeueujndjAJJKLAJNA",
-                }}
-                defaultCenter={defaultProps.center}
-                defaultZoom={defaultProps.zoom}
-              ></GoogleMapReact>
-            </div>*/}
             <div className="manager-info">
               <div className="avatar">
                 <img src={avatar} alt="manager avatar" />
               </div>
               <div className="detail">
-                <p>Scott Jacobs</p>
-                <a href="tel:703-594-3800">703-594-3800</a>
+                <p>{property.alter_name || "Scott Jacobs"}</p>
+                <a href={`tel:${property.alter_phone || "703-594-3800"}`}>{property.alter_phone || "703-594-3800"}</a><br/>
+                <a className="email" href={`mailto:${property.alter_email || "info@selldealsnow.com"}`}>{property.alter_email || "info@selldealsnow.com"}</a>
               </div>
             </div>
             <div className="contact-body">

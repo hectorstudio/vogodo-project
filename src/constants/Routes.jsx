@@ -2,7 +2,7 @@ const Routes = {
   home: "/",
   signup: "/signup",
   find_property: "/properties",
-  submit_property: "/properties/submit",
+  submit_property: "/properties/submit/:id",
   property_detail: "/properties/detail/:id",
   findmanager: "/managers",
   managerslisting: "/managers/listing",

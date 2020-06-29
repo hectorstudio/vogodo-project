@@ -6,12 +6,13 @@ import {
   Settings,
 } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { setAuthenticate, setUserId, setVisibleType } from "../../redux/actions";
-import { Avatar, Menu, ListItemIcon, ListItemText, MenuItem } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
+import { setAuthenticate, setUserId, setFilterType, setVisibleType, setOpenSignUp } from "../../redux/actions";
+import { Avatar, Menu, ListItemIcon, ListItemText, MenuItem, Grid } from "@material-ui/core";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 import BaseDrawer from "../../components/BaseDrawer";
 import History from "../../constants/History";
 import Logo from "../../assets/img/logo.png";
+import jwt from "jsonwebtoken";
 
 import "./Header.style.scss";
 
@@ -47,20 +48,47 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
+
 const Header = () => {
+  const classes = useStyles();
   const [isShowDrawer, setShowDrawer] = useState(false);
   const [isSignUp, setSignUp] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [LoginFlag, setLoginFlag] = useState(false);
-  const loginState = localStorage.getItem("loggedin");
+  const LoginFlag = localStorage.getItem("loggedin");
   const globalState = useSelector(state => state);
   const dispatch = useDispatch();
+  const token = localStorage.getItem('token');
+  const jwtSecret = process.env.REACT_APP_JWT_SECRET;
+  useEffect(() => {
+    if (token) {
+      try {
+        jwt.verify(token, jwtSecret);
+      } catch (err) {
+        localStorage.removeItem('geoInfo');
+        localStorage.removeItem('loggedin');
+        localStorage.removeItem('userId');
+        localStorage.removeItem('token');
+        dispatch(setOpenSignUp(false));
+        dispatch(setAuthenticate(false));
+        dispatch(setUserId(0));
+      }
+    }
+  });
 
   useEffect(() => {
-    setLoginFlag(loginState && true);
     setShowDrawer(globalState.openSignUp);
     setSignUp(globalState.openSignUp);
-  }, [loginState, globalState]);
+  }, [globalState]);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -82,11 +110,13 @@ const Header = () => {
 
   const goToAccountPage = () => {
     setAnchorEl(null);
+    dispatch(setOpenSignUp(false));
     History.push("/account");
   };
 
   const goToMessageRoom = () => {
     setAnchorEl(null);
+    dispatch(setOpenSignUp(false));
     History.push("/messages");
   };
 
@@ -95,6 +125,7 @@ const Header = () => {
     localStorage.removeItem("loggedin");
     localStorage.removeItem("userId");
     localStorage.removeItem("geoInfo");
+    dispatch(setOpenSignUp(false));
     dispatch(setAuthenticate(false));
     dispatch(setUserId(0));
     setAnchorEl(null);
@@ -105,72 +136,161 @@ const Header = () => {
     dispatch(setVisibleType(""));
     History.push("/");
   }
-
+  
   return (
-    <header className="app-header">
-      <div className="container menu-container">
-        <div className="logo">
-          <div onClick={goToHomePage} style={{ cursor: 'pointer' }}>
-            <img src={Logo} alt="Logo" />
-          </div>
-        </div>
-        <div className="menu" id="menu">
-          <div className="login">
-            {LoginFlag ? (
-              <div>
-                <Avatar onClick={handleClick}>ES</Avatar>
+    <header className={`app-header ${globalState.visible_type}`}>
+      { globalState.visible_type === 'fixed-height' ? (
+        <div className={classes.root}>
+          <Grid container spacing={3} className="search-header">
+            <Grid item xs={4} className="header-item category">
+              <div className="menu" id="menu">
+                <div className={globalState.filterType === 'all' ? "active" : ""} onClick={() => dispatch(setFilterType('all'))}>
+                  All
+                </div>
+                <div className={globalState.filterType === 'sell' ? "active" : ""} onClick={() => dispatch(setFilterType('sell'))}>
+                  Sell
+                </div>
+                <div className={globalState.filterType === 'rent' ? "active" : ""} onClick={() => dispatch(setFilterType('rent'))}>
+                  Rent
+                </div>
               </div>
-            ) : (
-              <Fragment>
-                <div className="login" onClick={openLoginDrawer} style={{ paddingRight: "10px"}}>
-                  Log In
+            </Grid>
+            <Grid item xs={4} className="header-item">
+              <div className="logo" onClick={goToHomePage} style={{ cursor: 'pointer' }}>
+                <img src={Logo} alt="Logo" />
+              </div>
+            </Grid>
+            <Grid item xs={4} className="header-item account">
+              <div className="menu" id="menu">
+                <div className="login">
+                  {LoginFlag ? (
+                    <div>
+                      <Avatar onClick={handleClick}>ES</Avatar>
+                    </div>
+                  ) : (
+                    <Fragment>
+                      <div className="login" onClick={openLoginDrawer} style={{ paddingRight: "10px"}}>
+                        Log In
+                      </div>
+                      <div className="signup" onClick={openSignUpDrawer}>
+                        Sign Up
+                      </div>
+                    </Fragment>
+                  )}
                 </div>
-                <div className="signup" onClick={openSignUpDrawer}>
-                  Sign Up
-                </div>
-              </Fragment>
-            )}
-          </div>
-          <StyledMenu
-            id="customized-menu"
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >
-            <StyledMenuItem onClick={goToAccountPage}>
-              <ListItemIcon>
-                <Settings fontSize="small" />
-              </ListItemIcon>
-              <ListItemText primary="Settings" />
-            </StyledMenuItem>
-            <StyledMenuItem onClick={goToAccountPage}>
-              <ListItemIcon>
-                <Save fontSize="small" />
-              </ListItemIcon>
-              <ListItemText primary="Saved Properties" />
-            </StyledMenuItem>
-            <StyledMenuItem onClick={goToAccountPage}>
-              <ListItemIcon>
-                <Save fontSize="small" />
-              </ListItemIcon>
-              <ListItemText primary="My Listing" />
-            </StyledMenuItem>
-            <StyledMenuItem onClick={goToMessageRoom}>
-              <ListItemIcon>
-                <ChatBubble fontSize="small" />
-              </ListItemIcon>
-              <ListItemText primary="Messages" />
-            </StyledMenuItem>
-            <StyledMenuItem onClick={LogOut}>
-              <ListItemIcon>
-                <PowerSettingsNew fontSize="small" />
-              </ListItemIcon>
-              <ListItemText primary="Log Out" />
-            </StyledMenuItem>
-          </StyledMenu>
+                <StyledMenu
+                  id="customized-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                >
+                  <StyledMenuItem onClick={goToAccountPage}>
+                    <ListItemIcon>
+                      <Settings fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="Settings" />
+                  </StyledMenuItem>
+                  <StyledMenuItem onClick={goToAccountPage}>
+                    <ListItemIcon>
+                      <Save fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="Saved Properties" />
+                  </StyledMenuItem>
+                  <StyledMenuItem onClick={goToAccountPage}>
+                    <ListItemIcon>
+                      <Save fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="My Listing" />
+                  </StyledMenuItem>
+                  <StyledMenuItem onClick={goToMessageRoom}>
+                    <ListItemIcon>
+                      <ChatBubble fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="Messages" />
+                  </StyledMenuItem>
+                  <StyledMenuItem onClick={LogOut}>
+                    <ListItemIcon>
+                      <PowerSettingsNew fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="Log Out" />
+                  </StyledMenuItem>
+                </StyledMenu>
+              </div>
+            </Grid>
+          </Grid>
         </div>
-      </div>
+      ) : (
+        <div className="container menu-container">
+          <Grid container spacing={3}>
+            <Grid item xs={4}>
+            </Grid>
+            <Grid item xs={4}>
+              <div onClick={goToHomePage} style={{ cursor: 'pointer' }}>
+                <img src={Logo} alt="Logo" style={{ width: '100%' }} />
+              </div>
+            </Grid>
+            <Grid item xs={4} container justify="flex-end" direction="row" alignItems="center">
+              <div className="menu" id="menu">
+                <div className="login">
+                  {LoginFlag ? (
+                    <div>
+                      <Avatar onClick={handleClick}>ES</Avatar>
+                    </div>
+                  ) : (
+                    <Fragment>
+                      <div className="login" onClick={openLoginDrawer} style={{ paddingRight: "10px"}}>
+                        Log In
+                      </div>
+                      <div className="signup" onClick={openSignUpDrawer}>
+                        Sign Up
+                      </div>
+                    </Fragment>
+                  )}
+                </div>
+                <StyledMenu
+                  id="customized-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                >
+                  <StyledMenuItem onClick={goToAccountPage}>
+                    <ListItemIcon>
+                      <Settings fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="Settings" />
+                  </StyledMenuItem>
+                  <StyledMenuItem onClick={goToAccountPage}>
+                    <ListItemIcon>
+                      <Save fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="Saved Properties" />
+                  </StyledMenuItem>
+                  <StyledMenuItem onClick={goToAccountPage}>
+                    <ListItemIcon>
+                      <Save fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="My Listing" />
+                  </StyledMenuItem>
+                  <StyledMenuItem onClick={goToMessageRoom}>
+                    <ListItemIcon>
+                      <ChatBubble fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="Messages" />
+                  </StyledMenuItem>
+                  <StyledMenuItem onClick={LogOut}>
+                    <ListItemIcon>
+                      <PowerSettingsNew fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="Log Out" />
+                  </StyledMenuItem>
+                </StyledMenu>
+              </div>
+            </Grid>
+          </Grid>
+        </div>
+      )}
       <BaseDrawer
         isShowDrawer={isShowDrawer}
         setShowDrawer={setShowDrawer}

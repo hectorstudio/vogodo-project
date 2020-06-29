@@ -4,10 +4,52 @@
 header.app-header {
   background-color: white;
   padding: 10px 30px 0px 30px;
-  height: 100px;
+  height: 90px;
   font-size: 20px;
   color: black;
-  
+  &.fixed-height {
+    height: 55px;
+    font-size: 14px;
+    color: #647883;
+    font-family: Raleway, sans-serif;
+  }
+  .search-header {
+    .header-item {
+      display: flex;
+      justify-content: center;
+      .logo {
+        img {
+          height: 50px;
+        }
+      }
+      &.category {
+        justify-content: flex-start;
+        .menu {
+          div {
+            font-size: 14px;
+            padding-right: 15px;
+            cursor: pointer;
+            &:hover {
+              color: #3f9dff;
+            }
+            &.active {
+              color: #3f9dff;
+            }
+          }
+        }
+      }
+      &.account {
+        justify-content: flex-end;
+        .menu {
+          .login {
+            div {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
   .menu-container {
     display: flex;
     flex-wrap: wrap;
@@ -15,44 +57,44 @@ header.app-header {
     .logo {
       margin-left: 40%;
     }
-    .menu {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;;
-      @media (max-width: $tabletBreakpoint) {
-        flex-direction: column;
-        align-items: center;
-        width: unset;
-        padding-top: 50px;
-        display: none;
-      }
+  }
+  .menu {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;;
+    @media (max-width: $tabletBreakpoint) {
+      flex-direction: column;
+      align-items: center;
+      width: unset;
+      padding-top: 50px;
+      display: none;
+    }
 
-      ul {
-        flex: 11;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        list-style: none;
-        padding: 0px;
-        margin: 0px;
-        @media (max-width: $tabletBreakpoint) {
-          display: block;
-        }
+    ul {
+      flex: 11;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      list-style: none;
+      padding: 0px;
+      margin: 0px;
+      @media (max-width: $tabletBreakpoint) {
+        display: block;
       }
-      .login {
-        flex: 1;
+    }
+    .login {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      div {
+        cursor: pointer;
         display: flex;
         align-items: center;
-        justify-content: flex-end;
-        div {
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #647883;
-          font-family: Raleway, sans-serif;
-          font-size: 18px;
-        }
+        justify-content: center;
+        color: #647883;
+        font-family: Raleway, sans-serif;
+        font-size: 18px;
       }
     }
   }

@@ -39,4 +39,38 @@ export default class BaseService {
       return null;
     });
   }
+  static async fetchFormData (apiUrl, formData) {
+    const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+    const callAPI = new Promise(async (resolve, reject) => {
+      const token = localStorage.getItem('token');
+      let url = API_ENDPOINT + apiUrl;
+      try {
+        let opt = {
+          method: 'POST',
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': '*',
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        };
+        if (formData) {
+          opt.body = formData;
+        }
+        const response = await fetch(url, opt);
+        const responseJson = await response.json();
+        resolve(responseJson);
+      } catch (error) {
+        reject(error);
+      }
+    });
+
+    const callTimeout = () => new Promise((resolve, reject) => setTimeout(reject, 60000, 'OVER_TIME'));
+
+    return Promise.race([callAPI, callTimeout()]).then(result => {
+      return result;
+    }).catch(e => {
+      return null;
+    });
+  }
 }

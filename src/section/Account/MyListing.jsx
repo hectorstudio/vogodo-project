@@ -24,6 +24,11 @@ const MyListing = () => {
     })();
   }, [userId, globalState.userId]);
 
+  const deleteProperty = async (id) => {
+    setData(data.filter(el => el.id !== id));
+    await PropertiesService.deleteProperty(id);
+  }
+
   return (
     <Fragment>
       <div className="pane-header">
@@ -36,6 +41,7 @@ const MyListing = () => {
             <ListingItem
               key={`element-${index}`}
               data={element}
+              onDelete={deleteProperty}
             />
           )) : (
             <div className="no-properties"> No properties </div>

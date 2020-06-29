@@ -7,23 +7,26 @@ import History from "../../constants/History";
 import Autocomplete from 'react-google-autocomplete';
 import { useDispatch } from "react-redux";
 import { setOpenSignUp } from "../../redux/actions";
+import PropertyModal from "../../components/PropertyModal";
 
 const options = [
-  { value: "residential", label: "Residential" },
-  { value: "commercial", label: "Detached House" },
+  { value: "rent", label: "Rent" },
+  { value: "sell", label: "Sell" },
 ];
 
 const BannerSection = () => {
-  const [values, setValues] = useState([]);
+  const [values, setValues] = useState("sell");
   const dispatch = useDispatch();
   const loggedin = localStorage.getItem('loggedin');
+  const [openFlag, setOpenModal] = useState(false);
 
   const goToSubmitPage = () => {
     const login = localStorage.getItem("loggedin");
-    if(login)
-      History.push("/properties/submit");
-    else
+    if (login) {
+      setOpenModal(true);
+    } else {
       History.push("/signup");
+    }
   };
 
   const openSignUpDrawer = () => {
@@ -66,7 +69,7 @@ const BannerSection = () => {
                 onPlaceSelected={(place) => {
                   console.log(place);
                 }}
-                types={['(regions)']}
+                types={['(cities)']}
                 componentRestrictions={{country: "us"}}
               />
             </div>
@@ -81,6 +84,7 @@ const BannerSection = () => {
           </button>
         </div>
       </div>
+      <PropertyModal setOpenModal={setOpenModal} openFlag={openFlag}/>
     </section>
   );
 };

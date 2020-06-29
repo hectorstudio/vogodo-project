@@ -9,7 +9,6 @@ const EachSlide = ({url, propertyPrice}) => {
           backgroundImage: `url(${url})`,
         }}
       >
-        <span>${propertyPrice}</span>
       </div>
     </div>
   );

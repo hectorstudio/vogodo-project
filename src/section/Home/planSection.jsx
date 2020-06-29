@@ -1,15 +1,33 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import { useSelector } from "react-redux";
 import "../../containers/Home.style.scss";
+import UserService from "../../services/UserService";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from '../../components/CheckoutForm';
 
-const PlanSection = ({type=""}) => {
-  if(type !== "") {
-    localStorage.setItem('login', true);
-    localStorage.setItem('account-type', type);
-  }
-  
-  const goToHomepage = () => {
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
-  }
+const PlanSection = () => {
+  const userId = localStorage.getItem('userId');
+  const [user, setUser] = useState({});
+  const globalState = useSelector(state => state);
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+  useEffect(() => {
+    (async () => {
+      try {
+        const result = await UserService.getUser(userId || globalState.userId);
+        if (result && result.user) {
+          const { user } = result;
+          setUser(user);
+        } else {
+          console.log("Loading User Data Error: ");
+        }
+      } catch (error) {
+        console.log("Loading USer Data Error: ");
+      }
+    })();
+  }, [userId, globalState.userId]);
   
   return (
     <section className="section section-promotion-price">
@@ -32,9 +50,18 @@ const PlanSection = ({type=""}) => {
               <div className="details">
                 <p>&#10004; Unlimited Deals </p>
               </div>
-              <button onClick={goToHomepage} className={`btn btn-rounded uppercase`}>
-                Purchase
-              </button>
+              <div className="product">
+                <img
+                  src="https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress"
+                  alt="laptop"
+                  style={{ width: "100%", height: "auto" }}
+                />
+                <div>
+                  <Elements stripe={stripePromise}>
+                    <CheckoutForm />
+                  </Elements>
+                </div>
+              </div>
             </div>
           </div>
         </div>

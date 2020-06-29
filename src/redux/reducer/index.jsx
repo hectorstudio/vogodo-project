@@ -1,4 +1,4 @@
-import { SET_VISIBLE_TYPE, SET_AUTHENTICATE, SET_USER_ID, SET_ACCOUNT_SETTING, SET_OPEN_SIGNUP } from "../constants/action-types";
+import { SET_VISIBLE_TYPE, SET_AUTHENTICATE, SET_USER_ID, SET_ACCOUNT_SETTING, SET_FILTER_TYPE, SET_OPEN_SIGNUP } from "../constants/action-types";
 
 const initialState = {
   visible_type: "",
@@ -6,6 +6,7 @@ const initialState = {
   userId: 0,
   accountSetting: 0,
   openSignUp: false,
+  filterType: 'all',
 };
 
 function rootReducer(state = initialState, action) {
@@ -37,6 +38,12 @@ function rootReducer(state = initialState, action) {
     return {
       ...state,
       openSignUp: action.payload,
+    }
+  }
+  if (action.type === SET_FILTER_TYPE) {
+    return {
+      ...state,
+      filterType: action.payload,
     }
   }
   return state;

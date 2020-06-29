@@ -17,6 +17,10 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1, 1, 0, 0),
     textAlign: "right", 
   },
+  alert: {
+    textAlign: "left",
+    fontSize: 12,
+  },
 }));
 
 const AccountSettings = () => {
@@ -139,10 +143,11 @@ const AccountSettings = () => {
           <Autocomplete
             className="address"
             onPlaceSelected={onChangeAddress}
-            types={['(regions)']}
-            value={user.address}
+            types={['address']}
+            default
             componentRestrictions={{country: "us"}}
           />
+          <span className={classes.alert}>Current Address: {user.address}</span>
         </FormControl>
 
         <FormControl className={classes.margin}>

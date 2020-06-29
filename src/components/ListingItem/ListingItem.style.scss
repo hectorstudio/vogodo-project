@@ -46,7 +46,7 @@
     flex-direction: column;
     margin: 10px;
     align-items: center;
-    border: 1px solid #aaaaaa;
+    /*border: 1px solid #aaaaaa;*/
     .title {
       font-size: 14px;
       margin: 10px;
@@ -84,6 +84,7 @@
       border-radius: 2px;
       margin: 5px 0px;
       cursor: pointer;
+      width: 100%;
       &.delete-button {
         background-color: #f50000;
       }

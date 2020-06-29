@@ -4,56 +4,55 @@
   height: fit-content;
   margin: 0.3%;
   border: 1px solid #dad2d2;
+  border-bottom: 3px solid #337ab7;
   .slide-container {
-    margin: 10px;
     .each-slide {
-      cursor: pointer;
       div {
-        height: 250px;
+        width: 100%;
+        min-height: 150px ;
         background-size: cover;
-        span {
-          position: relative;
-          background-color: #c02a26;
-          border-radius: 2px;
-          color: white;
-          padding: 3px 5px;
-          top: 10px;
-          right: -75px;
-          font-family: Raleway, sans-serif;
-        }
+      }
+    }
+    .badge {
+      position: relative;
+      background-color: rgba(#000000, 0.5);
+      border-radius: 2px;
+      color: white;
+      padding: 3px 5px;
+      top: -155px;
+      left: -79px;
+      font-family: Raleway, sans-serif;
+    }
+    .save {
+      cursor: pointer;
+      position: relative;
+      top: -148px;
+      right: -70px;
+      .icon {
+        color: white;
       }
     }
   }
   .item-description {
-    margin: 0 10px 10px 10px;
+    margin: -15px 5px 5px 5px;
     //filter: blur(0.2rem);
-    h3 {
-      margin: 5px 5px !important;
-      text-align: left !important;
+    .dec-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      h3 {
+        font-size: 22px;
+        margin: 0px 5px !important;
+        text-align: left !important;
+      }
+      .plan-title {
+        text-transform: uppercase;
+        font-size: 10px;
+      }
     }
     p {
       margin: 0px 5px 5px 5px !important;
       text-align: left !important;
-    }
-    .pricing {
-      display: flex;
-      justify-content: space-evenly;
-      .ind-plan {
-        display: flex;
-        flex-direction: column;
-        text-align: left;
-        .plan-title {
-          text-transform: uppercase;
-          font-size: 10px;
-        }
-        .plan-price {
-          font-size: 20px;
-          font-weight: 800;
-          .plan-detail {
-            font-size: 14px;
-          }
-        }
-      }
     }
     .more {
       display: flex;
@@ -63,7 +62,6 @@
         color: black;
         text-align: right;
         font-size: 10px;
-        padding: 20px 0 10px 0;
       }
     }
   }

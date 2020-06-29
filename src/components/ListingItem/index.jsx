@@ -2,27 +2,23 @@ import React from "react";
 import "./ListingItem.style.scss";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
-import imgSrc from "../../assets/img/realestate.jpg";
-import imgSrc1 from "../../assets/img/realestate1.jpg";
-import imgSrc2 from "../../assets/img/realestate2.jpg";
+import { Link } from "react-router-dom";
 
-const ListingItem = ({data}) => {
+const ListingItem = ({data, onDelete}) => {
+  const handleClickDelete = () => {
+    onDelete(data.id);
+  }
   return (
     <div className="listing-item-container">
       <div className="item-carousel">
         <Carousel showThumbs={false} >
-          <div>
-            <img src={imgSrc} alt="carousel"/>
-            <p className="legend">Legend 1</p>
-          </div>
-          <div>
-            <img src={imgSrc1} alt="carousel"/>
-            <p className="legend">Legend 2</p>
-          </div>
-          <div>
-            <img src={imgSrc2} alt="carousel"/>
-            <p className="legend">Legend 3</p>
-          </div>
+          {
+            data.resources.map((element, index) => (
+              <div key={`carousel-${index}`}>
+                <img src={element} alt={`carousel-${index}`}/>
+              </div>
+            ))
+          }
         </Carousel>
       </div>
       <div className="item-details">
@@ -38,13 +34,13 @@ const ListingItem = ({data}) => {
         </div>
       </div>
       <div className="item-review-details">
-        <div className="title">90 Day Views</div>
+        {/* <div className="title">90 Day Views</div>
         <div className="info">2,215</div>
-        <span>Want to improve?</span>
+        <span>Want to improve?</span> */}
       </div>
       <div className="item-action">
-        <button className="button edit-button">Edit Listing</button>
-        <button className="button delete-button">delete Listing</button>
+        <Link style={{width: "100%"}} to={`/properties/submit/${data.id}`}><button className="button edit-button">Edit Listing</button></Link>
+        <button className="button delete-button" onClick={handleClickDelete}>Delete Listing</button>
       </div>
     </div>
   );
