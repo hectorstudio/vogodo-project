@@ -12,9 +12,17 @@ section {
 }
 .slider-container {
   height: 486px;
+  min-height: 250px;
+  @media (max-width: $smalldeskBreakpoint) {
+    height: auto;
+  }
   overflow: hidden;
   img {
     width: 100%;
+    @media (max-width: 512px) {
+      width: auto;
+      height: 250px;
+    }
   }
 }
 .section-title {
@@ -30,8 +38,26 @@ section {
   padding: 64px 0 80px 0;
 
   @media (max-width: $smalldeskBreakpoint) {
-    padding: 1px 0 0 0;
+    padding: 0px 0 65px;
+    margin-top: -430px;
   }
+  @media (max-width: 930px) {
+    padding: 45px 0 20px;
+    margin-top: -430px;
+  }
+  @media (max-width: 768px) {
+    padding: 45px 0 36px;
+    margin-top: -317px;
+  }
+  @media (max-width: 600px) { 
+    padding: 15px 0 15px; 
+    margin-top: -235px;
+  }
+  @media (max-width: 512px) { 
+    padding: 15px 0 15px; 
+    margin-top: -235px;
+  }
+
 
   /* Style banner content */
   .banner {
@@ -40,6 +66,9 @@ section {
 
     @media (max-width: $smalldeskBreakpoint) {
       display: block;
+    }
+    @media (max-width: 768px) {
+      display: none;
     }
     h1 {
       @include fontDef(white, "Lato", 45px, 900, 80px, none, uppercase);
@@ -61,6 +90,9 @@ section {
   .property-actions {
     display: flex;
     justify-content: center;
+    @media (max-width: 600px) {
+      display: none;
+    }
     .btn-property {
       font-family: Raleway, sans-serif;
       background-color: #c02a26;
@@ -85,8 +117,11 @@ section {
     .form {
       background-color: rgba($color: #fff, $alpha: 0.5);
       display: flex;
-      width: 900px;
+      width: 90%;
       flex-wrap: wrap;
+      @media (max-width: 600px) {
+        display: block;
+      }
       margin: auto;
       padding: 5px;
       .form-control {
@@ -105,6 +140,7 @@ section {
         .react-dropdown-select-input {
           font-family: 'Raleway', sans-serif !important;
           font-size: 16px;
+          width: 100%;
         }
       }
       .input {
@@ -113,7 +149,10 @@ section {
           padding-left: 20px;
           box-sizing: border-box;
           font-family: Raleway, sans-serif;
-          width: 100%;
+          width: 95%;
+          @media (max-width: 600px) {
+            width: 100%;
+          }
           outline: none;
           border: none;
           font-size: 16px;
@@ -141,6 +180,11 @@ section {
       }
     }
   }
+  .register-button {
+    @media (max-width: 600px) {
+      display: none;
+    }
+  }
 }
 
 .content {
@@ -151,21 +195,21 @@ section {
     align-items: center;
     justify-content: space-around;
 
-    @media (max-width: $tabletBreakpoint) {
-      display: block;
+    @media (max-width: 1024px) {
+      flex-wrap: wrap;
     }
 
     .featured-item {
       width: 24%;
-      @media (max-width: $tabletBreakpoint) {
-        width: 100%;
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
+      margin: 1% 0;
+      @media (max-width: 1024px) {
+        width: 48%;
       }
-
-      @media (max-width: $mobileBreakpoint) {
-        display: grid;
+      @media (max-width: 524px) {
+        width: 300px;
+      }
+      @media (max-width: 325px) {
+        width: 96%;
       }
 
       .img {
@@ -200,6 +244,7 @@ section {
   color: white;
   .section-title {
     padding: 25px;
+    word-break: break-all;
     margin: 0px;
   }
   .introduction {
@@ -220,6 +265,9 @@ section {
 .promotion-prices {
   display: block;
   width: 500px;
+  @media (max-width: 540px) {
+    width: auto;
+  }
   margin: auto;
   padding: 30px 10px;
   margin-bottom: 50px;
@@ -233,6 +281,9 @@ section {
 
   .price-ticket {
     width: 400px;
+    @media (max-width: 512px) {
+      width: auto;
+    }
     margin: auto;
     background-color: #647883;
     border-radius: 10px;
@@ -268,10 +319,16 @@ section {
     }
     .ticket-body {
       border-top: 2px solid #fff;
+      @media (max-width: 375px) {
+        border: none;
+      }
       h5 {
         font-size: 15px;
         font-family: Lato, sans-serif;
         width: 200px;
+        @media (max-width: 375px) {
+          width: auto;
+        }
         margin: auto;
         margin-top: -12px;
         background-color: #647883;

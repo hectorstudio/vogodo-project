@@ -20,14 +20,32 @@
       color: white;
       padding: 3px 5px;
       top: -155px;
-      left: -79px;
+      left: -60px;
+      @media (max-width: 950px) {
+        left: -50px;
+      }
+      @media (max-width: 860px) {
+        left: -35px;
+      }
+      @media (max-width: 512px) {
+        left: -45px;
+      }
       font-family: Raleway, sans-serif;
     }
     .save {
       cursor: pointer;
       position: relative;
       top: -148px;
-      right: -70px;
+      right: -60px;
+      @media (max-width: 950px) {
+        right: -50px;
+      }
+      @media (max-width: 860px) {
+        right: -35px;
+      }
+      @media (max-width: 512px) {
+        right: -45px;
+      }
       .icon {
         color: white;
       }

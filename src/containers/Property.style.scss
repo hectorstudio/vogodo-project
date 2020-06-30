@@ -11,25 +11,35 @@
       flex-wrap: wrap;
       .search-input {
         min-width: 300px;
+        width: 30%;
+        @media (max-width: 768px) {
+          min-width: auto;
+        }
         background-color: white;
         font-family: Raleway, sans-serif;
         outline: none;
         font-size: 16px;
         text-align: left;
         padding: 2.5px 10px;
+        @media (max-width: 556px) {
+          padding: 0px;
+        }
         border: none;
         border-bottom: 1px solid #cccccc;
         min-height: 36px;
         margin: 5px 5px;
       }
       .price-input {
-        max-width: 100px;
+        width: 16%;
         background-color: white;
         font-family: Raleway, sans-serif;
         outline: none;
         font-size: 16px;
         text-align: left;
         padding: 2.5px 10px;
+        @media (max-width: 556px) {
+          padding: 0px;
+        }
         border: none;
         border-bottom: 1px solid #cccccc;
         min-height: 36px;
@@ -44,18 +54,26 @@
     display: flex;
     .map {
       width: 50%;
+      @media (max-width: 512px) {
+        display: none;
+      }
     }
     .content {
       width: 50%;
+      @media (max-width: 512px) {
+        width: 100%;
+      }
       padding: 0px;
       .content-header {
         height: 50px;
         text-align: left;
         padding: 0px 10px;
+        overflow-x: hidden;
         .current-position {
           font-family: Lato, sans-serif;
           font-size: 20px;
           font-weight: 600;
+          width: max-content;
         }
         .search-details {
           display: flex;
@@ -65,14 +83,34 @@
       .content-body {
         width: 100%;
         display: flex;
+        @media (max-width: 768px) {
+          display: block;
+        }
+        @media (max-width: 512px) {
+          display: flex;
+        }
+        @media (max-width: 400px) {
+          display: block;
+        }
         flex-wrap: wrap;
+        justify-content: space-around;
         height: calc(100vh - 212px);
         &.has-filter {
           height: calc(100vh - 250px);
         }
         overflow-y: scroll;
         .property-item {
-          width: 49%;
+          width: 48%;
+          @media (max-width: 768px) {
+            width: 70%;
+            margin: auto;
+          }
+          @media (max-width: 512px) {
+            width: 48%;
+          }
+          @media (max-width: 400px) {
+            width: 70%;
+          }
         }
         .no-properties {
           color: #797775;

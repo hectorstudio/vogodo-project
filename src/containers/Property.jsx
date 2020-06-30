@@ -173,14 +173,12 @@ const Property = () => {
         <Breadcrumbs parent="Home" child="Find properties" />
         <div className="filter-container">
           <div className="filter-items">
-            <div className="search-item">
-              <Autocomplete
-                className="search-input"
-                onPlaceSelected={handleChangeSearch}
-                types={['(cities)']}
-                componentRestrictions={{country: "us"}}
-              />
-            </div>
+            <Autocomplete
+              className="search-input"
+              onPlaceSelected={handleChangeSearch}
+              types={['(cities)']}
+              componentRestrictions={{country: "us"}}
+            />
             <input
               type="text"
               className="price-input"

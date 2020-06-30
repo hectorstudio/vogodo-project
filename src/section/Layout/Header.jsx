@@ -80,6 +80,8 @@ const Header = () => {
         dispatch(setOpenSignUp(false));
         dispatch(setAuthenticate(false));
         dispatch(setUserId(0));
+        if (History.location.pathname !== '/' || History.location.pathname !== '/properties')
+          History.push('/');
       }
     }
   });
@@ -136,8 +138,8 @@ const Header = () => {
     <header className={`app-header ${globalState.visible_type}`}>
       { globalState.visible_type === 'fixed-height' ? (
         <div className={classes.root}>
-          <Grid container spacing={3} className="search-header">
-            <Grid item xs={4} className="header-item category">
+          <Grid container className="search-header container">
+            <Grid xs={12} md={4} className="header-item category">
               <div className="menu" id="menu">
                 <div className={globalState.filterType === 'all' ? "active" : ""} onClick={() => dispatch(setFilterType('all'))}>
                   All
@@ -150,12 +152,12 @@ const Header = () => {
                 </div>
               </div>
             </Grid>
-            <Grid item xs={4} className="header-item">
+            <Grid xs={12} md={4} className="header-item">
               <div className="logo" onClick={goToHomePage} style={{ cursor: 'pointer' }}>
                 <img src={Logo} alt="Logo" />
               </div>
             </Grid>
-            <Grid item xs={4} className="header-item account">
+            <Grid xs={12} md={4} className="header-item account">
               <div className="menu" id="menu">
                 <div className="login">
                   {LoginFlag ? (
@@ -211,15 +213,15 @@ const Header = () => {
         </div>
       ) : (
         <div className="container menu-container">
-          <Grid container spacing={3}>
-            <Grid item xs={4}>
+          <Grid container>
+            <Grid xs={12} md={4}>
             </Grid>
-            <Grid item xs={4}>
-              <div onClick={goToHomePage} style={{ cursor: 'pointer' }}>
-                <img src={Logo} alt="Logo" style={{ width: '100%' }} />
+            <Grid xs={12} md={4}>
+              <div className="logo" onClick={goToHomePage} style={{ cursor: 'pointer' }}>
+                <img src={Logo} alt="Logo" />
               </div>
             </Grid>
-            <Grid item xs={4} container justify="flex-end" direction="row" alignItems="center">
+            <Grid xs={12} md={4} container justify="flex-end" direction="row" alignItems="center">
               <div className="menu" id="menu">
                 <div className="login">
                   {LoginFlag ? (

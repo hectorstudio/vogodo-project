@@ -85,7 +85,6 @@ const BannerSection = () => {
             </div>
             <div className="form-control input">
               <Autocomplete
-                style={{width: '95%'}}
                 onPlaceSelected={handleSelectCity}
                 types={['(cities)']}
                 componentRestrictions={{country: "us"}}
@@ -96,7 +95,7 @@ const BannerSection = () => {
             </div>
           </div>
         </div>
-        <div>
+        <div className="register-button">
           <button className={`btn btn-primary btn-semi-rounded btn-register uppercase`} style={{ cursor: "pointer" }} onClick={openSignUpDrawer}>
             Register Today!
           </button>

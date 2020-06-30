@@ -8,7 +8,7 @@ const IntroSection = () => {
   return (
     <section className="section section-intro">
       <div className="container">
-        <h2 className="section-title">Why VOGODO?</h2>
+        <h2 className="section-title">Why SellDealsNow?</h2>
         <p className="introduction">
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever
