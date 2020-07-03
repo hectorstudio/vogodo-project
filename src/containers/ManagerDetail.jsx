@@ -15,6 +15,7 @@ import Box from "@material-ui/core/Box";
 import ListingSection from "../section/ManagerDetails/ListingSection";
 import AboutMeSection from "../section/ManagerDetails/AboutMeSection";
 import SendMessageModal from "../components/SendMessageModal";
+import Routes from "../constants/Routes";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -83,7 +84,7 @@ const ManagerDetail = () => {
       <Breadcrumbs parent="Find a Property Manager" child="Detail" />
       <div className="manager-container">
         <div className="navigator">
-          <Link to="/managers/listing"> <KeyboardArrowLeft /> Back To Directory </Link>
+          <Link to={Routes.managerslisting}> <KeyboardArrowLeft /> Back To Directory </Link>
         </div>
         <div className="manager-content">
           <div className="content-header">

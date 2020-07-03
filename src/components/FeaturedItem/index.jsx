@@ -5,6 +5,7 @@ import imgSrc from "../../assets/img/realestate.jpg";
 import imgSrc1 from "../../assets/img/realestate1.jpg";
 import imgSrc2 from "../../assets/img/realestate2.jpg";
 import "./FeaturedItem.style.scss";
+import Routes from "constants/Routes";
 
 const slideImages = {
   address: "Temp Street 1 Oklabahma",
@@ -41,7 +42,7 @@ const properties = {
 const FeaturedItem = () => {
   const Login = localStorage.getItem("login");
   return (
-    <Link to="/properties" className="featured-item">
+    <Link to={Routes.find_property} className="featured-item">
       <div className="slide-container">
         <Slide {...properties}>
           <div className="each-slide">

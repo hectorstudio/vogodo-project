@@ -7,7 +7,7 @@ const SignUpForm = () => {
 
   return (
     <div className="container">
-      <Breadcrumbs parent="Home" child="SignUp"/>
+      <Breadcrumbs parent="Home" child="Plan"/>
       <PlanSection></PlanSection>
     </div>
   );

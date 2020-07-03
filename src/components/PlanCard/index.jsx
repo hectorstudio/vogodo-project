@@ -1,11 +1,12 @@
 import React from "react";
 import History from "../../constants/History";
+import Routes from "constants/Routes";
 
 import "./PlanCard.style.scss";
 
 const PlanCard = ({ selected, planObject }) => {
   const goToHomepage = () => {
-    History.push("/");
+    History.push(Routes.home);
   };
   return (
     <div className={`price-ticket`}>

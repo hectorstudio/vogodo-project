@@ -20,13 +20,13 @@ const properties = {
   pauseOnHover: true,
 };
 
-const PropertyItem = ({ data = {}, saved, onUpdate }) => {
+const PropertyItem = ({className, data = {}, featured=false, saved, onUpdate }) => {
   const loggedin = localStorage.getItem('loggedin');
   const handleClickFavorite = () => {
     onUpdate({pid: data.id, favorite: saved ? (!saved.favorite ? 1 : 0) : 1});
   }
   return (
-    <div className="property-item">
+    <div className={`property-item ${className}`}>
       <div className="slide-container">
         <Slide {...properties}>
           {
@@ -38,10 +38,16 @@ const PropertyItem = ({ data = {}, saved, onUpdate }) => {
             ))
           }
         </Slide>
-        <span className="badge">${data.details.price || 1768}</span>
-        <span className="save" onClick={handleClickFavorite}>{saved && saved.favorite===1 ? <Favorite className="icon"/> :<FavoriteBorder className="icon"/>}</span>
+        {
+          !featured && <span className="badge">${data.details.price || 1768}</span>
+        }
+        {
+          !featured && <span className="save" onClick={handleClickFavorite}>
+            {saved && saved.favorite===1 ? <Favorite className="icon"/> :<FavoriteBorder className="icon"/>}
+          </span>
+        }
       </div>
-      <div className="item-description">
+      <div className={`item-description ${loggedin ? "" : "blur"} ${featured ? "featuredItem" : ""}`}>
         <div className="dec-header">
           <h3>${data.details.price || 1768}</h3>
           <span className="plan-title">

@@ -71,7 +71,7 @@ section {
       display: none;
     }
     h1 {
-      @include fontDef(white, "Lato", 45px, 900, 80px, none, uppercase);
+      @include fontDef(white, "Lato", 35px, 900, 80px, none, uppercase);
       margin: 0px;
       padding: 25px 0px;
       width: 100%;
@@ -198,11 +198,14 @@ section {
     @media (max-width: 1024px) {
       flex-wrap: wrap;
     }
+    @media (max-width: 400px) {
+      display: block;
+    }
 
     .featured-item {
       width: 24%;
       margin: 1% 0;
-      @media (max-width: 1024px) {
+      @media (max-width: 768px) {
         width: 48%;
       }
       @media (max-width: 524px) {
@@ -278,69 +281,77 @@ section {
     font-size: 28px;
     font-weight: 600;
   }
-
-  .price-ticket {
-    width: 400px;
+  .price-tickets {
+    display: flex;
     @media (max-width: 512px) {
-      width: auto;
+      display: block;
     }
-    margin: auto;
-    background-color: #647883;
-    border-radius: 10px;
-    color: white;
-    .ticket-header {
-      h4 {
-        padding-top: 20px;
-        font-size: 20px;
-        margin: 20px 0px 0px;
+    .price-ticket {
+      width: 300px;
+      margin: 0 10px;
+      @media (max-width: 512px) {
+        width: auto;
       }
-      .price {
-        font-size: 20px;
-        font-family: Raleway, sans-serif;
-        font-weight: 500;
-        margin-top: 0px;
-        display: flex;
-        justify-content: center;
-        align-items: flex-end;
-        .unit {
-          padding-bottom: 10px;
+      background-color: #647883;
+      border-radius: 10px;
+      color: white;
+      .ticket-header {
+        h4 {
+          padding-top: 20px;
+          font-size: 20px;
+          margin: 20px 0px 0px;
         }
-        .price-cost-big {
-          font-size: 60px;
+        .price {
+          font-size: 20px;
+          font-family: Raleway, sans-serif;
+          font-weight: 500;
+          margin-top: 0px;
+          display: flex;
+          justify-content: center;
+          align-items: flex-end;
+          .unit {
+            padding-bottom: 10px;
+          }
+          .price-cost-big {
+            font-size: 60px;
+          }
+          .price-cost-small {
+            padding-bottom: 30px;
+          }
         }
-        .price-cost-small {
-          padding-bottom: 30px;
+        .starting-from {
+          font-size: 22px;
+          font-family: Lato, sans-serif;
         }
       }
-      .starting-from {
-        font-size: 22px;
-        font-family: Lato, sans-serif;
-      }
-    }
-    .ticket-body {
-      border-top: 2px solid #fff;
-      @media (max-width: 375px) {
-        border: none;
-      }
-      h5 {
-        font-size: 15px;
-        font-family: Lato, sans-serif;
-        width: 200px;
+      .ticket-body {
+        border-top: 2px solid #fff;
         @media (max-width: 375px) {
-          width: auto;
+          border: none;
         }
-        margin: auto;
-        margin-top: -12px;
-        background-color: #647883;
-        text-transform: uppercase;    
-      }
-      button {
-        border: 1px solid #fff;
-        cursor: pointer;
-        margin-bottom: 0;
-        border-radius: 50px;
-        padding: 5px 32px;
-        margin-bottom: 20px;
+        .details {
+          min-height: 93px;
+        }
+        h5 {
+          font-size: 15px;
+          font-family: Lato, sans-serif;
+          width: 200px;
+          @media (max-width: 375px) {
+            width: auto;
+          }
+          margin: auto;
+          margin-top: -12px;
+          background-color: #647883;
+          text-transform: uppercase;    
+        }
+        button {
+          border: 1px solid #fff;
+          cursor: pointer;
+          margin-bottom: 0;
+          border-radius: 50px;
+          padding: 5px 32px;
+          margin-bottom: 20px;
+        }
       }
     }
   }

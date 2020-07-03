@@ -4,6 +4,7 @@ import Breadcrumbs from '../components/Breadcrumbs';
 import Profile from '../assets/img/profile.jpg';
 import { Send } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
+import Routes from "../constants/Routes";
 
 const MessageContainer = () => {
   return (
@@ -38,7 +39,7 @@ const MessageContainer = () => {
               Name of Contactor
             </div>
             <div className="contactor-link">
-              <Link to="/">Visit Profile</Link>
+              <Link to={Routes.home}>Visit Profile</Link>
             </div>
           </div>
           <div className="content-body">

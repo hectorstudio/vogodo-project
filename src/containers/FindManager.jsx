@@ -8,6 +8,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Input from "@material-ui/core/Input";
 import History from "../constants/History";
+import Routes from "../constants/Routes";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -28,7 +29,7 @@ const FindManager = () => {
   
   const goToManagersList = () => {
     console.log("Manager listing");
-    History.push("/managers/listing");
+    History.push(Routes.managerslisting);
   }
 
   return (

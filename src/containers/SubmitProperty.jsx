@@ -11,6 +11,7 @@ import PropertyElement from "../components/PropertyElement";
 import "./SubmitProperty.style.scss";
 import GoogleMapReact from 'google-map-react';
 import { Place } from '@material-ui/icons';
+import Routes from "../constants/Routes";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -167,7 +168,7 @@ const SubmitProperty = ({match}) => {
   const onSubmit = () => {
     let info = { ...propertyInfo };
     updateProperty(info);
-    History.push("/properties");
+    History.push(Routes.find_property);
   };
 
   const updateProperty = async (info) => {

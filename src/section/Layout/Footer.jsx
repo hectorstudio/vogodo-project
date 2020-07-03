@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import Logo from "../../assets/img/logo.png";
+import Logo from "../../assets/img/logo_footer.png";
 import "./Footer.style.scss";
 
 const Footer = () => {

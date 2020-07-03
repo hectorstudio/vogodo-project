@@ -8,6 +8,11 @@ export default class PropertiesService {
     return BaseService.fetchData(REQUEST_TYPE.GET, apiUrl, null);
   }
 
+  static async getRecentProperties() {
+    const apiUrl = '/property/recent';
+    return BaseService.fetchData(REQUEST_TYPE.GET, apiUrl, null);
+  }
+
   static async getProperties() {
     const apiUrl = '/property/';
     return BaseService.fetchData(REQUEST_TYPE.GET, apiUrl, null);
@@ -30,7 +35,7 @@ export default class PropertiesService {
   }
 
   static async getPropertiesByOwnerId() {
-    const apiUrl = '/property/';
+    const apiUrl = '/property/own';
     return BaseService.fetchData(REQUEST_TYPE.GET, apiUrl, null);
   }
   static async addNewProperty(property) {

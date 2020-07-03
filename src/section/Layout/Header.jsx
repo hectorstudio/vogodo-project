@@ -5,15 +5,17 @@ import {
   Settings,
 } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { setAuthenticate, setUserId, setFilterType, setVisibleType, setOpenSignUp, setMenuType } from "../../redux/actions";
+import { setAuthenticate, setUserId, setUserInfo, setFilterType, setVisibleType, setOpenSignUp, setMenuType } from "../../redux/actions";
 import { Avatar, Menu, ListItemIcon, ListItemText, MenuItem, Grid } from "@material-ui/core";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import BaseDrawer from "../../components/BaseDrawer";
 import History from "../../constants/History";
 import Logo from "../../assets/img/logo.png";
 import jwt from "jsonwebtoken";
-
+import UserService from "../../services/UserService";
 import "./Header.style.scss";
+import { checkIsPremiumMember } from "../../constants/Common";
+import Routes from "../../constants/Routes";
 
 const StyledMenu = withStyles({
   paper: {
@@ -61,6 +63,8 @@ const useStyles = makeStyles((theme) => ({
 const Header = () => {
   const classes = useStyles();
   const [isShowDrawer, setShowDrawer] = useState(false);
+  const [user, setUser] = useState(null);
+  const userId = localStorage.getItem('userId');
   const [isSignUp, setSignUp] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const LoginFlag = localStorage.getItem("loggedin");
@@ -72,6 +76,28 @@ const Header = () => {
     if (token) {
       try {
         jwt.verify(token, jwtSecret);
+        if (!user) {
+          (async () => {
+            try {
+              const result = await UserService.getUser(userId || globalState.userId);
+              if (result && result.user) {
+                const { user } = result;
+                setUser(user);
+                dispatch(setUserInfo(user));
+                const status = checkIsPremiumMember(user);
+                if (History.location.pathname !== Routes.signup && History.location.pathname !== Routes.home) {
+                  if (!status) {
+                    History.push(Routes.signup);
+                  }
+                }
+              } else {
+                console.log("Loading User Data Error: ");
+              }
+            } catch (error) {
+              console.log("Loading USer Data Error: ");
+            }
+          })();
+        }
       } catch (err) {
         localStorage.removeItem('geoInfo');
         localStorage.removeItem('loggedin');
@@ -80,11 +106,23 @@ const Header = () => {
         dispatch(setOpenSignUp(false));
         dispatch(setAuthenticate(false));
         dispatch(setUserId(0));
-        if (History.location.pathname !== '/' || History.location.pathname !== '/properties')
-          History.push('/');
+        if (History.location.pathname !== Routes.home || History.location.pathname !== Routes.find_property)
+          History.push(Routes.home);
       }
     }
   });
+
+  useEffect(() => {
+    if (globalState.userInfo) {
+      const status = checkIsPremiumMember(globalState.userInfo);
+      if (History.location.pathname !== Routes.signup && History.location.pathname !== Routes.home) {
+        if (!status) {
+          History.push(Routes.signup);
+        }
+      }
+    }
+  }, [History.location]);
+
 
   useEffect(() => {
     setShowDrawer(globalState.openSignUp);
@@ -110,11 +148,10 @@ const Header = () => {
   };
 
   const goToAccountPage = (value) => {
-    console.log(value);
     setAnchorEl(null);
     dispatch(setOpenSignUp(false));
     dispatch(setMenuType(value))
-    History.push("/account");
+    History.push(Routes.account);
   };
 
   const LogOut = () => {
@@ -125,13 +162,14 @@ const Header = () => {
     dispatch(setOpenSignUp(false));
     dispatch(setAuthenticate(false));
     dispatch(setUserId(0));
+    dispatch(setUserInfo(null));
     setAnchorEl(null);
-    History.push("/");
+    History.push(Routes.home);
   };
 
   const goToHomePage = () => {
     dispatch(setVisibleType(""));
-    History.push("/");
+    History.push(Routes.home);
   }
   
   return (
@@ -162,7 +200,7 @@ const Header = () => {
                 <div className="login">
                   {LoginFlag ? (
                     <div>
-                      <Avatar onClick={handleClick}>ES</Avatar>
+                      <Avatar onClick={handleClick}>{user ? `${user.firstName.charAt(0)}${user.lastName.charAt(0)}` : 'TE'}</Avatar>
                     </div>
                   ) : (
                     <Fragment>
@@ -226,7 +264,7 @@ const Header = () => {
                 <div className="login">
                   {LoginFlag ? (
                     <div>
-                      <Avatar onClick={handleClick}>ES</Avatar>
+                      <Avatar onClick={handleClick}>{user ? `${user.firstName.charAt(0)}${user.lastName.charAt(0)}` : 'TE'}</Avatar>
                     </div>
                   ) : (
                     <Fragment>

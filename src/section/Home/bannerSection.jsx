@@ -5,9 +5,11 @@ import banner1 from "../../assets/img/banner1.jpg";
 import "../../containers/Home.style.scss";
 import History from "../../constants/History";
 import Autocomplete from 'react-google-autocomplete';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setOpenSignUp, setSearchCity, setSearchCityGeoInfo, setSearchVal } from "../../redux/actions";
 import PropertyModal from "../../components/PropertyModal";
+import Routes from "../../constants/Routes";
+import { checkIsPremiumMember } from "../../constants/Common";
 
 const options = [
   { value: "all", label: "All" },
@@ -20,6 +22,7 @@ const BannerSection = () => {
   const [city, setCity] = useState('');
   const [geoInfo, setGeoInfo] = useState({});
   const dispatch = useDispatch();
+  const userInfo = useSelector(state => state.userInfo);
   const loggedin = localStorage.getItem('loggedin');
   const [openFlag, setOpenModal] = useState(false);
 
@@ -38,15 +41,18 @@ const BannerSection = () => {
     dispatch(setSearchVal(type));
     dispatch(setSearchCity(city));
     dispatch(setSearchCityGeoInfo(geoInfo));
-    History.push("/properties");
+    History.push(Routes.find_property);
   }
 
   const goToSubmitPage = () => {
     const login = localStorage.getItem("loggedin");
-    if (login) {
+    const userStatus = userInfo ? checkIsPremiumMember(userInfo) : false;
+    console.log(userInfo);
+    console.log(userStatus);
+    if (login && userStatus) {
       setOpenModal(true);
     } else {
-      History.push("/signup");
+      History.push(Routes.plan);
     }
   };
 
@@ -63,10 +69,10 @@ const BannerSection = () => {
       </div>
       <div className="banner-content">
         <div className="banner">
-          <h1>Find The Available Properties</h1>
+          <h1>Find Wholesales and Off Market Real Estate Deals</h1>
         </div>
         <div className="property-actions">
-          <Link to="/properties">
+          <Link to={Routes.find_property}>
             <button className="btn-property btn-available">
               Available Properties
             </button>

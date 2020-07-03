@@ -11,6 +11,12 @@ export default class UserService {
     return BaseService.fetchData(REQUEST_TYPE.POST, apiUrl, params);
   }
 
+  static async insertUser (userInfo) {
+    const params = userInfo;
+    const apiUrl = '/user/register';
+    return BaseService.fetchData(REQUEST_TYPE.POST, apiUrl, params);
+  }
+
   static async updateUser(id, user) {
     const params = user;
     const apiUrl = `/user/${id}`;

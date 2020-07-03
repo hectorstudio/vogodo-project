@@ -8,6 +8,7 @@ import {
   KeyboardArrowRight,
   KeyboardArrowDown,
 } from "@material-ui/icons";
+import Routes from "../constants/Routes";
 
 const ManagersListing = () => {
   return (
@@ -15,7 +16,7 @@ const ManagersListing = () => {
       <Breadcrumbs parent="Find a Property Manager" child="Search..." />
       <div className="managers-container">
         <div className="navigator">
-          <Link to="/managers">
+          <Link to={Routes.findmanager}>
             {" "}
             <KeyboardArrowLeft /> Modify Your Search{" "}
           </Link>

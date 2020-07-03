@@ -2,6 +2,7 @@ import {
   SET_VISIBLE_TYPE,
   SET_AUTHENTICATE,
   SET_USER_ID,
+  SET_USER_INFO,
   SET_ACCOUNT_SETTING,
   SET_FILTER_TYPE,
   SET_OPEN_SIGNUP,
@@ -51,6 +52,10 @@ export function setMenuType(payload) {
   return { type: SET_MENU_TYPE, payload };
 }
 
+export function setUserInfo(payload) {
+  return { type: SET_USER_INFO, payload };
+}
+
 export default {
   setVisibleType,
   setOpenSignUp,
@@ -61,4 +66,5 @@ export default {
   setSearchCityGeoInfo,
   setSearchVal,
   setMenuType,
+  setUserInfo,
 };

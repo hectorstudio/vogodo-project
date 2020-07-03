@@ -8,3 +8,4 @@ export const SET_SEARCH_CITY = "SET_SEARCH_CITY";
 export const SET_SEARCH_CITY_GEOINFO = "SET_SEARCH_CITY_GEOINFO";
 export const SET_SEARCH_VAL = "SET_SEARCH_VAL";
 export const SET_MENU_TYPE = "SET_MENU_TYPE";
+export const SET_USER_INFO = "SET_USER_INFO";

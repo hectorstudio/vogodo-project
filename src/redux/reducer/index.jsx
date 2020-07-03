@@ -9,6 +9,7 @@ import {
   SET_SEARCH_CITY_GEOINFO,
   SET_SEARCH_VAL,
   SET_MENU_TYPE,
+  SET_USER_INFO,
 } from "../constants/action-types";
 
 const initialState = {
@@ -22,6 +23,7 @@ const initialState = {
   searchCityGeoInfo: {},
   searchVal: "",
   menuType: 0,
+  userInfo: null,
 };
 
 function rootReducer(state = initialState, action) {
@@ -83,6 +85,12 @@ function rootReducer(state = initialState, action) {
     return {
       ...state,
       menuType: action.payload,
+    };
+  }
+  if (action.type === SET_USER_INFO) {
+    return {
+      ...state,
+      userInfo: action.payload,
     };
   }
   return state;

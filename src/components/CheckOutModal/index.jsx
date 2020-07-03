@@ -238,7 +238,7 @@ const CheckOutModal = ({ setOpenModal, openFlag }) => {
               </fieldset>
               {error && <ErrorMessage>{error.message}</ErrorMessage>}
               <SubmitButton processing={processing} error={error} disabled={!stripe}>
-                Pay $25
+                Pay $79.99
               </SubmitButton>
             </form>
           )}

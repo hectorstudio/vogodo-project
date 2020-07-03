@@ -1,6 +1,6 @@
 const Routes = {
   home: "/",
-  signup: "/signup",
+  signup: "/plan",
   find_property: "/properties",
   submit_property: "/properties/submit/:id",
   property_detail: "/properties/detail/:id",

@@ -2,10 +2,11 @@ import React from "react";
 import "./ManagerItem.style.scss";
 import Profile from "../../assets/img/profile.jpg";
 import { Link } from "react-router-dom";
+import Routes from "../../constants/Routes";
 
 const ManagerItem = () => {
   return (
-    <Link to="/managers/detail">
+    <Link to={Routes.managerdetail}>
       <div className="manager-item">
         <div className="manager-profile">
           <img src={Profile} alt="profile" />

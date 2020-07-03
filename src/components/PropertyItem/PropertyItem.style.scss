@@ -53,7 +53,12 @@
   }
   .item-description {
     margin: -15px 5px 5px 5px;
-    //filter: blur(0.2rem);
+    &.blur {
+      filter: blur(0.2rem);
+    }
+    &.featuredItem {
+      margin: 5px;
+    }
     .dec-header {
       display: flex;
       justify-content: space-between;
