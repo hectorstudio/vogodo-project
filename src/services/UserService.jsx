@@ -17,6 +17,12 @@ export default class UserService {
     return BaseService.fetchData(REQUEST_TYPE.POST, apiUrl, params);
   }
 
+  static async signWithSocial (userInfo, type) {
+    const params = {...userInfo, type};
+    const apiUrl = '/user/registerWithSocial';
+    return BaseService.fetchData(REQUEST_TYPE.POST, apiUrl, params);
+  }
+
   static async updateUser(id, user) {
     const params = user;
     const apiUrl = `/user/${id}`;

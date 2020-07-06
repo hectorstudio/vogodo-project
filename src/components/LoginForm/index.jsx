@@ -5,6 +5,8 @@ import GoogleLogin from 'react-google-login';
 import { setAuthenticate, setUserId } from "../../redux/actions";
 import "./LoginForm.style.scss";
 import UserService from "../../services/UserService";
+import History from "../../constants/History";
+import Routes from "../../constants/Routes";
 
 const LoginForm = ({ setShowDrawer, openSignUpForm }) => {
   const [email, setEmail] = useState("");
@@ -12,8 +14,21 @@ const LoginForm = ({ setShowDrawer, openSignUpForm }) => {
 
   const dispatch = useDispatch();
   
-  const responseFacebook = (response) => {
-    console.log(response);
+  const responseFacebook = async (response) => {
+    if (response && response.userID) {
+      const result = await UserService.signWithSocial(response, 'facebook');
+      if (result && result.user && result.token) {
+        const geoInfo = {latitude: result.user.latitude, longitude: result.user.longitude};
+        localStorage.setItem('token', result.token.accessToken);
+        localStorage.setItem('loggedin', true)
+        localStorage.setItem('userId', result.user.id);
+        localStorage.setItem('geoInfo', JSON.stringify(geoInfo));
+        setShowDrawer(false);
+        dispatch(setAuthenticate(true));
+        dispatch(setUserId(result.user.id));
+        History.push(Routes.signup);
+      }
+    }
   }
 
   const responseGoogle = (response) => {

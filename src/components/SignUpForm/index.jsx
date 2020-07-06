@@ -60,26 +60,36 @@ const SignUpForm = ({setShowDrawer, openLogInForm}) => {
         setShowDrawer(false);
         dispatch(setAuthenticate(true));
         dispatch(setUserId(result.user.id));
+        History.push(Routes.signup);
       }
     } catch(err) {
       console.log(err);
     }
   }
 
-  const responseFacebook = (response) => {
-    console.log(response);
-    if (response.data) {
-      setShowDrawer(false);
-      History.push(Routes.signup);
+  const responseFacebook = async (response) => {
+    if (response && response.userID) {
+      const result = await UserService.signWithSocial(response, 'facebook');
+      if (result && result.user && result.token) {
+        const geoInfo = {latitude: result.user.latitude, longitude: result.user.longitude};
+        localStorage.setItem('token', result.token.accessToken);
+        localStorage.setItem('loggedin', true)
+        localStorage.setItem('userId', result.user.id);
+        localStorage.setItem('geoInfo', JSON.stringify(geoInfo));
+        setShowDrawer(false);
+        dispatch(setAuthenticate(true));
+        dispatch(setUserId(result.user.id));
+        History.push(Routes.signup);
+      }
     }
   }
 
   const responseGoogle = (response) => {
     console.log(response);
-    if (response.data) {
-      setShowDrawer(false);
-      History.push(Routes.signup);
-    }
+    // if (response.data) {
+    //   setShowDrawer(false);
+    //   History.push(Routes.signup);
+    // }
   }
   return (
     <div className="signup-form">
@@ -146,10 +156,10 @@ const SignUpForm = ({setShowDrawer, openLogInForm}) => {
       <div className="divider"></div>
       <div className="social-login">
         <FacebookLogin
-          appId="594376748148190"
+          appId="628766631327009"
           autoLoad={false}
           fields="name,email,picture"
-          scope="public_profile,user_friends"
+          scope="public_profile"
           cssClass="facebook"
           icon="fa-facebook"
           callback={responseFacebook}/>
