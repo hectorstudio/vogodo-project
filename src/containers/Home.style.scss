@@ -283,6 +283,7 @@ section {
   }
   .price-tickets {
     display: flex;
+    justify-content: center;
     @media (max-width: 512px) {
       display: block;
     }

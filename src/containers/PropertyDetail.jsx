@@ -12,7 +12,8 @@ import "./PropertyDetail.style.scss";
 import avatar from "../assets/img/avatar.jpg";
 import "video-react/dist/video-react.css";
 import { Player } from 'video-react';
-import Poster from "../assets/img/poster.png";
+import Introduction from "../assets/img/introduction.png";
+import IntroductionVideo from "../assets/img/introduction.mp4";
 import PropertiesService from "../services/PropertiesService";
 import GoogleMapReact from 'google-map-react';
 import { Place } from '@material-ui/icons';
@@ -145,8 +146,8 @@ const PropertyDetail = ({match}) => {
             <div className="video">
               <Player
                 playsInline
-                poster={Poster}
-                src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
+                poster={Introduction}
+                src={IntroductionVideo}
                 width="100%"
               />
             </div>

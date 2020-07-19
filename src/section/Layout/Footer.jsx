@@ -34,7 +34,6 @@ const Footer = () => {
           <div className="info">Contact Us</div>
           <ul>
             <li><span><i className="fa fa-facebook"></i></span> <span><i className="fa fa-google"></i></span></li>
-            <li>Phone: +1 (123)-456-789</li>
             <li>Email: contact@selldealsnow.com</li>
           </ul>
         </div>

@@ -22,27 +22,7 @@ const PlanSection = () => {
             <div className='price-tickets'>
               <div className={`price-ticket`}>
                 <div className={`ticket-header`}>
-                  <h4> Free </h4>
-                  <p className="price">
-                    <span className="price-cost-big">14</span>
-                    <span className="price-cost-small">days</span>
-                  </p>
-                  <p className="starting-from">Free trial</p>
-                </div>
-                <div className="ticket-body">
-                  <h5> Features </h5>
-                  <div className="details">
-                    <p>&#10004; Unlimited Deals </p>
-                    <p>&#10004; After 14 days, <br/> free trial will be ended. </p>
-                  </div>
-                  <button className={`btn btn-rounded uppercase`} onClick={handleClickOpen}>
-                    Purchase
-                  </button>
-                </div>
-              </div>
-              <div className={`price-ticket`}>
-                <div className={`ticket-header`}>
-                  <h4> Only </h4>
+                  <h4> 14 Days Trial </h4>
                   <p className="price">
                     <span className="unit">$</span>
                     <span className="price-cost-big">79</span>
