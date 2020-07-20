@@ -2,6 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Logo from "../../assets/img/logo_footer.png";
 import "./Footer.style.scss";
+import { Link } from "react-router-dom";
+import Routes from "../../constants/Routes";
 
 const Footer = () => {
   const globalState = useSelector(state => state);
@@ -14,11 +16,15 @@ const Footer = () => {
         <div className="footer-item company-info">
           <div className="info">Info</div>
           <ul>
-            <li>About</li>
+            <li>
+              <Link to={Routes.aboutus} className="featured-item">About</Link>
+            </li>
             <li>Help</li>
             <li>Terms</li>
             <li>Privacy</li>
-            <li>FAQ</li>
+            <li>
+              <Link to={Routes.faq} className="featured-item">FAQs</Link>
+            </li>
           </ul>
         </div>
         <div className="footer-item explore-info">

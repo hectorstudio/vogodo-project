@@ -8,6 +8,8 @@ const Routes = {
   managerslisting: "/managers/listing",
   managerdetail: "/managers/detail/",
   account: "/account",
+  aboutus: "/about-us",
+  faq: "/faq"
 };
 
 export default Routes;

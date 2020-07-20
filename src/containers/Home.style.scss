@@ -71,6 +71,9 @@ section {
     }
     @media (max-width: 768px) {
       display: none;
+      h1 {
+        font-size: 29px !important;
+      }
     }
     h1 {
       @include fontDef(white, "Lato", 35px, 900, 80px, none, uppercase);

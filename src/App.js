@@ -15,6 +15,8 @@ import { Router, Switch, Route } from "react-router-dom";
 import ROUTES from "./constants/Routes";
 import store from "./redux/service";
 import ManagersListing from "./containers/ManagersListing";
+import AboutContainer from "./containers/AboutContainer";
+import FAQContainer from "./containers/FAQContainer";
 import ManagerDetail from "./containers/ManagerDetail";
 function App() {
   return (
@@ -76,6 +78,18 @@ function App() {
               path={ROUTES.managerdetail}
               component={ManagerDetail}
               title="Manager Detail"
+            ></Route>
+            <Route
+              exact
+              path={ROUTES.aboutus}
+              component={AboutContainer}
+              title="About Us"
+            ></Route>
+            <Route
+              exact
+              path={ROUTES.faq}
+              component={FAQContainer}
+              title="FAQs"
             ></Route>
           </Switch>
           <Footer />
