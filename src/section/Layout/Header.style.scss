@@ -19,6 +19,10 @@ header.app-header {
     img {
       height: 50px;
     }
+    @media (max-width: 960px) {
+      display: flex;
+      justify-content: flex-start;
+    }
   }
   .search-header {
     .header-item {
@@ -62,16 +66,8 @@ header.app-header {
     flex-wrap: wrap;
     align-items: center;
     @media (max-width: 1024px) {
-      display: none;
+      
     }
-    @media (max-width: $tabletBreakpoint) {
-      flex-direction: column;
-      align-items: center;
-      width: unset;
-      padding-top: 50px;
-      display: none;
-    }
-
     ul {
       flex: 11;
       display: flex;

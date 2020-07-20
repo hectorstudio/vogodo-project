@@ -190,12 +190,12 @@ const Header = () => {
                 </div>
               </div>
             </Grid>
-            <Grid xs={12} md={4} className="header-item">
+            <Grid xs={6} md={4} className="header-item">
               <div className="logo" onClick={goToHomePage} style={{ cursor: 'pointer' }}>
                 <img src={Logo} alt="Logo" />
               </div>
             </Grid>
-            <Grid xs={12} md={4} className="header-item account">
+            <Grid xs={6} md={4} className="header-item account">
               <div className="menu" id="menu">
                 <div className="login">
                   {LoginFlag ? (
@@ -254,12 +254,12 @@ const Header = () => {
           <Grid container>
             <Grid xs={12} md={4}>
             </Grid>
-            <Grid xs={12} md={4}>
+            <Grid xs={6} md={4}>
               <div className="logo" onClick={goToHomePage} style={{ cursor: 'pointer' }}>
                 <img src={Logo} alt="Logo" />
               </div>
             </Grid>
-            <Grid xs={12} md={4} container justify="flex-end" direction="row" alignItems="center">
+            <Grid xs={6} md={4} container justify="flex-end" direction="row" alignItems="center">
               <div className="menu" id="menu">
                 <div className="login">
                   {LoginFlag ? (
