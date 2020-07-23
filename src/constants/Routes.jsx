@@ -9,7 +9,9 @@ const Routes = {
   managerdetail: "/managers/detail/",
   account: "/account",
   aboutus: "/about-us",
-  faq: "/faq"
+  faq: "/faq",
+  terms: "/terms",
+  privacy: "/privacy",
 };
 
 export default Routes;

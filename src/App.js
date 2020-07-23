@@ -17,7 +17,9 @@ import store from "./redux/service";
 import ManagersListing from "./containers/ManagersListing";
 import AboutContainer from "./containers/AboutContainer";
 import FAQContainer from "./containers/FAQContainer";
+import TermsContainer from "./containers/TermsContainer";
 import ManagerDetail from "./containers/ManagerDetail";
+import PrivacyContainer from "./containers/PrivacyContainer";
 function App() {
   return (
     <Provider store={store}>
@@ -87,9 +89,21 @@ function App() {
             ></Route>
             <Route
               exact
+              path={ROUTES.terms}
+              component={TermsContainer}
+              title="FAQs"
+            ></Route>
+            <Route
+              exact
+              path={ROUTES.privacy}
+              component={PrivacyContainer}
+              title="FAQs"
+            ></Route>
+            <Route
+              exact
               path={ROUTES.faq}
               component={FAQContainer}
-              title="FAQs"
+              title="Terms of Services"
             ></Route>
           </Switch>
           <Footer />

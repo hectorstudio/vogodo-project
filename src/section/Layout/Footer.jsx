@@ -19,9 +19,8 @@ const Footer = () => {
             <li>
               <Link to={Routes.aboutus} className="featured-item">About</Link>
             </li>
-            <li>Help</li>
-            <li>Terms</li>
-            <li>Privacy</li>
+            <li><Link to={Routes.terms} className="featured-item">Terms of Use</Link></li>
+            <li><Link to={Routes.privacy} className="featured-item">Privacy Notice</Link></li>
             <li>
               <Link to={Routes.faq} className="featured-item">FAQs</Link>
             </li>
