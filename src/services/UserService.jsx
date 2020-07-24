@@ -17,6 +17,16 @@ export default class UserService {
     return BaseService.fetchData(REQUEST_TYPE.POST, apiUrl, params);
   }
 
+  static async proceedPayment (id, payload, billingDetails) {
+    const params = {
+      createdID: payload.paymentMethod.created,
+      transactionID: payload.paymentMethod.id,
+      billing_details: billingDetails
+    };
+    const apiUrl = `/user/proceed/${id}`;
+    return BaseService.fetchData(REQUEST_TYPE.POST, apiUrl, params);
+  }
+
   static async signWithSocial (userInfo, type) {
     const params = {...userInfo, type};
     const apiUrl = '/user/registerWithSocial';

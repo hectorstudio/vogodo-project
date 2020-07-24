@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {CardElement, useElements, useStripe} from '@stripe/react-stripe-js';
+import UserService from "../../services/UserService";
 import './styles.scss';
 
 
@@ -100,7 +101,7 @@ const ResetButton = ({onClick}) => (
 const CheckOutModal = ({ setOpenModal, openFlag }) => {
   const stripe = useStripe();
   const elements = useElements();
-  // const userId = localStorage.getItem('userId');
+  const userId = localStorage.getItem('userId');
   const [error, setError] = useState(null);
   const [cardComplete, setCardComplete] = useState(false);
   const [processing, setProcessing] = useState(false);
@@ -140,6 +141,13 @@ const CheckOutModal = ({ setOpenModal, openFlag }) => {
     if (payload.error) {
       setError(payload.error);
     } else {
+    console.log("Payment Proceed", billingDetails);
+    console.log("Payment Proceed", payload);
+      try {
+        const result = await UserService.proceedPayment(userId, payload, billingDetails);
+      } catch (error) {
+        console.log("Loading User Data Error: ");
+      }
       setPaymentMethod(payload.paymentMethod);
     }
   };

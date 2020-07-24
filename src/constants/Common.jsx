@@ -6,7 +6,7 @@ export const checkIsPremiumMember = (user) => {
   const diff = today.diff(createdAt, 'days');
   if (user.membership === 0 && diff > 14) {
     return false;
-  } else if (user.membership === 0 && diff < 15 && !user.cardInfo) {
+  } else if (user.membership === 0 && diff < 15 && (!user.cardInfo || user.cardInfo === '')) {
     return false;
   } else {
     return true;

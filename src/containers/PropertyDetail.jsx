@@ -143,14 +143,14 @@ const PropertyDetail = ({match}) => {
               <textarea className="contact-input info" placeholder="Description..." rows="10"></textarea>
               <button className="contact-input btn">Submit</button>
             </div>
-            <div className="video">
+            {/* <div className="video">
               <Player
                 playsInline
                 poster={Introduction}
                 src={IntroductionVideo}
                 width="100%"
               />
-            </div>
+            </div> */}
           </div>        
         </div>
       </div>
