@@ -5,9 +5,9 @@ import {
   Settings,
 } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { setAuthenticate, setUserId, setUserInfo, /*setFilterType, */setVisibleType, setOpenSignUp, setMenuType } from "../../redux/actions";
+import { setAuthenticate, setUserId, setUserInfo, setFilterType, setVisibleType, setOpenSignUp, setMenuType } from "../../redux/actions";
 import { Avatar, Menu, ListItemIcon, ListItemText, MenuItem, Grid } from "@material-ui/core";
-import { withStyles/*, makeStyles*/ } from "@material-ui/core/styles";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 import BaseDrawer from "../../components/BaseDrawer";
 import History from "../../constants/History";
 import Logo from "../../assets/img/logo.png";
@@ -49,19 +49,19 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     flexGrow: 1,
-//   },
-//   paper: {
-//     padding: theme.spacing(2),
-//     textAlign: 'center',
-//     color: theme.palette.text.secondary,
-//   },
-// }));
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
 
 const Header = () => {
-  //const classes = useStyles();
+  const classes = useStyles();
   const [isShowDrawer, setShowDrawer] = useState(false);
   const [user, setUser] = useState(null);
   const userId = localStorage.getItem('userId');
@@ -87,7 +87,6 @@ const Header = () => {
                 const status = checkIsPremiumMember(user);
                 if (History.location.pathname !== Routes.signup && History.location.pathname !== Routes.home) {
                   if (!status) {
-                    console.log("You have got the expired membership!");
                     History.push(Routes.signup);
                   }
                 }
@@ -95,7 +94,7 @@ const Header = () => {
                 console.log("Loading User Data Error: ");
               }
             } catch (error) {
-              console.log("Loading User Data Error: ");
+              console.log("Loading USer Data Error: ");
             }
           })();
         }
@@ -118,7 +117,6 @@ const Header = () => {
       const status = checkIsPremiumMember(globalState.userInfo);
       if (History.location.pathname !== Routes.signup && History.location.pathname !== Routes.home) {
         if (!status) {
-          console.log("You have got the expired membership!");
           History.push(Routes.signup);
         }
       }
@@ -176,70 +174,146 @@ const Header = () => {
   
   return (
     <header className={`app-header ${globalState.visible_type}`}>
-      <div className="container menu-container">
-        <Grid container>
-          <Grid xs={12} md={4} item>
-          </Grid>
-          <Grid xs={6} md={4} item>
-            <div className="logo" onClick={goToHomePage} style={{ cursor: 'pointer' }}>
-              <img src={Logo} alt="Logo" />
-            </div>
-          </Grid>
-          <Grid xs={6} md={4} container justify="flex-end" direction="row" alignItems="center" item>
-            <div className="menu" id="menu">
-              <div className="login">
-                {LoginFlag ? (
-                  <div>
-                    <Avatar onClick={handleClick}>{user ? `${user.firstName.charAt(0)}${user.lastName.charAt(0)}` : 'TE'}</Avatar>
-                  </div>
-                ) : (
-                  <Fragment>
-                    <div className="login" onClick={openLoginDrawer} style={{ paddingRight: "10px"}}>
-                      Log In
-                    </div>
-                    <div className="signup" onClick={openSignUpDrawer}>
-                      Sign Up
-                    </div>
-                  </Fragment>
-                )}
+      { globalState.visible_type === 'fixed-height' ? (
+        <div className={classes.root}>
+          <Grid container className="search-header container">
+            <Grid xs={12} md={4} className="header-item category">
+              <div className="menu" id="menu">
+                <div className={globalState.filterType === 'all' ? "active" : ""} onClick={() => dispatch(setFilterType('all'))}>
+                  All
+                </div>
+                <div className={globalState.filterType === 'sell' ? "active" : ""} onClick={() => dispatch(setFilterType('sell'))}>
+                  Sell
+                </div>
+                <div className={globalState.filterType === 'rent' ? "active" : ""} onClick={() => dispatch(setFilterType('rent'))}>
+                  Rent
+                </div>
               </div>
-              <StyledMenu
-                id="customized-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <StyledMenuItem onClick={() => goToAccountPage(0)}>
-                  <ListItemIcon>
-                    <Settings fontSize="small" />
-                  </ListItemIcon>
-                  <ListItemText primary="Settings" />
-                </StyledMenuItem>
-                <StyledMenuItem onClick={() => goToAccountPage(1)}>
-                  <ListItemIcon>
-                    <Save fontSize="small" />
-                  </ListItemIcon>
-                  <ListItemText primary="Saved Properties" />
-                </StyledMenuItem>
-                <StyledMenuItem onClick={() => goToAccountPage(2)}>
-                  <ListItemIcon>
-                    <Save fontSize="small" />
-                  </ListItemIcon>
-                  <ListItemText primary="My Listing" />
-                </StyledMenuItem>
-                <StyledMenuItem onClick={LogOut}>
-                  <ListItemIcon>
-                    <PowerSettingsNew fontSize="small" />
-                  </ListItemIcon>
-                  <ListItemText primary="Log Out" />
-                </StyledMenuItem>
-              </StyledMenu>
-            </div>
+            </Grid>
+            <Grid xs={6} md={4} className="header-item">
+              <div className="logo" onClick={goToHomePage} style={{ cursor: 'pointer' }}>
+                <img src={Logo} alt="Logo" />
+              </div>
+            </Grid>
+            <Grid xs={6} md={4} className="header-item account">
+              <div className="menu" id="menu">
+                <div className="login">
+                  {LoginFlag ? (
+                    <div>
+                      <Avatar onClick={handleClick}>{user ? `${user.firstName.charAt(0)}${user.lastName.charAt(0)}` : 'TE'}</Avatar>
+                    </div>
+                  ) : (
+                    <Fragment>
+                      <div className="login" onClick={openLoginDrawer} style={{ paddingRight: "10px"}}>
+                        Log In
+                      </div>
+                      <div className="signup" onClick={openSignUpDrawer}>
+                        Sign Up
+                      </div>
+                    </Fragment>
+                  )}
+                </div>
+                <StyledMenu
+                  id="customized-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                >
+                  <StyledMenuItem onClick={() => goToAccountPage(0)}>
+                    <ListItemIcon>
+                      <Settings fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="Settings" />
+                  </StyledMenuItem>
+                  <StyledMenuItem onClick={() => goToAccountPage(1)}>
+                    <ListItemIcon>
+                      <Save fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="Saved Properties" />
+                  </StyledMenuItem>
+                  <StyledMenuItem onClick={() => goToAccountPage(2)}>
+                    <ListItemIcon>
+                      <Save fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="My Listing" />
+                  </StyledMenuItem>
+                  <StyledMenuItem onClick={LogOut}>
+                    <ListItemIcon>
+                      <PowerSettingsNew fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="Log Out" />
+                  </StyledMenuItem>
+                </StyledMenu>
+              </div>
+            </Grid>
           </Grid>
-        </Grid>
-      </div>
-    
+        </div>
+      ) : (
+        <div className="container menu-container">
+          <Grid container>
+            <Grid xs={12} md={4}>
+            </Grid>
+            <Grid xs={6} md={4}>
+              <div className="logo" onClick={goToHomePage} style={{ cursor: 'pointer' }}>
+                <img src={Logo} alt="Logo" />
+              </div>
+            </Grid>
+            <Grid xs={6} md={4} container justify="flex-end" direction="row" alignItems="center">
+              <div className="menu" id="menu">
+                <div className="login">
+                  {LoginFlag ? (
+                    <div>
+                      <Avatar onClick={handleClick}>{user ? `${user.firstName.charAt(0)}${user.lastName.charAt(0)}` : 'TE'}</Avatar>
+                    </div>
+                  ) : (
+                    <Fragment>
+                      <div className="login" onClick={openLoginDrawer} style={{ paddingRight: "10px"}}>
+                        Log In
+                      </div>
+                      <div className="signup" onClick={openSignUpDrawer}>
+                        Sign Up
+                      </div>
+                    </Fragment>
+                  )}
+                </div>
+                <StyledMenu
+                  id="customized-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                >
+                  <StyledMenuItem onClick={() => goToAccountPage(0)}>
+                    <ListItemIcon>
+                      <Settings fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="Settings" />
+                  </StyledMenuItem>
+                  <StyledMenuItem onClick={() => goToAccountPage(1)}>
+                    <ListItemIcon>
+                      <Save fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="Saved Properties" />
+                  </StyledMenuItem>
+                  <StyledMenuItem onClick={() => goToAccountPage(2)}>
+                    <ListItemIcon>
+                      <Save fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="My Listing" />
+                  </StyledMenuItem>
+                  <StyledMenuItem onClick={LogOut}>
+                    <ListItemIcon>
+                      <PowerSettingsNew fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="Log Out" />
+                  </StyledMenuItem>
+                </StyledMenu>
+              </div>
+            </Grid>
+          </Grid>
+        </div>
+      )}
       <BaseDrawer
         isShowDrawer={isShowDrawer}
         setShowDrawer={setShowDrawer}
