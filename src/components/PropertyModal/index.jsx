@@ -93,7 +93,7 @@ const PropertyModal = ({ setOpenModal, openFlag }) => {
               value={propertyInfo.details.property_type || "sell"}
               onChange={handleChangePropertyType}
             >
-              <MenuItem value="rent">Rent</MenuItem>
+              <MenuItem value="rent">Buy</MenuItem>
               <MenuItem value="sell">Sell</MenuItem>
             </Select>
           </FormControl>

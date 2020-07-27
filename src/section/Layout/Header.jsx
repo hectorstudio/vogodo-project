@@ -186,7 +186,7 @@ const Header = () => {
                   Sell
                 </div>
                 <div className={globalState.filterType === 'rent' ? "active" : ""} onClick={() => dispatch(setFilterType('rent'))}>
-                  Rent
+                  Buy
                 </div>
               </div>
             </Grid>

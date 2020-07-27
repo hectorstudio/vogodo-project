@@ -92,7 +92,7 @@ const PropertyDetail = ({match}) => {
                 </div>
                 <div className="real-estate-info">
                   <span>
-                    <img src={Rent} alt="For Rent" />
+                    <img src={Rent} alt="To Buy" />
                     Rate: ${property.details.rate || 10}
                   </span>
                 </div>

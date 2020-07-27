@@ -13,7 +13,7 @@ import { checkIsPremiumMember } from "../../constants/Common";
 
 const options = [
   { value: "all", label: "All" },
-  { value: "rent", label: "Rent" },
+  { value: "buy", label: "Buy" },
   { value: "sell", label: "Sell" },
 ];
 
