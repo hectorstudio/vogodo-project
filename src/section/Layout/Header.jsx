@@ -87,7 +87,7 @@ const Header = () => {
                 const status = checkIsPremiumMember(user);
                 if (History.location.pathname !== Routes.signup && History.location.pathname !== Routes.home) {
                   if (!status) {
-                    History.push(Routes.signup);
+                    //History.push(Routes.signup);
                   }
                 }
               } else {
@@ -117,7 +117,7 @@ const Header = () => {
       const status = checkIsPremiumMember(globalState.userInfo);
       if (History.location.pathname !== Routes.signup && History.location.pathname !== Routes.home) {
         if (!status) {
-          History.push(Routes.signup);
+          //History.push(Routes.signup);
         }
       }
     }

@@ -24,6 +24,7 @@ const PropertyDetail = ({match}) => {
   const { id } = match.params;
   const [property, setProperty] = useState({details:{}, latitude: 59.955413, longitude: 30.337844 });
   const [images, setImages] = useState([]);
+  const apiKey = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
 
   useEffect(() => {
     (async () => {
@@ -104,7 +105,7 @@ const PropertyDetail = ({match}) => {
                 <div className="property-map">
                   <GoogleMapReact
                     bootstrapURLKeys={{
-                      key: "AIzaSyB6ABnTCVsOqCaU_vwH6uPN3pLqaRQhyU0",
+                      key: apiKey,
                     }}
                     defaultCenter={{ lat: parseFloat(property.latitude), lng: parseFloat(property.longitude) }}
                     defaultZoom={15}

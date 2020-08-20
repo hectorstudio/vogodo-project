@@ -22,6 +22,21 @@ const PlanSection = () => {
             <div className='price-tickets'>
               <div className={`price-ticket`}>
                 <div className={`ticket-header`}>
+                  <h4> Free for now </h4>
+                  <p className="price">
+                    <span className="unit">$</span>
+                    <span className="price-cost-big">0</span>
+                    <span className="price-cost-small">.00</span>
+                  </p>
+                  <p className="starting-from">Per Month</p>
+                </div>
+                <div className="ticket-body">
+                  <h5> Features </h5>
+                  <div className="details">
+                    <p>&#10004; Unlimited Deals </p>
+                  </div>
+                </div>
+                {/* <div className={`ticket-header`}>
                   <h4> 14 Days Trial </h4>
                   <p className="price">
                     <span className="unit">$</span>
@@ -38,7 +53,7 @@ const PlanSection = () => {
                   <button className={`btn btn-rounded uppercase`} onClick={handleClickOpen}>
                     Purchase
                   </button>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

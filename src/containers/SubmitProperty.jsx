@@ -27,6 +27,8 @@ const SubmitProperty = ({match}) => {
   const classes = useStyles();
   const [propertyInfo, setPropertyInfo] = useState({ details: {} });
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
+  const apiKey = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
+
   const files = acceptedFiles.map((file) => (
     <li key={file.path}>
       {file.path} - {file.size} bytes
@@ -185,7 +187,7 @@ const SubmitProperty = ({match}) => {
       <div className="list-map">
         <GoogleMapReact
           bootstrapURLKeys={{
-            key: "AIzaSyB6ABnTCVsOqCaU_vwH6uPN3pLqaRQhyU0",
+            key: apiKey,
           }}
           defaultCenter={
             { lat: 59.955413, lng: 30.337844 }

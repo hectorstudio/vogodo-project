@@ -38,6 +38,7 @@ const Property = () => {
   const [geoInfo, setGeoInfo] = useState(null);
   const [currentPos, setCurrentPos] = useState("");
   const [saved, setSaved] = useState([]);
+  const apiKey = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
 
   useEffect(() => {
     if (currentPos === "") {
@@ -163,7 +164,6 @@ const Property = () => {
     }    
     PropertiesService.saveAsFavorite({uid: userId, pid: item.pid, favorite: item.favorite});
   };
-
   return (
     <Fragment>
       <div className={`container property-container ${Object.keys(filterOption).length < 1 ? "" : "has-filter"}`}>
@@ -217,7 +217,7 @@ const Property = () => {
           <div className="map">
             <GoogleMapReact
               bootstrapURLKeys={{
-                key: "AIzaSyB6ABnTCVsOqCaU_vwH6uPN3pLqaRQhyU0",
+                key: apiKey,
               }}
               defaultCenter={
                 geoInfo && geoInfo.latitude ? 
