@@ -28,7 +28,7 @@ const PropertyItem = ({className, data = {}, featured=false, saved, onUpdate }) 
     onUpdate({pid: data.id, favorite: saved ? (!saved.favorite ? 1 : 0) : 1});
   }
   return (
-    <div className={`property-item ${className}`}>
+    <div className={`property-item`}>
       <div className="slide-container">
         <Slide {...properties}>
           {
