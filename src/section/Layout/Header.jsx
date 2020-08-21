@@ -112,16 +112,16 @@ const Header = () => {
     }
   });
 
-  useEffect(() => {
-    if (globalState.userInfo) {
-      const status = checkIsPremiumMember(globalState.userInfo);
-      if (History.location.pathname !== Routes.signup && History.location.pathname !== Routes.home) {
-        if (!status) {
-          //History.push(Routes.signup);
-        }
-      }
-    }
-  }, [History.location]);
+  // useEffect(() => {
+  //   if (globalState.userInfo) {
+  //     const status = checkIsPremiumMember(globalState.userInfo);
+  //     if (History.location.pathname !== Routes.signup && History.location.pathname !== Routes.home) {
+  //       if (!status) {
+  //         //History.push(Routes.signup);
+  //       }
+  //     }
+  //   }
+  // }, [History.location]);
 
 
   useEffect(() => {
@@ -185,7 +185,7 @@ const Header = () => {
                 <div className={globalState.filterType === 'sell' ? "active" : ""} onClick={() => dispatch(setFilterType('sell'))}>
                   Sell
                 </div>
-                <div className={globalState.filterType === 'rent' ? "active" : ""} onClick={() => dispatch(setFilterType('rent'))}>
+                <div className={globalState.filterType === 'buy' ? "active" : ""} onClick={() => dispatch(setFilterType('buy'))}>
                   Buy
                 </div>
               </div>

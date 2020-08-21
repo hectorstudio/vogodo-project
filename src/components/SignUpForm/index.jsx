@@ -60,7 +60,8 @@ const SignUpForm = ({setShowDrawer, openLogInForm}) => {
         setShowDrawer(false);
         dispatch(setAuthenticate(true));
         dispatch(setUserId(result.user.id));
-        History.push(Routes.signup);
+        // History.push(Routes.signup);
+        History.push(Routes.home);
       }
     } catch(err) {
       console.log(err);
@@ -79,7 +80,8 @@ const SignUpForm = ({setShowDrawer, openLogInForm}) => {
         setShowDrawer(false);
         dispatch(setAuthenticate(true));
         dispatch(setUserId(result.user.id));
-        History.push(Routes.signup);
+        // History.push(Routes.signup);
+        History.push(Routes.home);
       }
     }
   }

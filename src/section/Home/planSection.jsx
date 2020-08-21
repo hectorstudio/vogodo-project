@@ -7,9 +7,9 @@ import CheckoutModal from '../../components/CheckOutModal';
 const PlanSection = () => {
   const [openForm, setOpen] = useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
 
   const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
   return (

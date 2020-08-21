@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from "react";
+import React, { useState, Fragment, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setVisibleType } from "../redux/actions";
 import PropertyItem from "../components/PropertyItem";
@@ -86,7 +86,7 @@ const Property = () => {
   }, [userId]);
 
   useEffect(() => {
-    let option = globalState.filterType === 'all' ? filterOption : {...filterOption, type: globalState.filterType};
+    let option = globalState.filterType === 'all' ? {...filterOption, type: ''} : {...filterOption, type: globalState.filterType};
     if ( globalState.searchCity !== '') {
       option.search = globalState.searchCity;
       setCurrentPos(globalState.searchCity);
@@ -116,6 +116,40 @@ const Property = () => {
     })();
   }, [filterOption]);
 
+  const MapComponent = useMemo(() => {
+    return (
+      <GoogleMapReact
+        bootstrapURLKeys={{
+          key: apiKey,
+        }}
+        defaultCenter={
+          { lat: 39.0409, lng: -76.9932 }
+        }
+        center={
+          geoInfo && geoInfo.latitude ? 
+          { lat: geoInfo.latitude, lng: geoInfo.longitude } : 
+          { lat: 39.0409, lng: -76.9932 }
+        }
+        defaultZoom={9}
+      >
+        <CurrentPosition
+          lat={ geoInfo && geoInfo.latitude ? geoInfo.latitude : 39.0409 }
+          lng={ geoInfo && geoInfo.longitude ? geoInfo.longitude : -76.9932 }
+          text="Current Position"
+        />
+        { data.length > 0 && data.map((el, index) => (
+          <PropertyPosition 
+            onClick={() => History.push(`/properties/detail/${el.id}`)}
+            key={`pos-${index}`}
+            lat={ parseFloat(el.latitude) }
+            lng={ parseFloat(el.longitude) }
+            text="Property Position"
+          />
+        )) }
+      </GoogleMapReact>
+    )
+  }, [geoInfo, data])
+
   const handleChangeSearch = (e) => {
     let options = {...filterOption};
     setGeoInfo({latitude: e.geometry.location.lat(), longitude: e.geometry.location.lng()});
@@ -125,32 +159,30 @@ const Property = () => {
   };
 
   const handleChangeMin = (e) => {
-    if (e.target.value !== '') {
-      let options = {...filterOption};
-      options.min = e.target.value;
-      setFilterOption(options);
-    }
+    let options = {...filterOption};
+    options.min = e.target.value;
+    setFilterOption(options);
   };
 
   const handleChangeMax = (e) => {
-    if (e.target.value !== '') {
-      let options = {...filterOption};
-      options.max = e.target.value;
-      setFilterOption(options);
-    }
+    let options = {...filterOption};
+    options.max = e.target.value;
+    setFilterOption(options);
   };
 
   const handleChangeYear = (e) => {
-    if (e.target.value !== '') {
-      let options = {...filterOption};
-      options.built = e.target.value;
-      setFilterOption(options);
-    }
+    let options = {...filterOption};
+    options.built = e.target.value;
+    setFilterOption(options);
   };
 
   const handleDelete = (item) => {
     let options = {...filterOption};
     options[item] = '';
+    if (item === 'search') {
+      setCurrentPos("No Selected Current Position");
+      setGeoInfo(null);
+    }
     setFilterOption(options);
   };
 
@@ -179,18 +211,21 @@ const Property = () => {
             <input
               type="text"
               className="price-input"
+              onChange={handleChangeMin}
               onBlur={handleChangeMin}
               placeholder="min: $"
             />
             <input
               type="text"
               className="price-input"
+              onChange={handleChangeMax}
               onBlur={handleChangeMax}
               placeholder="max: $"
             />
             <input
               type="text"
               className="price-input"
+              onChange={handleChangeYear}
               onBlur={handleChangeYear}
               placeholder="Year: $"
             />
@@ -215,37 +250,7 @@ const Property = () => {
         </div>
         <div className="items-container">
           <div className="map">
-            <GoogleMapReact
-              bootstrapURLKeys={{
-                key: apiKey,
-              }}
-              defaultCenter={
-                geoInfo && geoInfo.latitude ? 
-                { lat: geoInfo.latitude, lng: geoInfo.longitude } : 
-                { lat: 59.955413, lng: 30.337844 }
-              }
-              center={
-                geoInfo && geoInfo.latitude ? 
-                { lat: geoInfo.latitude, lng: geoInfo.longitude } : 
-                { lat: 59.955413, lng: 30.337844 }
-              }
-              defaultZoom={9}
-            >
-              <CurrentPosition
-                lat={ geoInfo && geoInfo.latitude ? geoInfo.latitude : 59.955413 }
-                lng={ geoInfo && geoInfo.longitude ? geoInfo.longitude : 30.337844 }
-                text="Current Position"
-              />
-              { data.length > 0 && data.map((el, index) => (
-                <PropertyPosition 
-                  onClick={() => History.push(`/properties/detail/${el.id}`)}
-                  key={`pos-${index}`}
-                  lat={ parseFloat(el.latitude) }
-                  lng={ parseFloat(el.longitude) }
-                  text="Property Position"
-                />
-              )) }
-            </GoogleMapReact>
+            {MapComponent}
           </div>
           <div className="content">
             <div className="content-header">

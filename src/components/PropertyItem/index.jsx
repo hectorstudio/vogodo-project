@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Slide } from "react-slideshow-image";
 import { Link } from "react-router-dom";
 import EachSlide from "./EachSlide";
+import SimplePopover from "../Popover";
 import { FavoriteBorder, Favorite } from "@material-ui/icons";
 import "./PropertyItem.style.scss";
 
@@ -22,6 +23,7 @@ const properties = {
 
 const PropertyItem = ({className, data = {}, featured=false, saved, onUpdate }) => {
   const loggedin = localStorage.getItem('loggedin');
+  const [open, setOpen] = useState(false);
   const handleClickFavorite = () => {
     onUpdate({pid: data.id, favorite: saved ? (!saved.favorite ? 1 : 0) : 1});
   }
@@ -58,9 +60,14 @@ const PropertyItem = ({className, data = {}, featured=false, saved, onUpdate }) 
         </div>
         <p>{`${data.address}` || slideImages.address}</p>
         <div className="more">
-          <Link to={ loggedin ? `/properties/detail/${data.id}` : '/signup' }>More info...</Link>
+          { loggedin ?
+            <Link to={ loggedin ? `/properties/detail/${data.id}` : '/signup' }>More info...</Link>
+            : 
+            <div onClick={() => setOpen(true)} style={{cursor: "pointer"}}>More info...</div>
+          }
         </div>
       </div>
+      <SimplePopover status={open} setOpen={setOpen} description="You need to sign up to see details" type="error" />
     </div>
   );
 };

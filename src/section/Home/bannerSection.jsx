@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Select from "react-dropdown-select";
+import { Select, MenuItem } from "@material-ui/core"
 import banner1 from "../../assets/img/banner1.jpg";
 import "../../containers/Home.style.scss";
 import History from "../../constants/History";
 import Autocomplete from 'react-google-autocomplete';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch/*, useSelector */ } from "react-redux";
 import { setOpenSignUp, setSearchCity, setSearchCityGeoInfo, setSearchVal } from "../../redux/actions";
 import PropertyModal from "../../components/PropertyModal";
 import Routes from "../../constants/Routes";
-import { checkIsPremiumMember } from "../../constants/Common";
+//import { checkIsPremiumMember } from "../../constants/Common";
+import SimplePopover from "../../components/Popover";
 
 const options = [
   { value: "all", label: "All" },
@@ -22,9 +23,10 @@ const BannerSection = () => {
   const [city, setCity] = useState('');
   const [geoInfo, setGeoInfo] = useState({});
   const dispatch = useDispatch();
-  const userInfo = useSelector(state => state.userInfo);
+  //const userInfo = useSelector(state => state.userInfo);
   const loggedin = localStorage.getItem('loggedin');
   const [openFlag, setOpenModal] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleSelectCity = (e) => {
     setCity(e.formatted_address);
@@ -34,7 +36,7 @@ const BannerSection = () => {
   }
 
   const handleSelectType = (value) => {
-    setType(value[0].value);
+    setType(value);
   }
 
   const handleClickSearch = () =>{
@@ -46,13 +48,11 @@ const BannerSection = () => {
 
   const goToSubmitPage = () => {
     const login = localStorage.getItem("loggedin");
-    const userStatus = userInfo ? checkIsPremiumMember(userInfo) : false;
-    console.log(userInfo);
-    console.log(userStatus);
-    if (login && userStatus) {
+    //const userStatus = userInfo ? checkIsPremiumMember(userInfo) : false;
+    if (login) {
       setOpenModal(true);
     } else {
-      History.push(Routes.plan);
+      setOpen(true)
     }
   };
 
@@ -87,7 +87,13 @@ const BannerSection = () => {
                 className="property_select"
                 placeholder="Select the property type..."
                 onChange={handleSelectType}
-              />
+              >
+                {
+                  options.map(opt => (
+                    <MenuItem key={opt.value} value={opt.value}>{opt.label}</MenuItem>
+                  ))
+                }
+              </Select>
             </div>
             <div className="form-control input">
               <Autocomplete
@@ -108,6 +114,7 @@ const BannerSection = () => {
         </div>
       </div>
       <PropertyModal setOpenModal={setOpenModal} openFlag={openFlag}/>
+      <SimplePopover status={open} setOpen={setOpen} description="You need to sign up to list your properties" type="error" />
     </section>
   );
 };

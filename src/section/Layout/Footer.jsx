@@ -29,9 +29,6 @@ const Footer = () => {
         <div className="footer-item explore-info">
           <div className="info">EXPLORE</div>
           <ul>
-            <li>Find a Property Manager</li>
-            <li>Find a Contractor</li>
-            <li>Find Private money Lenders</li>
             <li>Course to Learn RE Wholesailing</li>
           </ul>
         </div>

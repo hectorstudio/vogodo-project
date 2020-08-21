@@ -144,7 +144,7 @@ const CheckOutModal = ({ setOpenModal, openFlag }) => {
     console.log("Payment Proceed", billingDetails);
     console.log("Payment Proceed", payload);
       try {
-        const result = await UserService.proceedPayment(userId, payload, billingDetails);
+        /*const result = */await UserService.proceedPayment(userId, payload, billingDetails);
       } catch (error) {
         console.log("Loading User Data Error: ");
       }
