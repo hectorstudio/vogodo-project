@@ -132,7 +132,7 @@ const SignUpForm = ({setShowDrawer, openLogInForm}) => {
             name="password"
             placeholder="Password"
             onChange={handleChangePassword}
-            onConBlurhange={handleChangePassword}
+            onBlur={handleChangePassword}
             value={password}
           />
         </div>

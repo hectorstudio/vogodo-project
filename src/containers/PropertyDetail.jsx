@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useMemo} from "react";
 import BreadCrumbs from "../components/Breadcrumbs";
 import ImageGallery from "react-image-gallery";
 import Constructed from "../assets/svg/constructed.svg";
@@ -32,7 +32,6 @@ const PropertyDetail = ({match}) => {
           const resources = JSON.parse(result.Property.resources);
           const thumbnails = JSON.parse(result.Property.thumbnails);
           const resourceImages = [];
-          console.log(resources);
           resources.forEach((el, index) => {
             resourceImages.push({original: el, thumbnail: thumbnails.filter(el => el.order === index)[0].url});
           })
@@ -46,6 +45,23 @@ const PropertyDetail = ({match}) => {
     })();
   }, [id]);
   
+  const MapComponent = useMemo(() => {
+    return (
+      <GoogleMapReact
+        bootstrapURLKeys={{
+          key: apiKey,
+        }}
+        defaultZoom={15}
+        center={{ lat: parseFloat(property.latitude), lng: parseFloat(property.longitude) }}
+      >
+        <CurrentPosition
+          lat={ parseFloat(property.latitude) }
+          lng={ parseFloat(property.longitude) }
+        />
+      </GoogleMapReact>
+    )
+  }, [property])
+
   return (
     <div className="container">
       <BreadCrumbs parent="Properties" child={`Detail: ${property.title || "Temp Property"}`} />
@@ -100,19 +116,7 @@ const PropertyDetail = ({match}) => {
                   </p>
                 </div>
                 <div className="property-map">
-                  <GoogleMapReact
-                    bootstrapURLKeys={{
-                      key: apiKey,
-                    }}
-                    defaultCenter={{ lat: parseFloat(property.latitude), lng: parseFloat(property.longitude) }}
-                    defaultZoom={15}
-                    center={{ lat: parseFloat(property.latitude), lng: parseFloat(property.longitude) }}
-                  >
-                    <CurrentPosition
-                      lat={ parseFloat(property.latitude) }
-                      lng={ parseFloat(property.longitude) }
-                    />
-                  </GoogleMapReact>
+                  {MapComponent}
                 </div>
               </div>
             </div>

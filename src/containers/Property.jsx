@@ -148,7 +148,7 @@ const Property = () => {
         )) }
       </GoogleMapReact>
     )
-  }, [geoInfo, data])
+  }, [geoInfo, data, apiKey])
 
   const handleChangeSearch = (e) => {
     let options = {...filterOption};
