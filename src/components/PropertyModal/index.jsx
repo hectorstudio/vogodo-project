@@ -5,6 +5,21 @@ import "./PropertyModal.style.scss";
 import PropertiesService from "../../services/PropertiesService";
 import History from "../../constants/History";
 
+const options = [
+  { value: "Single Family", label: "Single Family" }, 
+  { value: "Duplex", label: "Duplex" }, 
+  { value: "Multifamily", label: "Multifamily" }, 
+  { value: "Apartments", label: "Apartments" }, 
+  { value: "Offices", label: "Offices" },
+  { value: "Land", label: "Land" },
+  { value: "Lots", label: "Lots" },
+  { value: "Shopping Center", label: "Shopping Center" },
+  { value: "Warehouses", label: "Warehouses" },
+  { value: "Building", label: "Building" },
+  { value: "Hotels", label: "Hotels" },
+  { value: "Motels", label: "Motels" }
+];
+
 const PropertyModal = ({ setOpenModal, openFlag }) => {
   const [propertyInfo, setPropertyInfo] = useState({ 
     details: {
@@ -93,8 +108,11 @@ const PropertyModal = ({ setOpenModal, openFlag }) => {
               value={propertyInfo.details.property_type || "sell"}
               onChange={handleChangePropertyType}
             >
-              <MenuItem value="buy">Buy</MenuItem>
-              <MenuItem value="sell">Sell</MenuItem>
+              {
+                options.map(opt => (
+                  <MenuItem key={opt.value} value={opt.value}>{opt.label}</MenuItem>
+                ))
+              }
             </Select>
           </FormControl>
           <div className="submit-button">

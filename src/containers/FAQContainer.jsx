@@ -31,11 +31,13 @@ const FAQContainer = () => {
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography className={classes.heading}><b>1. What is Selldealsnow.com?</b></Typography>
+            <Typography className={classes.heading}><b>1. Why Should I Choose Sell Deals Now Over Other Real Estate Sites? </b></Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              We provide exclusive access to off market deals throughout the United States.
+            Being successful in real estate is all about being ahead of the curve. Sell Deals Now focuses on providing high-value real estate that isn’t listed anywhere else. 
+You might’ve had a feeling that professional real estate agents know something you don’t. Sell Deals Now allows you to gain the same insight into buying opportunities that top-tier professionals receive through their network. 
+If you’re a professional real estate seller or developer, diversifying your sources is always useful. Knowing that you can access a multitude of properties that will attract buyers due to their low cost is a powerful asset. 
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -45,11 +47,22 @@ const FAQContainer = () => {
             aria-controls="panel2a-content"
             id="panel2a-header"
           >
-            <Typography className={classes.heading}><b>2. Can I list unlimited properties?</b></Typography>
+            <Typography className={classes.heading}><b>2. What Kinds of People Can Benefit from Sell Deals Now?</b></Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              Yes, you can list as many as you want with your monthly subscription.
+            Sell Deals Now is founded on an inclusive philosophy that brings together all of the essential components of the real estate buying and selling market to form a modern, streamlined, and optimized platform. 
+
+Below are the types of people we gear our services toward: 
+
+<li>Agents</li>
+<li>Property owners</li>
+<li>Landlords</li>
+<li>Developers </li>
+<li>Brokerages </li>
+<li>Real estate investor </li>
+
+Utilizing our platform allows you to leverage off-market and wholesale deals to turn a profit. 
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -59,11 +72,14 @@ const FAQContainer = () => {
             aria-controls="panel2a-content"
             id="panel2a-header"
           >
-            <Typography className={classes.heading}><b>3. If I like a property, how can I contact the seller/investor/broker?</b></Typography>
+            <Typography className={classes.heading}><b>3. Why Should I Buy from Sell Deals Now?</b></Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              Their contact info will be on the listing.
+            We observed that successful real estate websites such as Zillow allow prospective buyers to browse tons of real estate options.
+
+Instead of just copying and pasting what other real estate websites are doing, we took things one step further and designed a platform that gives buyers plenty of options that are strictly wholesale and off-market deals. 
+The result is more bang for your buck. 
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -73,11 +89,17 @@ const FAQContainer = () => {
             aria-controls="panel2a-content"
             id="panel2a-header"
           >
-            <Typography className={classes.heading}><b>4. Can I cancel my membership at anytime?</b></Typography>
+            <Typography className={classes.heading}><b>4. Why Should I Sell My Property on Sell Deals Now? </b></Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              Yes, you can cancel at any time.
+            We understand that listing and selling your property can be a stressful process. Our platform utilizes a minimalist nature to guide you through the essential components of listing your property. 
+
+Sell Deals Now subscribers can post as many properties as they wish—a perk that’s invaluable to people in businesses that include house flipping. 
+
+Marketing your property well is half the battle. 
+
+We help you disclose all the essential information buyers need to help you complete a sale while the modern aesthetic of our site helps present your property in the best light possible.
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -87,13 +109,13 @@ const FAQContainer = () => {
             aria-controls="panel2a-content"
             id="panel2a-header"
           >
-            <Typography className={classes.heading}><b>5. Are these deals public?</b></Typography>
+            <Typography className={classes.heading}><b>5. What Should I Ask Myself When Browsing Properties to Buy on Sell Deals Now?</b></Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-                No, we check on the properties to make sure they are not public and if
-              they are, the member would be in violation and their account can be
-              suspended.
+            Have you been pre-approved by your bank to look at properties? Consulting professionals at a banking institution can help you narrow your search by pointing you toward options within your budget. 
+
+Banks can also help outline other costs that will be associated with your property purchase. 
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -103,12 +125,11 @@ const FAQContainer = () => {
             aria-controls="panel2a-content"
             id="panel2a-header"
           >
-            <Typography className={classes.heading}><b>6. Can I list deals if I am a broker/ realtor/ or investor?</b></Typography>
+            <Typography className={classes.heading}><b>6. Should I Buy a Home Before Selling?</b></Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-                Yes, as long as you have an agreement with the seller that states that
-              you have the right to market it.
+            It’s generally good to buy a home before you sell to lessen the pressure of having to house hunt once your property on the market gets sold. It’s preferable to skip out on sale contingency, a term that indicates your purchase offer being linked to the sale of your current home. 
             </Typography>
           </AccordionDetails>
         </Accordion>

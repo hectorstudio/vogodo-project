@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setVisibleType } from "../redux/actions";
 import PropertyItem from "../components/PropertyItem";
 import { makeStyles } from "@material-ui/core/styles";
+import { Select, MenuItem } from "@material-ui/core";
 import PropertiesService from "../services/PropertiesService";
 import UserService from "../services/UserService";
 import "./Property.style.scss";
@@ -12,6 +13,22 @@ import GoogleMapReact from 'google-map-react';
 import History from "../constants/History";
 import { Place } from '@material-ui/icons';
 import Autocomplete from 'react-google-autocomplete';
+
+const options = [
+  { value: "all", label: "All" },
+  { value: "Single Family", label: "Single Family" }, 
+  { value: "Duplex", label: "Duplex" }, 
+  { value: "Multifamily", label: "Multifamily" }, 
+  { value: "Apartments", label: "Apartments" }, 
+  { value: "Offices", label: "Offices" },
+  { value: "Land", label: "Land" },
+  { value: "Lots", label: "Lots" },
+  { value: "Shopping Center", label: "Shopping Center" },
+  { value: "Warehouses", label: "Warehouses" },
+  { value: "Building", label: "Building" },
+  { value: "Hotels", label: "Hotels" },
+  { value: "Motels", label: "Motels" }
+];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -86,7 +103,7 @@ const Property = () => {
   }, [userId]);
 
   useEffect(() => {
-    let option = globalState.filterType === 'all' ? {...filterOption, type: ''} : {...filterOption, type: globalState.filterType};
+    let option = {...filterOption};
     if ( globalState.searchCity !== '') {
       option.search = globalState.searchCity;
       setCurrentPos(globalState.searchCity);
@@ -148,10 +165,18 @@ const Property = () => {
         )) }
       </GoogleMapReact>
     )
-  }, [geoInfo, data, apiKey])
+  }, [data])
+
+  const handleSelectType = (e) => {
+    if (e.target.value !== 'all') {
+      setFilterOption({...filterOption, type: e.target.value});
+    } else {
+      setFilterOption({...filterOption, type: ''});
+    }    
+  }
 
   const handleChangeSearch = (e) => {
-    let options = {...filterOption};
+    const options = {...filterOption};
     setGeoInfo({latitude: e.geometry.location.lat(), longitude: e.geometry.location.lng()});
     setCurrentPos(e.formatted_address);
     options.search = e.formatted_address;
@@ -159,25 +184,25 @@ const Property = () => {
   };
 
   const handleChangeMin = (e) => {
-    let options = {...filterOption};
+    const options = {...filterOption};
     options.min = e.target.value;
     setFilterOption(options);
   };
 
   const handleChangeMax = (e) => {
-    let options = {...filterOption};
+    const options = {...filterOption};
     options.max = e.target.value;
     setFilterOption(options);
   };
 
   const handleChangeYear = (e) => {
-    let options = {...filterOption};
+    const options = {...filterOption};
     options.built = e.target.value;
     setFilterOption(options);
   };
 
   const handleDelete = (item) => {
-    let options = {...filterOption};
+    const options = {...filterOption};
     options[item] = '';
     if (item === 'search') {
       setCurrentPos("No Selected Current Position");
@@ -208,6 +233,17 @@ const Property = () => {
               types={['(cities)']}
               componentRestrictions={{country: "us"}}
             />
+            <Select
+              className="property_select"
+              placeholder="Select the property type..."
+              onChange={handleSelectType}
+            >
+              {
+                options.map(opt => (
+                  <MenuItem key={opt.value} value={opt.value}>{opt.label}</MenuItem>
+                ))
+              }
+            </Select>
             <input
               type="text"
               className="price-input"

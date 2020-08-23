@@ -14,8 +14,18 @@ import SimplePopover from "../../components/Popover";
 
 const options = [
   { value: "all", label: "All" },
-  { value: "buy", label: "Buy" },
-  { value: "sell", label: "Sell" },
+  { value: "Single Family", label: "Single Family" }, 
+  { value: "Duplex", label: "Duplex" }, 
+  { value: "Multifamily", label: "Multifamily" }, 
+  { value: "Apartments", label: "Apartments" }, 
+  { value: "Offices", label: "Offices" },
+  { value: "Land", label: "Land" },
+  { value: "Lots", label: "Lots" },
+  { value: "Shopping Center", label: "Shopping Center" },
+  { value: "Warehouses", label: "Warehouses" },
+  { value: "Building", label: "Building" },
+  { value: "Hotels", label: "Hotels" },
+  { value: "Motels", label: "Motels" }
 ];
 
 const BannerSection = () => {

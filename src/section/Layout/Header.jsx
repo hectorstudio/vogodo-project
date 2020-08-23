@@ -178,17 +178,13 @@ const Header = () => {
         <div className={classes.root}>
           <Grid container className="search-header container">
             <Grid xs={12} md={4} className="header-item category">
-              <div className="menu" id="menu">
-                <div className={globalState.filterType === 'all' ? "active" : ""} onClick={() => dispatch(setFilterType('all'))}>
-                  All
-                </div>
-                <div className={globalState.filterType === 'sell' ? "active" : ""} onClick={() => dispatch(setFilterType('sell'))}>
-                  Sell
-                </div>
-                <div className={globalState.filterType === 'buy' ? "active" : ""} onClick={() => dispatch(setFilterType('buy'))}>
-                  Buy
-                </div>
-              </div>
+              {/* <div className="menu" id="menu">
+                {options.map(opt => (
+                  <div className={globalState.filterType === opt.value ? "active" : ""} onClick={() => dispatch(setFilterType(opt.value))}>
+                    { opt.label }
+                  </div>
+                ))}
+              </div> */}
             </Grid>
             <Grid xs={6} md={4} className="header-item">
               <div className="logo" onClick={goToHomePage} style={{ cursor: 'pointer' }}>
