@@ -35,6 +35,7 @@ const SignUpForm = ({setShowDrawer, openLogInForm}) => {
 
   const handleChangeConfirm = (e) => {
     setConfirm(e.target.value);
+    console.log(e.target.value);
     checkStatus();
   }
 
@@ -143,6 +144,7 @@ const SignUpForm = ({setShowDrawer, openLogInForm}) => {
             placeholder="Confirm Password"
             onChange={handleChangeConfirm}
             onBlur={handleChangeConfirm}
+            onKeyUp={handleChangeConfirm}
             value={confirm}
           />
         </div>
