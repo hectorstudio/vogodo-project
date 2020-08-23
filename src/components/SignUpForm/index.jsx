@@ -25,6 +25,8 @@ const SignUpForm = ({setShowDrawer, openLogInForm}) => {
   const checkStatus = () => {
     if ( firstName !== '' && lastName !== '' && email !== '' && password !== '' && password === confirm ) {
       setDisable(false);
+    } else {
+      setDisable(true);
     }
   }
 
