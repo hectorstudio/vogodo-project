@@ -33,7 +33,8 @@ const PropertyDetail = ({match}) => {
           const thumbnails = JSON.parse(result.Property.thumbnails);
           const resourceImages = [];
           resources.forEach((el, index) => {
-            resourceImages.push({original: el, thumbnail: thumbnails.filter(el => el.order === index)[0].url});
+            const thumbnail = thumbnails.find(el => el.order === index) || thumbnails[index];
+            resourceImages.push({original: el, thumbnail: thumbnail.url });
           })
           setImages(resourceImages);
         } else {
