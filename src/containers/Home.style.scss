@@ -263,6 +263,14 @@ section {
     line-height: 1.5;
     font-family: 'Raleway', sans-serif;
     font-size: 16px;
+    .sector {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @media (max-width: 512px) {
+        display: block;
+      }
+    }
     ul {
       width: 320px;
       margin: auto;
