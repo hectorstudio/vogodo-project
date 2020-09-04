@@ -258,7 +258,7 @@ section {
     margin: 0px;
   }
   .introduction {
-    max-width: 800px;
+    max-width: 1000px;
     margin: auto;
     line-height: 1.5;
     font-family: 'Raleway', sans-serif;
@@ -267,19 +267,30 @@ section {
       display: flex;
       align-items: center;
       justify-content: center;
-      @media (max-width: 512px) {
+      @media (max-width: 768px) {
         display: block;
+      }
+      .core-features {
+        display: flex;
+        @media (max-width: 512px) {
+          display: block;
+          div {
+            margin: 5px;
+          }
+        }
       }
     }
     ul {
-      width: 320px;
       margin: auto;
     }
   }
   .intro-video {
     padding: 20px 0px;
-    width: 60%;
+    width: 72%;
     margin: auto;
+    @media (max-width: 768px) {
+      width: 95%;
+    }
   }
 }
 
