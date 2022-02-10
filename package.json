@@ -19,7 +19,7 @@
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.27.0",
     "mui-rte": "^1.17.3",
-    "node-sass": "^4.14.0",
+    "node-sass": "^7.0.0",
     "nuka-carousel": "^4.6.7",
     "query-string": "^6.13.0",
     "react": "^16.13.1",
